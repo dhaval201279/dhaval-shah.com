@@ -1,0 +1,16 @@
+# Show or hide by uncommenting and vice versa
+- item: "linkedin"
+  url: "https://www.linkedin.com/in/dhavalshah201279/"
+- item: "github"
+  url: "https://github.com/dhaval201279"
+- item: "twitter"
+  url: "https://twitter.com/dhaval201279"
+- item: "youtube"
+  url: "https://www.youtube.com/user/gladiator201279"
+- item: "facebook"
+  url: "https://www.facebook.com/dhaval201279"
+# - item: "instagram"
+# url: "https://instagram.com/#"
+#- item: "rss"
+#  url: "index.xml"
+#  internal:  true
