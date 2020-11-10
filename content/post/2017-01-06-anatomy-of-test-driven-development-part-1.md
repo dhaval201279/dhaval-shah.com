@@ -29,9 +29,7 @@ Unit testing in general can be employed and practiced in many ways. One may stil
 
 Before we look into HOW part of TDD, lets first understand WHY Test Driven Development is an indispensable practice that needs to be religiously followed
 
-Why Test Driven Development
-===========================
-
+# Why Test Driven Development
 Before we understand the advantages of following TDD, lets try to understand actual purpose of Unit Testing. [Brian Marick](https://en.wikipedia.org/wiki/Brian_Marick) who is leading Agile Testing guru and one of the authors of [Agile Manifesto](http://agilemanifesto.org/) came up with categorization of tests – which test fits into which quadrant and primary criteria behind this classification is to help people understand purpose of each type of tests that are implemented within a software application
 
 [![brian-maricks-test-quadrant-tdd](http://dhaval-shah.com/wp-content/uploads/2016/12/Brian-Maricks-Test-Quadrant-TDD-1024x576.jpg)](http://dhaval-shah.com/wp-content/uploads/2016/12/Brian-Maricks-Test-Quadrant-TDD.jpg)
@@ -47,13 +45,9 @@ If you take any of 4 quadrants, you can put a given test in 1 of the 4 quadrants
 
 On a side note if we try to super impose [Test Pyramid](https://www.mountaingoatsoftware.com/blog/the-forgotten-layer-of-the-test-automation-pyramid), most of the test cases i.e. Unit and Services will fall into 1st quadrant.
 
-Advantages of TDD
-=================
+# Advantages of TDD
 
- 
-
-1\. TDD aids in deriving loosely coupled and highly cohesive design
--------------------------------------------------------------------
+## TDD aids in deriving loosely coupled and highly cohesive design
 
 [![loosely-coupled-design](http://dhaval-shah.com/wp-content/uploads/2017/01/loosely-coupled-design.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/01/loosely-coupled-design.jpg)
 
@@ -74,8 +68,7 @@ Three main aspects of TDD that help us achieve clean and elegant design :
 2.  We would have seen tests which are few 100 lines/ 1000 lines; such test tell us that the target object is too large and needs to broken up further for achieving better separation of concerns.
 3.  Since target object needs to be instantiated before test starts executing actual API, whilst construction of target object we may identify that if there are too many dependencies it is too painful to construct and test
 
-2\. Helps create live specification
------------------------------------
+## Helps create live specification
 
   [![live-specification](http://dhaval-shah.com/wp-content/uploads/2017/01/live-specification.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/01/live-specification.jpg)
 
@@ -83,8 +76,7 @@ How many times we have ended up in situations where in we are newly allocated to
 
 TDD will implicitly help us to create appropriate and just enough specification using which one can clearly understand business features and functionalities. Most importantly this specification is a live specification, hence it gets updated as and when changes are incorporated; since test cases would also have to be updated along with code :)
 
-3\. Promotes Refactoring
-------------------------
+## Promotes Refactoring
 
 [![refactoring](http://dhaval-shah.com/wp-content/uploads/2017/01/refactoring.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/01/refactoring.jpg)
 
