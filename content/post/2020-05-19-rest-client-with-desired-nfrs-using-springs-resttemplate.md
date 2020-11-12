@@ -12,8 +12,7 @@ tags:
   - cloud native
   - performance
   - spring boot
-
-thumbnail: "wp-content/uploads/2020/05/white-mode.png"
+thumbnail: "wp-content/uploads/2020/05/white-mode-150x150.png"
 ---
 
 [![](http://dhaval-shah.com/wp-content/uploads/2020/05/white-mode.png)](http://dhaval-shah.com/wp-content/uploads/2020/05/white-mode.png)
