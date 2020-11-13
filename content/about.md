@@ -1,25 +1,50 @@
 +++
 title = "About"
-description = "Hugo, the world's fastest framework for building websites"
-date = "2019-02-28"
+description = "Dhaval Shah"
+date = "2020-11-12"
 aliases = ["about-us", "about-hugo", "contact"]
-author = "Hugo Authors"
+author = "Dhaval"
+toc = true
 +++
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+Dear Readers, Welcome to the "Ramblings of Pragmatic Software Craftsman" blog.
 
-Hugo makes use of a variety of open source projects including:
+## Introduction
+My name is Dhaval P Shah. I am the founder and editor of this blog.
+I work as a Lead - Software Development Engineer at [Mastercard](https://www.mastercard.co.in/en-in.html).
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+## About Me
+I am a pragmatic Software Craftsman, passionate about architecting, designing, implementing, operationalizing and monitoring **Distributed Systems** with 15+ years of experience predominately in crafting low latency, high throughput and scalable enterprise applications.
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+I am a perpetual learner, who is inquisitive about all the latest trends shaping the software 
+industry. I am predominantly a backend developer with extensive experience in Java / J2EE stack using Spring framework. Of late I am trying to tinker with Big Data stack.
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
+### Specialities
+1. Spring Boot, Spring Webflux, Spring Reactor
+2. J2EE technologies (Spring Core, Spring MVC, Spring Data JPA, Spring Integration, Hibernate )
+3. Refactoring legacy applications
+4. Performance Engg. aficionado with sharp focus on optimization of enterprise applications (JVM / GC Tuning, App. Memory utilization, App. profiling and benchmarking, DB tuning etc.)
+5. Enterprise Monitoring (Splunk, Dynatrace, Prometheus, Grafana)
+6. Chaos Engineering (Chaos Monkey for Spring Boot)
 
-Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
+Professionl Linkedin profile - [Dhaval Shah](https://www.linkedin.com/in/dhavalshah201279/)
 
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+My curriculum vitae - [CV]()  
+
+### Spare Time
+I am an avid reader and hence in my spare time I generally read non fictional and technology books. My book shelf can be availed at [goodreads](https://www.goodreads.com/review/list/5826087-dhaval-shah?shelf=read)
+
+### Connect with me
+You can connect with me directly on [twitter](https://twitter.com/dhaval201279), [linkedin](https://www.linkedin.com/in/dhavalshah201279/) or [github](https://github.com/dhaval201279)
+
+## About this blog
+"Ramblings of Pragmatic Software Craftsman" is a blog where I tend to log my key learnings that I have gathered as part of my day job or as part of my evening / night time where I simply love to play with some new or upcoming technology / tools. This in a way compels me to delve deeper to build a strong conceptual foundation for the article I intend to write about. It gives me immense self gratifying feeling when my readers find my articles insightful - however thats just a byproduct for the endeavor that I put to blog.
+
+### What powers this blog?
+This blog is powered by [Hugo](https://gohugo.io/), a static site generated built using [Golang](https://golang.org/). It uses a [Hugo Clarity](https://themes.gohugo.io/hugo-clarity/) theme.
+I’ve hosted this blog on [Netlify](https://www.netlify.com/), a cloud hosting platform for static websites.
+
+
+
+
+
