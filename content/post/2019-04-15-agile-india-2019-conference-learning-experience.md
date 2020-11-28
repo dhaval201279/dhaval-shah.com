@@ -6,9 +6,9 @@ date: 2019-04-14T19:42:30+00:00
 url: /agile-india-2019-conference-learning-experience/
 categories:
   - Testing
-
+thumbnail: "images/wp-content/uploads/2019/04/agile-conf-2019-logo.png"
 ---
-[![](http://dhaval-shah.com/wp-content/uploads/2019/04/agile-conf-2019-logo.png)](http://dhaval-shah.com/wp-content/uploads/2019/04/agile-conf-2019-logo.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/04/agile-conf-2019-logo.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/04/agile-conf-2019-logo.png)
 
 Personally speaking, I am of the belief that only way to excel (professionally) is to collaborate and learn from experts. Since I am constantly striving to improve professionally as [Software Craftsman](https://8thlight.com/blog/micah-martin/2008/09/21/definition-of-software-craftsman.html), I try my best to exercise available options. One such option is attending some good Technology Conferences - as they are the platforms from where the so called experts of industry share their distilled experience to the larger community.
 
@@ -96,13 +96,13 @@ Anti-patterns of Acceptance Testing :
 
 _Personally speaking I am a big fan of testing. For all the testing aficionados, I had penned down following posts:_
 
-1.  _[Bootiful TDD](http://dhaval-shah.com/bootiful-test-driven-development/) - How to do outside - in TDD whilst implementing Spring Boot Application_
-2.  _A brief article on doing [Consumer Driven Contract Testing](http://dhaval-shah.com/microservices-and-consumer-driven-contract-testing-using-pact/) using [Pact](https://docs.pact.io/)_
-3.  _A 2 part series for understanding [Anatomy of TDD](http://dhaval-shah.com/anatomy-of-test-driven-development-part-1/) - an oldie but good enough to rehash the fundamentals ;)_
+1.  _[Bootiful TDD](https://dhaval-shah.com/bootiful-test-driven-development/) - How to do outside - in TDD whilst implementing Spring Boot Application_
+2.  _A brief article on doing [Consumer Driven Contract Testing](https://dhaval-shah.com/microservices-and-consumer-driven-contract-testing-using-pact/) using [Pact](https://docs.pact.io/)_
+3.  _A 2 part series for understanding [Anatomy of TDD](https://dhaval-shah.com/anatomy-of-test-driven-development-part-1/) - an oldie but good enough to rehash the fundamentals ;)_
 
 # Reactive Systems
 
-This talk mainly covered 4 pillars of [reactive manifesto](https://www.reactivemanifesto.org/) and thereby explained key properties of reactive systems. It put lot of emphasis on realizing [eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency) using asynchronous messaging. However, as we all know it has its own limitations and pitfalls in terms of [observability](https://medium.com/observability/microservices-observability-26a8b7056bb4) and resiliency - but it can definitely be addressed by implementing it in a correct way. Session was full of real world examples that speaker had worked upon. It also talked about isolation, as that is main force behind implementing [Microservices](https://en.wikipedia.org/wiki/Microservices) within [cloud native](http://dhaval-shah.com/understanding-cloud-native-architecture-with-an-example/) world. Concluding part of session was mainly about [Backpressure](https://www.reactivemanifesto.org/glossary#Back-Pressure) by explaining ways to handle it when a component within application is producing stream of data at a rate faster than the component who is going to consume stream of data emitted by producer of data
+This talk mainly covered 4 pillars of [reactive manifesto](https://www.reactivemanifesto.org/) and thereby explained key properties of reactive systems. It put lot of emphasis on realizing [eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency) using asynchronous messaging. However, as we all know it has its own limitations and pitfalls in terms of [observability](https://medium.com/observability/microservices-observability-26a8b7056bb4) and resiliency - but it can definitely be addressed by implementing it in a correct way. Session was full of real world examples that speaker had worked upon. It also talked about isolation, as that is main force behind implementing [Microservices](https://en.wikipedia.org/wiki/Microservices) within [cloud native](https://dhaval-shah.com/understanding-cloud-native-architecture-with-an-example/) world. Concluding part of session was mainly about [Backpressure](https://www.reactivemanifesto.org/glossary#Back-Pressure) by explaining ways to handle it when a component within application is producing stream of data at a rate faster than the component who is going to consume stream of data emitted by producer of data
 
 So this is the synopsis of concepts / topics I was able to learn from most impactful sessions that I had attended during Agile 2019 conference. I hope you would have enjoyed it; to such an extent that next year you will try your level best to make a point of attending 2020 Agile India Conference. 
 

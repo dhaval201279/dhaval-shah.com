@@ -11,10 +11,10 @@ tags:
   - jvm
   - performance
   - tuning
-
+thumbnail: "images/wp-content/uploads/2019/11/thnail-java-gc.jpg"
 ---
 
-In one of my [previous post](http://dhaval-shah.com/understanding-jvm-memory-management/) I elaborated basics of JVM memory and also explained how garbage collection works. In this post we will try to understand various types of GC and how to tune and optimize them with a real world example.
+In one of my [previous post](https://dhaval-shah.com/understanding-jvm-memory-management/) I elaborated basics of JVM memory and also explained how garbage collection works. In this post we will try to understand various types of GC and how to tune and optimize them with a real world example.
 
 # GC Taxonomy
 
@@ -41,7 +41,7 @@ In nutshell we can infer that Major GCs would be an outcome of number of Minor G
 
 # Types of GC
 
-[![Types of GC](http://dhaval-shah.com/wp-content/uploads/2019/11/types-of-gc.png)](http://dhaval-shah.com/wp-content/uploads/2019/11/types-of-gc.png)
+[![Types of GC](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/types-of-gc.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/types-of-gc.png)
 
 ## 1. Serial GC
 
@@ -102,7 +102,7 @@ In one of the application which was in production for more than 4 years with mod
 
 ## 1. Initial Analysis
 
-[![GC Metrics before optimization](http://dhaval-shah.com/wp-content/uploads/2019/11/1-default-gc-readings.png)](http://dhaval-shah.com/wp-content/uploads/2019/11/1-default-gc-readings.png)
+[![GC Metrics before optimization](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/1-default-gc-readings.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/1-default-gc-readings.png)
 
 Whilst skimming through performance reports and some of GC logs, we observed that allocation failures were happening in large proportion ~ 90%.
 
@@ -114,7 +114,7 @@ We looked at Allocation Rate which clearly indicates that while new objects are 
 
 Above report indicating high Allocation Failure is due to high fragmentation in memory and hence GC needs to be triggered. So we started analyzing GC behavior and thereby found out that application was using default GC i.e. Parallel GC, which can have latency issues. So we decided to change its algorithm to CMS and then analyzed GC logs. Below are the readings after changing from default GC to CMS GC
 
-[![Comparison - Parallel GC Vs CMS GC](http://dhaval-shah.com/wp-content/uploads/2019/11/2-default-gc-to-cms-gc.png)](http://dhaval-shah.com/wp-content/uploads/2019/11/2-default-gc-to-cms-gc.png)
+[![Comparison - Parallel GC Vs CMS GC](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/2-default-gc-to-cms-gc.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/2-default-gc-to-cms-gc.png)
 
 With CMS GC we were able to see significant amount of gain in terms of - 
 1. **50% reduction** in Allocation Failure
@@ -124,7 +124,7 @@ With CMS GC we were able to see significant amount of gain in terms of -
 
 Considering this gain in lower environment, we pushed GC related changes to production. And in spite of full blown performance testing in lower environment destiny had something else in store for us :) When we started analyzing GC logs from PROD this is what we saw in its reports :(
 
-[![CMS GC Metrics from Prod](http://dhaval-shah.com/wp-content/uploads/2019/11/3-cms-perf-degrader-readings.png)](http://dhaval-shah.com/wp-content/uploads/2019/11/3-cms-perf-degrader-readings.png)
+[![CMS GC Metrics from Prod](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/3-cms-perf-degrader-readings.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/3-cms-perf-degrader-readings.png)
 
 Significant observations that may have impact on performance of application  -
 
@@ -145,7 +145,7 @@ So we changed JVM parameters to below values and then tried comparing the readin
 2. *-XX:CMSInitiatingOccupancyFraction* = 70
 3. *-XX:ParallelGCThreads* = 8 
    
-[![Optimed GC Metrics](http://dhaval-shah.com/wp-content/uploads/2019/11/4-optimized-cms-gc.png)](http://dhaval-shah.com/wp-content/uploads/2019/11/4-optimized-cms-gc.png)
+[![Optimed GC Metrics](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/4-optimized-cms-gc.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/11/4-optimized-cms-gc.png)
 
 It is clearly evident from above readings that by adding above mentioned flags we can see significant improvements in terms of -
 

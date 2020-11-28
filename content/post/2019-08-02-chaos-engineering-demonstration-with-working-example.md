@@ -16,13 +16,13 @@ tags:
   - microservice
   - Prometheus
   - spring boot
-
+thumbnail: "images/wp-content/uploads/2019/06/thnail-chaos-engg-demo.png"
 ---
 
 
 # Background
 
-From [first part](http://dhaval-shah.com/chaos-engineering-a-quick-primer/) of blog we gathered understanding about basics of Chaos Engineering. Now we will further deep dive to understand how to perform Chaos Engineering with a working example - which to me is going to be quite interesting. First lets start with understanding basics of working example which will be used to demonstrate following-
+From [first part](https://dhaval-shah.com/chaos-engineering-a-quick-primer/) of blog we gathered understanding about basics of Chaos Engineering. Now we will further deep dive to understand how to perform Chaos Engineering with a working example - which to me is going to be quite interesting. First lets start with understanding basics of working example which will be used to demonstrate following-
 
 *   How to perform chaos engineering within an application
 *   How to monitor the behavior of the system
@@ -30,7 +30,7 @@ From [first part](http://dhaval-shah.com/chaos-engineering-a-quick-primer/) of 
 
 # Bird's eye view of demo example
 
-[![Demo App - Architecture Overview](http://dhaval-shah.com/wp-content/uploads/2019/06/blog-demo-archictecture.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/blog-demo-archictecture.png)
+[![Demo App - Architecture Overview](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/blog-demo-archictecture.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/blog-demo-archictecture.png)
 
 The working example (along with its source code) which we will be using for demonstration, primarily consists of 2 simple Spring Boot applications -
 
@@ -55,7 +55,7 @@ As per my earlier post, most fundamental prerequisite for performing Chaos Engin
 2.  [Prometheus](https://prometheus.io/) - It is an open source monitoring and alerting tool built by [SoundCloud](https://soundcloud.com/)
 3.  [Grafana](https://grafana.com/) - It is a visualizing tool that allows us to view different types of metrics by formulating queries and alerts. It has an excellent looking aesthetic UI.
 
-Note - You can refer to my older [blog](http://dhaval-shah.com/monitoring-spring-boot-application/)  for understanding how Spring Boot's Actuator, [Micrometer](http://micrometer.io/),  Prometheus and Grafana works in unison to provide us required system metrics.
+Note - You can refer to my older [blog](https://dhaval-shah.com/monitoring-spring-boot-application/)  for understanding how Spring Boot's Actuator, [Micrometer](http://micrometer.io/),  Prometheus and Grafana works in unison to provide us required system metrics.
 
 In order to generate chaos we will inject failures and for that we will make use of some tool. As on date there are myriad tools available in market viz. [Chaos IQ](https://chaosiq.io/), [Gremlin](https://www.gremlin.com/), [Simian Army](https://github.com/Netflix/SimianArmy/wiki) etc. Since we need to inject failures within application, we will be using [Chaos Monkey for Spring Boot (CM4SB)](https://codecentric.github.io/chaos-monkey-spring-boot/)
 
@@ -225,7 +225,7 @@ As we can see from above response, it mainly depicts key configurations pertaini
 
 Next we need to enable Chaos Monkey. So we will be using _'**/actuator/chaosmonkey/enable**'_ URI. As soon as it is enabled, we can clearly see it in Grafana dashboard (under 'Chaos Monkey Status') as shown below
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/enable-CM4SB.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/enable-CM4SB.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/enable-CM4SB.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/enable-CM4SB.png)
 
 ### First Chaos Experiment
 
@@ -259,11 +259,11 @@ we can clearly see below metrics within the imported dashboard
 2.  Total number of requests for which latency was induced
 3.  Actual latency induced (in seconds)
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/latency-req-count-graphs-latest.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/latency-req-count-graphs-latest.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/latency-req-count-graphs-latest.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/latency-req-count-graphs-latest.png)
 
 Since we have also configured distribution percentiles for server request we can also see metrics pertaining to response time. As we can see from below metrics, that response time of Get all Cards API is taking 7 seconds.
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/latency-response-time-and-percentiles.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/latency-response-time-and-percentiles.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/latency-response-time-and-percentiles.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/latency-response-time-and-percentiles.png)
 
 ### Second Chaos Experiment
 
@@ -291,11 +291,11 @@ After running the same tests (i.e. Fetch all Cards using the same above Apache B
 2.  Number of exceptions thrown
 3.  Error Rate
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/error-count.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/error-count.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/error-count.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/error-count.png)
 
 Within HTTP code section of dashboard we can also see number of requests that have ended up with HTTP code as 500 (due to Runtime Exception thrown by CM4SB assault)
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/error-http-status-code.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/error-http-status-code.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/error-http-status-code.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/error-http-status-code.png)
 
 ### Third Chaos Experiment
 
@@ -321,7 +321,7 @@ As part of this chaos experiment we will be applying kill application Assault to
 
 After running the same tests (i.e. Fetch all Cards using the same above Apache Bench command) we can clearly see that there is not a single failure ! So we can infer that our fallback mechanism that we have configured within Card Client application is working as per its expected behavior in case Card Service becomes unresponsive.
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/07/fallback-apache-bench-image.png)](http://dhaval-shah.com/wp-content/uploads/2019/07/fallback-apache-bench-image.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/07/fallback-apache-bench-image.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/07/fallback-apache-bench-image.png)
 
 # Conclusion
 

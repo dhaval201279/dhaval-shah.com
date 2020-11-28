@@ -11,10 +11,10 @@ categories:
 tags:
   - Chaos Engineering
   - microservice
-
+thumbnail: "images/wp-content/uploads/2019/06/thnail-chaos-theory.jpg"
 ---
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/flu-vaccine-and-misarriages-today-tease-170913_8ef927cd65f9f91b90aca569965992dc.jpg)](http://dhaval-shah.com/wp-content/uploads/2019/06/flu-vaccine-and-misarriages-today-tease-170913_8ef927cd65f9f91b90aca569965992dc.jpg)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/flu-vaccine-and-misarriages-today-tease-170913_8ef927cd65f9f91b90aca569965992dc.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/flu-vaccine-and-misarriages-today-tease-170913_8ef927cd65f9f91b90aca569965992dc.jpg)
 
 Human body is vulnerable to lot of diseases. So in order to protect human beings from diseases [vaccines](https://en.wikipedia.org/wiki/Vaccine) have been invented. Vaccines mainly work due to process called '[Hormesis](https://en.wikipedia.org/wiki/Hormesis)', by which system or organism adapts to harm in order to become stronger. Just as our body is susceptible to diseases and germs, so do our systems in software world. Hence vaccines and vaccination can be considered as an apt analogy for understanding [Chaos Engineering](https://en.wikipedia.org/wiki/Chaos_engineering). So as two part series on Chaos Engineering, we will try understanding the basics of Chaos Engineering in first part which will then be followed up by demonstrating working example in the second and final part of this series
 
@@ -26,7 +26,7 @@ Theoretical definition from [Principles of Chaos](http://principlesofchaos.org/)
 
 So in layman's term it is **thoughtful**, **planned** experiments executed in **organized** way to reveal **weaknesses** in software system. The whole purpose of being thoughtful, planned and organized is to be able to understand impact of experiments on system and thereby monitor system behavior. It is a scientific approach by which hypothesis about our systems are validated, which eventually helps us to discover significant information about our systems.
 
-Just as different categories of [tests](http://dhaval-shah.com/anatomy-of-test-driven-development-part-1/) help us build confidence in application, Chaos Engineering is a proactive way of validating our systems. Of course one would argue that we can still validate our systems by following the conventional and reactive approach to our operations during production incidents or outages. But this reactive approach will never get us to degree of reliability that we intend to.
+Just as different categories of [tests](https://dhaval-shah.com/anatomy-of-test-driven-development-part-1/) help us build confidence in application, Chaos Engineering is a proactive way of validating our systems. Of course one would argue that we can still validate our systems by following the conventional and reactive approach to our operations during production incidents or outages. But this reactive approach will never get us to degree of reliability that we intend to.
 
 # Misconceptions
 
@@ -49,9 +49,9 @@ Most important thing to notice here is that all the above categories are not jus
 
 ## 2. Shift in Architecture paradigm
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/mono-to-MSA.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/mono-to-MSA.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/mono-to-MSA.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/mono-to-MSA.png)
 
-In today's contemporary world of software systems, most of the green field projects are built with [Cloud Native Mircroservice](http://dhaval-shah.com/understanding-cloud-native-architecture-with-an-example/) architecture. And brown field projects are undergoing a major transformation i.e. moving from [Monolithic](https://en.wikipedia.org/wiki/Monolithic_application) architecture to [Microservice](https://en.wikipedia.org/wiki/Microservices) architecture. With Microservice architecture there are lot of disconnected and moving pieces within the system. Now if we consider this shift in architecture paradigm through the lens of above failure points, there would be almost 6 \* N failure points to deal with, where N is number of Microservice applications for a given system - needless to say that answer to this multiplication will look too substantial to ignore!
+In today's contemporary world of software systems, most of the green field projects are built with [Cloud Native Mircroservice](https://dhaval-shah.com/understanding-cloud-native-architecture-with-an-example/) architecture. And brown field projects are undergoing a major transformation i.e. moving from [Monolithic](https://en.wikipedia.org/wiki/Monolithic_application) architecture to [Microservice](https://en.wikipedia.org/wiki/Microservices) architecture. With Microservice architecture there are lot of disconnected and moving pieces within the system. Now if we consider this shift in architecture paradigm through the lens of above failure points, there would be almost 6 \* N failure points to deal with, where N is number of Microservice applications for a given system - needless to say that answer to this multiplication will look too substantial to ignore!
 
 As per [Murphy's](http://www.murphys-laws.com/murphy/murphy-laws.html) law, failure in software systems is inevitable. So Chaos Engineering in a way helps to identify vulnerable areas within our system and thereby help us to either get rid of failures or reduce [MTTR](https://en.wikipedia.org/wiki/Mean_time_to_recovery)
 
@@ -78,7 +78,7 @@ Basically chaos engineering will start with Planning a Game Day wherein we will 
 1.  From system standpoint, what can go wrong or how can system fail?
 2.  How to meticulously plan and effectively execute tests pertaining to answers that we get for above question?
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/infra-view.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/infra-view.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/infra-view.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/infra-view.png)
 
 So as part of 1st question one should be coming up with application's system and infrastructure view. This will in a way help us to understand probable failure points within the system. Above image just represents infrastructure view of a typical Microservice application with a hypothetical scenario
 
@@ -93,7 +93,7 @@ Now that we know how chaos engineering experiments should be executed, it is qui
 
 Chaos engineering has a very important fundamental that always needs to be kept in mind i.e. Blast Radius - which is nothing but the impacted area of system as an outcome of the chaos engineering experiments. In principle it should be as small as it can be so that chaos engineering experiments does not have a humongous impact, which is extremely complex and difficult to understand and analyze. So we should strive to run smallest possible experiment that can teach us something about our system's behavior.
 
-[![](http://dhaval-shah.com/wp-content/uploads/2019/06/CE-workflow.png)](http://dhaval-shah.com/wp-content/uploads/2019/06/CE-workflow.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/CE-workflow.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2019/06/CE-workflow.png)
 
  
 
@@ -105,4 +105,4 @@ If validation of hypothesis ends up in failure which is not because of our exper
 
 We tried understanding the WHAT'S, WHY'S and HOW's of Chaos Engineering with required rationale. So now we will be pretty much convinced that failures in software world are inevitable. And hence we need a mechanism to make our system better prepared to deal with them - That mechanism is none other than Chaos Engineering which will help us to identify potential weaknesses and vulnerability and thereby help us to harden them. This will be of immense help to be better prepared for production incidents and outages by either proactively getting rid of them or by reducing Mean Time To Recover (MTTR) from those unwanted incidents and outages.
 
-In [second part](http://dhaval-shah.com/chaos-engineering-demonstration-with-working-example/) I will be demonstrating Chaos Engineering with a working example by following what we have learnt over here. So stay tuned!
+In [second part](https://dhaval-shah.com/chaos-engineering-demonstration-with-working-example/) I will be demonstrating Chaos Engineering with a working example by following what we have learnt over here. So stay tuned!
