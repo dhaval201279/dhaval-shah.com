@@ -8,7 +8,8 @@ author = "Dhaval Shah"
 paginate = 10
 theme = "hugo-clarity"
 
-disqusShortname = "@disqus_Q6QOb3D75p"
+#disqusShortname = "@disqus_Q6QOb3D75p"
+disqusShortname = "dhaval-shah"
 
 DefaultContentLanguage = "en"
 #[languages]
