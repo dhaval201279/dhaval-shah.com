@@ -9,14 +9,14 @@ categories:
 tags:
   - microservice
   - spring boot
-
+thumbnail: "images/wp-content/uploads/2017/05/thnail-spring-boot-magic.jpg"
 ---
 
-Considering the extensive usage of [Spring Boot](https://projects.spring.io/spring-boot/) for building [Cloud Native Architecture](http://dhaval-shah.com/understanding-cloud-native-architecture-with-an-example/), I embarked on the journey of utilizing it in my reference [Cloud Native application](https://github.com/dhaval201279/cloud-native-java-demo). When I ran my first application I was literally flabbergasted with the magic [Spring Boot](https://projects.spring.io/spring-boot/) does under the hood, using which it camouflages the complexity and challenges of building enterprise applications. In order to understand capabilities of Spring Boot and thereby have its justifiable usage along with its troubleshooting skills I felt a dire need of demystifying the magic behind it!
+Considering the extensive usage of [Spring Boot](https://projects.spring.io/spring-boot/) for building [Cloud Native Architecture](https://dhaval-shah.com/understanding-cloud-native-architecture-with-an-example/), I embarked on the journey of utilizing it in my reference [Cloud Native application](https://github.com/dhaval201279/cloud-native-java-demo). When I ran my first application I was literally flabbergasted with the magic [Spring Boot](https://projects.spring.io/spring-boot/) does under the hood, using which it camouflages the complexity and challenges of building enterprise applications. In order to understand capabilities of Spring Boot and thereby have its justifiable usage along with its troubleshooting skills I felt a dire need of demystifying the magic behind it!
 
 The thing that makes an app a Spring boot application is the annotation *@SpringBootApplication*. This is basically applied to the class having main method i.e. entry point of the application. It is a meta annotation which internally comprises of 3 annotations -
 
-[![](http://dhaval-shah.com/wp-content/uploads/2017/05/annotation-2-spring-boot-internals.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/05/annotation-2-spring-boot-internals.jpg)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2017/05/annotation-2-spring-boot-internals.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/05/annotation-2-spring-boot-internals.jpg)
 
 1.  *@SpringBootConfiguration* - Its a specialization of spring framework's configuration annotation and it mainly helps in automatically discovering Spring configurations
 2.  *@ComponentScan* - Its a core spring framework standard component scan annotation.
@@ -274,7 +274,7 @@ Looking at the positive matches we are able to see custom auto configuration we 
 
 # Event Life Cycle of Spring Boot applications
 
-  [![](http://dhaval-shah.com/wp-content/uploads/2017/05/event-life-cycle-spring-boot-internals.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/05/event-life-cycle-spring-boot-internals.jpg) 
+  [![](https://www.dhaval-shah.com/images/wp-content/uploads/2017/05/event-life-cycle-spring-boot-internals.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/05/event-life-cycle-spring-boot-internals.jpg) 
 
 Lets try understanding different events that gets published once spring boot application bootstraps -
 

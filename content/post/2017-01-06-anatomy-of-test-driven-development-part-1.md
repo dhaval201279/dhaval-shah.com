@@ -9,7 +9,7 @@ categories:
 tags:
   - TDD
   - XP
-
+thumbnail: "images/wp-content/uploads/2016/12/TDD-lifecycle-217x300.jpg"
 ---
 
 Since we being one of the most intellectual and so called logical species on this earth, we need proper rationale behind each and every action that we do in our personal and professional life. Hence I thought to pen down a two post series highlighting rationale behind following one off the most important and underrated [XP](http://www.extremeprogramming.org/) practice of software devlopment i.e. [Test Driven Development](http://agiledata.org/essays/tdd.html)
@@ -32,7 +32,7 @@ Before we look into HOW part of TDD, lets first understand WHY Test Driven Devel
 # Why Test Driven Development
 Before we understand the advantages of following TDD, lets try to understand actual purpose of Unit Testing. [Brian Marick](https://en.wikipedia.org/wiki/Brian_Marick) who is leading Agile Testing guru and one of the authors of [Agile Manifesto](http://agilemanifesto.org/) came up with categorization of tests – which test fits into which quadrant and primary criteria behind this classification is to help people understand purpose of each type of tests that are implemented within a software application
 
-[![brian-maricks-test-quadrant-tdd](http://dhaval-shah.com/wp-content/uploads/2016/12/Brian-Maricks-Test-Quadrant-TDD-1024x576.jpg)](http://dhaval-shah.com/wp-content/uploads/2016/12/Brian-Maricks-Test-Quadrant-TDD.jpg)
+[![brian-maricks-test-quadrant-tdd](https://www.dhaval-shah.com/images/wp-content/uploads/2016/12/Brian-Maricks-Test-Quadrant-TDD-1024x576.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2016/12/Brian-Maricks-Test-Quadrant-TDD.jpg)
 
 4 axes against which categorization is done
 
@@ -49,7 +49,7 @@ On a side note if we try to super impose [Test Pyramid](https://www.mountaingoat
 
 ## TDD aids in deriving loosely coupled and highly cohesive design
 
-[![loosely-coupled-design](http://dhaval-shah.com/wp-content/uploads/2017/01/loosely-coupled-design.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/01/loosely-coupled-design.jpg)
+[![loosely-coupled-design](https://www.dhaval-shah.com/images/wp-content/uploads/2017/01/loosely-coupled-design.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/01/loosely-coupled-design.jpg)
 
 Lets take an example to understand this -
 
@@ -70,7 +70,7 @@ Three main aspects of TDD that help us achieve clean and elegant design :
 
 ## Helps create live specification
 
-  [![live-specification](http://dhaval-shah.com/wp-content/uploads/2017/01/live-specification.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/01/live-specification.jpg)
+  [![live-specification](https://www.dhaval-shah.com/images/wp-content/uploads/2017/01/live-specification.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/01/live-specification.jpg)
 
 How many times we have ended up in situations where in we are newly allocated to a project and size of the application is such that team is still clueless in terms of design of key features/functionalities within application.
 
@@ -78,7 +78,7 @@ TDD will implicitly help us to create appropriate and just enough specification 
 
 ## Promotes Refactoring
 
-[![refactoring](http://dhaval-shah.com/wp-content/uploads/2017/01/refactoring.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/01/refactoring.jpg)
+[![refactoring](https://www.dhaval-shah.com/images/wp-content/uploads/2017/01/refactoring.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/01/refactoring.jpg)
 
 As we are required to do reflexive design throughout the life cycle of product, refactoring is a quintessential aspect of product development - needless to say it is also equally important from XP perspective. Hence having right granular level of test cases immensely helps team members to do incremental refactoring. And by the virtue of this we can constantly strive for clean, elegant and maintainable software.
 

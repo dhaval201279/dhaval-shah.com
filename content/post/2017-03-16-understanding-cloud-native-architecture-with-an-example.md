@@ -11,7 +11,7 @@ tags:
   - microservice
   - spring boot
   - spring cloud
-
+thumbnail: "images/wp-content/uploads/2017/03/thnail-cloud-native-arch.png"
 ---
 
 Whenever the buzz word '_Cloud Native Architecture_' gets to our ears, first thing that comes to our mind is - It sounds too jazzy and latest and would have something to do with technology since it has a word called '_Architecture_' within it :). Because of this it creates a perception in the minds of lot of people that '_Cloud Native Architecture_' is just about TECHNOLOGY. Unfortunately, this is one of the most common misconception that prevails currently in the industry.
@@ -74,7 +74,7 @@ With Microservices based approach we are going to have myriad set of services an
 For any application, expected uptime is 99.999%, however if we are ready to accept reality than we clearly know that applications are bound to go down and hence they are inevitable - as Googles, Facebooks and Twitters also go down. Most important characteristics of High Available systems is - how gracefully they are able to handle such failures and how quickly they are able to recover. So the architecture (including infrastructure) has to be resilient in nature and has to be implemented by keeping such failures in mind.
 
 # Tenets of Cloud Native Architecture
-[![](http://dhaval-shah.com/wp-content/uploads/2017/03/casey-west-cloud-native-architecture.png)](http://dhaval-shah.com/wp-content/uploads/2017/03/casey-west-cloud-native-architecture.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2017/03/casey-west-cloud-native-architecture.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/03/casey-west-cloud-native-architecture.png)
 
 Courtesy - [Casey West](https://www.linkedin.com/in/caseywest/)
 
@@ -97,11 +97,11 @@ For sake of simplicity we will be just having a single service for Reservation w
 
 From functional stand point this is how simplistic the service would look like 
 
-[![](http://dhaval-shah.com/wp-content/uploads/2017/03/Functional-Service.png)](http://dhaval-shah.com/wp-content/uploads/2017/03/Functional-Service.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2017/03/Functional-Service.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/03/Functional-Service.png)
 
 However, from '_Cloud Native_' architectural standpoint, this is how our implementation would span out which includes application services (boxes with bold borders) and infrastructure services (boxes with dotted lines as borders) !
 
-[![](http://dhaval-shah.com/wp-content/uploads/2017/03/Infra-Services.png)](http://dhaval-shah.com/wp-content/uploads/2017/03/Infra-Services.png)    
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2017/03/Infra-Services.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/03/Infra-Services.png)    
 
 # Technology Stack
 It will be an all Spring technology stack that I will be using for implementing the example

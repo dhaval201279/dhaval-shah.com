@@ -12,10 +12,10 @@ tags:
   - Grafana
   - Prometheus
   - spring boot
-
+thumbnail: "images/wp-content/uploads/2018/11/final-main-image.png"
 ---
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/11/final-main-image.png)](http://dhaval-shah.com/wp-content/uploads/2018/11/final-main-image.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/final-main-image.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/final-main-image.png)
 
 [Spring Boot](http://spring.io/projects/spring-boot) helps developers to implement enterprise grade applications which can be pushed to production in no time. Once application gets into production and if we strongly believe in [vedic](https://en.wikipedia.org/wiki/Vedas) philosophy of [Karma](https://en.wikipedia.org/wiki/Karma) :), we are bound to experience [Murphy's Law](https://en.wikiquote.org/wiki/Murphy%27s_law).
 
@@ -31,7 +31,7 @@ In order to understand Spring Boot Actuator and its usage w.r.t observability an
 **Application Architecture**
 ----------------------------
 
-[![Sample App Architecture](http://dhaval-shah.com/wp-content/uploads/2018/10/spring-boot-actuator-monitoring.jpg)](http://dhaval-shah.com/wp-content/uploads/2018/10/spring-boot-actuator-monitoring.jpg)
+[![Sample App Architecture](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/spring-boot-actuator-monitoring.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/spring-boot-actuator-monitoring.jpg)
 
 Source code of both the applications can be referred at -
 
@@ -73,7 +73,7 @@ dependencies {
 
 When you run your application, it exposes set of endpoints relative to '_/actuator'_ URI which are as shown below
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/10/acutator-URIs.png)](http://dhaval-shah.com/wp-content/uploads/2018/10/acutator-URIs.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/acutator-URIs.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/acutator-URIs.png)
 
 The same can be viewed over JMX
 
@@ -117,7 +117,7 @@ management.endpoint.health.show-details=always
 
 By enabling health endpoints within our application, we will not only be able to see application's health information but we will also get to see infrastructure's health i.e. MongoDB and Rabbitmq as they are auto-configured
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/10/app-health-endpoints.png)](http://dhaval-shah.com/wp-content/uploads/2018/10/app-health-endpoints.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/app-health-endpoints.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/app-health-endpoints.png)
 
 # Metrics
 
@@ -163,7 +163,7 @@ When we access */actuator/prometheus* endpoint we can see lot of information per
 
 so on and so forth. Looking at the screen shot below one can realize that it is certainly not that user friendly in terms of inferring from data that is being emitted
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/10/actuator_prometheus_url.png)](http://dhaval-shah.com/wp-content/uploads/2018/10/actuator_prometheus_url.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/actuator_prometheus_url.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/actuator_prometheus_url.png)
 
 So we will be using [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) to easily infer from the data emitted as a part of Spring Boot Actuator. Prometheus is an open source monitoring tool developed by [SoundCloud](https://soundcloud.com/).  Grafana is an open platform for beautiful monitoring and analytics of time series data.
 
@@ -200,7 +200,7 @@ _.\\prometheus.exe --config.file=prometheus.yml_.
 
 Once Prometheus is successfully up and running you can see below console which means that it is not only running on 9090 but also scrapping metrics for you as per above configurations
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/10/prometheus-console-9090.png)](http://dhaval-shah.com/wp-content/uploads/2018/10/prometheus-console-9090.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/prometheus-console-9090.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/10/prometheus-console-9090.png)
 
 # Setting up Grafana
 
@@ -265,21 +265,21 @@ Below are some of the screen shots taken from Grafana dashboards, which are giv
 
 ## Basic Statistics and CPU usage
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/11/spring-boot-stats-basic-stats.png)](http://dhaval-shah.com/wp-content/uploads/2018/11/spring-boot-stats-basic-stats.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/spring-boot-stats-basic-stats.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/spring-boot-stats-basic-stats.png)
 
 ## Logback Statistics
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/11/spring-boot-stats-logback-stats.png)](http://dhaval-shah.com/wp-content/uploads/2018/11/spring-boot-stats-logback-stats.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/spring-boot-stats-logback-stats.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/spring-boot-stats-logback-stats.png)
 
 ## JVM Statistics
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/11/jvm-micrometer-jvm2.png)](http://dhaval-shah.com/wp-content/uploads/2018/11/jvm-micrometer-jvm2.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/jvm-micrometer-jvm2.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/jvm-micrometer-jvm2.png)
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/11/jvm-micrometer-jvm3.png)](http://dhaval-shah.com/wp-content/uploads/2018/11/jvm-micrometer-jvm3.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/jvm-micrometer-jvm3.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/jvm-micrometer-jvm3.png)
 
 ## Application Throughput
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/11/throughput-stats.png)](http://dhaval-shah.com/wp-content/uploads/2018/11/throughput-stats.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/throughput-stats.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/11/throughput-stats.png)
 
 # Conclusion
 So we saw how Spring Boot provides exhaustive time series metrics about different facets of health of an application which can help team to infer lot of insights from the available data by using monitoring and rendering tools like Prometheus / Grafana. Having said that, usage of Grafana is not just about setting up and configuring dashboards - one can create his own dashboard based on type of insights one would really like to have. One should also consider infrastructure (MongoDB and Rabbitmq here) as key aspect of the application and hence they should also be monitored closely via monitoring tools - this might be a candidate of another blog sometime later.

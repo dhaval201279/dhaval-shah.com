@@ -9,7 +9,7 @@ toc = true
 
 ------------------------------------------------------------------------------
 
-[![](http://dhaval-shah.com/wp-content/uploads/2020/05/about-1.png)](http://dhaval-shah.com/wp-content/uploads/2020/05/about-1.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2020/05/about-1.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2020/05/about-1.png)
 
 Dear Readers, Welcome to the "Ramblings of Pragmatic Software Craftsman" blog.
 

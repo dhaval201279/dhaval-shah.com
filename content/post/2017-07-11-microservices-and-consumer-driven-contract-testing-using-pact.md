@@ -11,7 +11,7 @@ tags:
   - microservice
   - spring boot
   - TDD
-
+thumbnail: "images/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-pact.jpg"
 ---
 # Background
 As per the current trends, Microservice Architecture has become a common paradigm using which enterprise applications are built. With this paradigm shift, an application is going to have myriad set of independent and autonomous (micro)services. So how does a developer do testing within Microservice Architecture? Answer is very obvious -
@@ -30,7 +30,7 @@ And hence the overall intent behind having integration tests gets defeated.
 
 So Martin Fowler gave an interesting perspective called [Consumer Driven Contract](https://martinfowler.com/articles/consumerDrivenContracts.html) which is nothing but a contract between consumer of service and producer of service. In this style of testing, format of contract is defined by Consumer and then shared with the corresponding Producer of service.
 
-[![](http://dhaval-shah.com/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-1.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-1.jpg)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-1.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-1.jpg)
 
 Lets take an example to understand this. We have *ReservationClient* which is an end consumer facing API; this in turn invokes *ReservationService* which is responsible for managing business workflows pertaining to Reservation. For the sake of simplicity, we will just try to retrieve Reservation using both the services.
 
@@ -39,7 +39,7 @@ We will be using Pact for realizing Consumer Driven Contract (CDC) testing. [PA
 1.  Pact generation on consumer side service
 2.  Pact verification on provider side service
 
-[![](http://dhaval-shah.com/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-pact.jpg)](http://dhaval-shah.com/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-pact.jpg)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-pact.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2017/07/Consumer-Driven-Contract-Testing-pact.jpg)
 
 ## 1. Pact Generation on Consumer side
 ### 1.1 Define expected result
@@ -235,6 +235,6 @@ Failures:
 It is quiet evident from the above error that Consumer has broken the contract as it is sending id attribute of user.
 
 # Summary
-As we saw above, with CDC we can make integration testing easy to manage and strive to get faster feedback. This in a way helps us to realize [Test Pyramid](http://dhaval-shah.com/anatomy-of-test-driven-development-part-1/). In subsequent posts, I will try to introduce usage of [Spring Cloud Contract](http://cloud.spring.io/spring-cloud-contract/spring-cloud-contract.html) for realizing CDC testing.
+As we saw above, with CDC we can make integration testing easy to manage and strive to get faster feedback. This in a way helps us to realize [Test Pyramid](https://dhaval-shah.com/anatomy-of-test-driven-development-part-1/). In subsequent posts, I will try to introduce usage of [Spring Cloud Contract](http://cloud.spring.io/spring-cloud-contract/spring-cloud-contract.html) for realizing CDC testing.
 
 [Github code](https://github.com/dhaval201279/spring-boot-pact-cdc) for your perusal.

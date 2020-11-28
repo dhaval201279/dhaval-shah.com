@@ -11,12 +11,12 @@ tags:
   - spring
   - spring boot
   - TDD
-
+thumbnail: "images/wp-content/uploads/2018/03/bootiful-TDD.jpg"
 ---
 
-[![](http://dhaval-shah.com/wp-content/uploads/2018/03/bootiful-TDD.jpg)](http://dhaval-shah.com/wp-content/uploads/2018/03/bootiful-TDD.jpg)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2018/03/bootiful-TDD.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2018/03/bootiful-TDD.jpg)
 
-Software engineers have been ardently following [Test Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD) as an [XP](https://en.wikipedia.org/wiki/Extreme_programming) practice for having necessary safety nets. I have even tried covering different [schools of TDD](http://dhaval-shah.com/anatomy-of-test-driven-development-part-1/) with an [example](https://github.com/dhaval201279/tdd-with-spring_mvc/tree/master/Spring_MVC_TDD) in one of my previous posts. Considering recent surge in using [Spring Boot](https://projects.spring.io/spring-boot/) for developing [Microservice](https://en.wikipedia.org/wiki/Microservices) applications, I felt a need to understand and learn how to do TDD whilst implementing [Spring Boot](https://projects.spring.io/spring-boot/) application.
+Software engineers have been ardently following [Test Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD) as an [XP](https://en.wikipedia.org/wiki/Extreme_programming) practice for having necessary safety nets. I have even tried covering different [schools of TDD](https://dhaval-shah.com/anatomy-of-test-driven-development-part-1/) with an [example](https://github.com/dhaval201279/tdd-with-spring_mvc/tree/master/Spring_MVC_TDD) in one of my previous posts. Considering recent surge in using [Spring Boot](https://projects.spring.io/spring-boot/) for developing [Microservice](https://en.wikipedia.org/wiki/Microservices) applications, I felt a need to understand and learn how to do TDD whilst implementing [Spring Boot](https://projects.spring.io/spring-boot/) application.
 
 In order to understand how [Spring Boot](https://projects.spring.io/spring-boot/) simplifies the overall process of doing [TDD](https://en.wikipedia.org/wiki/Test-driven_development), we will consider a very simple use case -
 
