@@ -31,9 +31,13 @@ industry. I am predominantly a backend developer with extensive experience in Ja
 5. Enterprise Monitoring (Splunk, Dynatrace, Prometheus, Grafana)
 6. Chaos Engineering (Chaos Monkey for Spring Boot)
 
-Professionl Linkedin profile - [Dhaval Shah](https://www.linkedin.com/in/dhavalshah201279/)
+### Certifications
+1. [Microsoft Certified : Azure Developer Associate](https://www.credly.com/badges/3c868c88-f163-41d0-ba70-e757087f978f/public_url)
+2. [Datastax certified : Apache Cassandra Developer Associate](https://certification.mettl.com/datastax/applicant/verify-certification-with-qr?email=gladiator201279%40gmail.com&assessment=Apache%20Cassandra%203%20Developer%20Associate%20Certification&date=Oct%2018,%202020)
 
-My curriculum vitae - [CV]()  
+My curriculum vitae - [CV](https://www.cakeresume.com/dhaval201279)
+
+Professional Linkedin profile - [Dhaval Shah](https://www.linkedin.com/in/dhavalshah201279/)
 
 ### Spare Time
 I am an avid reader and hence in my spare time I generally read non fictional and technology books. My book shelf can be availed at [goodreads](https://www.goodreads.com/review/list/5826087-dhaval-shah?shelf=read)
