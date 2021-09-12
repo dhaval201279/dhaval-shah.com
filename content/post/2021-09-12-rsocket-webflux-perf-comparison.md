@@ -15,7 +15,7 @@ tags:
 thumbnail: "images/wp-content/uploads/2021/09/rsock-rx-thumbnail-initial.png"
 ---
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/rsock-rx-thumbnail-initial.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/rsock-rx-thumbnail-initial.png)
+[![:centre](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/rsock-rx-thumbnail-initial.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/rsock-rx-thumbnail-initial.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
@@ -46,7 +46,7 @@ Lets try to understand _Request-Response_ model with a working example along wit
 
 # Bird's eye view of demo example
 
-[![Demo App - Bird's eye view](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/demo-app-view.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/demo-app-view.png)
+[![Demo App - Bird's eye view:centre](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/demo-app-view.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/demo-app-view.png)
 
 Working example (along with its source code) which we will be using for demonstration, primarily consists of 2 simple Spring Boot applications -
 
@@ -65,7 +65,7 @@ Working example (along with its source code) which we will be using for demonstr
 Lets try to comparatively analyze _RSocket_ Vs _Webflux_ from performance standpoint
 
 ## Throughput & Latency
-[![Load Testing Result](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gatling-result-comp.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gatling-result-comp.png)
+[![Load Testing Result:centre](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gatling-result-comp.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gatling-result-comp.png)
 
 Above reports clearly shows that -
 1. 95th Percentile response time of RSocket based communication is 1/3 of Webflux based API consumption
@@ -79,17 +79,17 @@ GC logging was enabled while performing load testing. GC logs were parsed via [G
 ### GC Pause Time
 Time taken by single Stop the World (STW) GC
 
-[![GC Pause Time](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gc-pause-time.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gc-pause-time.png)
+[![GC Pause Time:centre](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gc-pause-time.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gc-pause-time.png)
 
 ### Object Promotion Metrics
 Metrics indicating size and rate at which objects are promoted from Young Generation to Old Generation. Higher the promotion rate, higher the frequence of full GCs i.e. STW GC
 
-[![Object Promotion Metrics](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/obj-promotion-metrics.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/obj-promotion-metrics.png)
+[![Object Promotion Metrics:centre](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/obj-promotion-metrics.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/obj-promotion-metrics.png)
 
 ### GC Throughput
 Percentage of time spent in performing business transaction against time spent in GC activity
 
-[![GC Throughput](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/GC-throughput.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/GC-throughput.png)
+[![GC Throughput:centre](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/GC-throughput.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/GC-throughput.png)
 
 > Reference - One may want to refer my old article to understand [nuances of Garbage Collection](https://www.dhaval-shah.com/understanding-and-optimizing-garbage-collection/)
 
