@@ -24,16 +24,17 @@ I am a perpetual learner, who is inquisitive about all the latest trends shaping
 industry. I am predominantly a backend developer with extensive experience in Java / J2EE stack using Spring framework. Of late I am trying to tinker with Big Data stack.
 
 ### Specialities
-1. Spring Boot, Spring Webflux, Spring Reactor
+1. Spring Boot, Spring Webflux, Spring Reactor, Spring Cloud
 2. J2EE technologies (Spring Core, Spring MVC, Spring Data JPA, Spring Integration, Hibernate )
 3. Refactoring legacy applications
-4. Performance Engg. aficionado with sharp focus on optimization of enterprise applications (JVM / GC Tuning, App. Memory utilization, App. profiling and benchmarking, DB tuning etc.)
+4. Performance Engineering aficionado with sharp focus on optimization of enterprise applications (JVM / GC Tuning, App. Memory utilization, App. profiling and benchmarking, DB tuning etc.)
 5. Enterprise Monitoring (Splunk, Dynatrace, Prometheus, Grafana)
-6. Chaos Engineering (Chaos Monkey for Spring Boot)
+6. Chaos Engineering
 
 ### Certifications
-1. [Microsoft Certified : Azure Developer Associate](https://www.credly.com/badges/3c868c88-f163-41d0-ba70-e757087f978f/public_url)
-2. [Datastax certified : Apache Cassandra Developer Associate](https://certification.mettl.com/datastax/applicant/verify-certification-with-qr?email=gladiator201279%40gmail.com&assessment=Apache%20Cassandra%203%20Developer%20Associate%20Certification&date=Oct%2018,%202020)
+1. [Gremlin Certified Chaos Engineering Practitioner](https://www.credential.net/b161eed7-1611-471d-b4d1-1b84a0b13d8b)
+2. [Microsoft Certified Azure Developer Associate](https://www.credly.com/badges/3c868c88-f163-41d0-ba70-e757087f978f/public_url)
+3. [Datastax Certified Apache Cassandra Developer Associate](https://certification.mettl.com/datastax/applicant/verify-certification-with-qr?email=gladiator201279%40gmail.com&assessment=Apache%20Cassandra%203%20Developer%20Associate%20Certification&date=Oct%2018,%202020)
 
 My curriculum vitae - [CV](https://www.cakeresume.com/dhaval201279)
 
