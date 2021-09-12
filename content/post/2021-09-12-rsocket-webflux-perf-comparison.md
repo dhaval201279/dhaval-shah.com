@@ -22,7 +22,7 @@ thumbnail: "images/wp-content/uploads/2021/09/rsock-rx-thumbnail-initial.png"
 
 In one of my previous [post](https://www.dhaval-shah.com/refactoring-from-imperative-to-reactive-implementation/) we saw tangible advantages (w.r.t throughput, latency and resource utilization) of refactoring existing Microservice application from imperative to [reactive](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html) constructs.
 
-So an obvious question that can come to an inquisitive mind - 
+So an obvious question that comes to an inquisitive mind - 
 > Can we apply [Reactive](https://www.reactivemanifesto.org/) principles to the underlying communication layer
 
 Answer to above question is - Yes and  [**RSocket**](https://rsocket.io/) is the way to go
@@ -52,6 +52,20 @@ Working example (along with its source code) which we will be using for demonstr
 
 1.  [Card Client](https://github.com/dhaval201279/RxVsRsocket) - Public facing edge application with below endpoints. It uses _WebClient_ to invoke downstream system's APIs and and _RSocket_ client to communicate with downstream system's destination based on declared pattern.
 
+{{< highlight java >}}
+    @GetMapping("/rsocket/card/{cardId}")
+    public Mono<CardEntity> cardByIdWithRSocket(@PathVariable String cardId) {
+        log.info("Entering CardClientController : cardByIdWithRSocket with path variable as {} ", cardId);
+        Mono<CardEntity> cardEntityMono = rSocket
+                                            .route("rsocket-find-specific")
+                                            .data(cardId)
+                                            .retrieveMono(CardEntity.class);
+
+        log.info("Card details received");
+        return cardEntityMono;
+    }
+{{< /highlight >}}
+
 #### APIs exposed by application
 
 | HTTP Method   | URI     | Description   |
@@ -61,8 +75,20 @@ Working example (along with its source code) which we will be using for demonstr
 
 2.  [Card Service](https://github.com/dhaval201279/RxVsRSocketServer) - Application which not only exposes _Webflux_ endpoint but also has a connection point for accepting _RSocket_ client connection via [**@MessageMapping**](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/messaging/handler/annotation/MessageMapping.html). It will be using  [Redis](https://redis.io/) as a persistent store. It also has a bulk loader which will load 5000 cards into the database whenever it bootstraps.
 
+{{< highlight java >}}
+    @MessageMapping("rsocket-find-specific")
+    public Mono<CardEntity> rSocketFindSpecific(String cardId) {
+        log.info("Entering CardViewController : rSocketFindSpecific with cardId : {} ", cardId);
+        return cardService
+                .getCardById(cardId)
+                //.delayElement(Duration.ofSeconds(1))
+                .doFinally(sig -> log.info("Response sent"));
+    }
+{{< /highlight >}}
+
 # Comparison based on performance metrics
-Lets try to comparatively analyze _RSocket_ Vs _Webflux_ from performance standpoint
+Lets try to comparatively analyze _RSocket_ Vs _Webflux_ from performance standpoint. We will be using [Gatling](https://gatling.io/)
+to simulate a load test.
 
 ## Throughput & Latency
 [![Load Testing Result](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gatling-result-comp.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gatling-result-comp.png)
@@ -71,7 +97,7 @@ Above reports clearly shows that -
 1. 95th Percentile response time of RSocket based communication is 1/3 of Webflux based API consumption
 2. Mean response time of RSocket based communication is 1/2 of Webflux based API consumption
 3. Failures in RSocket based communication is 1/2 of WebFlux based API consumption
-4. TPS for successful requests in RSocket based communication is twice more than  that of Webflux based API consuption
+4. TPS for successful requests in RSocket based communication is twice more than  that of Webflux based API consumption
 
 ## [JVM Memory](https://www.dhaval-shah.com/understanding-jvm-memory-management/) usage and [Garbage Collection]() behavior
 GC logging was enabled while performing load testing. GC logs were parsed via [GC Easy](https://gceasy.io/) to infer detailed JVM heap and GC behavior. Below are the observations w.r.t key performance parameters :
