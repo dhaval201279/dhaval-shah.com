@@ -99,7 +99,7 @@ Above reports clearly shows that -
 3. Failures in RSocket based communication is 1/2 of WebFlux based API consumption
 4. TPS for successful requests in RSocket based communication is twice more than  that of Webflux based API consumption
 
-## [JVM Memory](https://www.dhaval-shah.com/understanding-jvm-memory-management/) usage and [Garbage Collection]() behavior
+## [JVM Memory](https://www.dhaval-shah.com/understanding-jvm-memory-management/) usage and [Garbage Collection](https://www.dhaval-shah.com/understanding-and-optimizing-garbage-collection/) behavior
 GC logging was enabled while performing load testing. GC logs were parsed via [GC Easy](https://gceasy.io/) to infer detailed JVM heap and GC behavior. Below are the observations w.r.t key performance parameters :
 
 ### GC Pause Time
@@ -108,7 +108,7 @@ Time taken by single Stop the World (STW) GC
 [![GC Pause Time](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gc-pause-time.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/gc-pause-time.png)
 
 ### Object Promotion Metrics
-Metrics indicating size and rate at which objects are promoted from Young Generation to Old Generation. Higher the promotion rate, higher the frequence of full GCs i.e. STW GC
+Metrics indicating size and rate at which objects are promoted from Young Generation to Old Generation. Higher the promotion rate, higher the frequency of full GCs i.e. STW GC
 
 [![Object Promotion Metrics](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/obj-promotion-metrics.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2021/09/obj-promotion-metrics.png)
 
