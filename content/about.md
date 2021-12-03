@@ -18,7 +18,7 @@ My name is Dhaval P Shah. I am the founder and editor of this blog.
 I work as a Lead - Software Development Engineer at [Mastercard](https://www.mastercard.co.in/en-in.html).
 
 ## About Me
-I am a pragmatic Software Craftsman, passionate about architecting, designing, implementing, operationalizing and monitoring **Distributed Systems** with 15+ years of experience predominately in crafting low latency, high throughput and scalable enterprise applications.
+I am a pragmatic Software Craftsman, passionate about architecting, designing, implementing, operationalizing and monitoring **Distributed Systems** with 16+ years of experience predominately in crafting low latency, high throughput and scalable enterprise applications.
 
 I am a perpetual learner, who is inquisitive about all the latest trends shaping the software 
 industry. I am predominantly a backend developer with extensive experience in Java / J2EE stack using Spring framework. Of late I am trying to tinker with Big Data stack.
@@ -48,6 +48,14 @@ You can connect with me directly on [twitter](https://twitter.com/dhaval201279),
 
 ## About this blog
 "Ramblings of Pragmatic Software Craftsman" is a blog where I tend to log my key learnings that I have gathered as part of my day job or as part of my evening / night time where I simply love to play with some new or upcoming technology / tools. This in a way compels me to delve deeper to build a strong conceptual foundation for the article I intend to write about. It gives me immense self gratifying feeling when my readers find my articles insightful - however thats just a byproduct for the endeavor that I put to blog.
+
+### Appreciations / Recommendations of article on this blog
+|  Year  | Article Name   | Quoted / Recommended |
+|:--------:|:--------:|:------:|
+| 2021 | [RSocket Vs Webflux](https://www.dhaval-shah.com/performance-comparison-rsocket-webflux/) | [Spring Weekly Newsletter](https://spring.io/blog/2021/09/14/this-week-in-spring-september-14th-2021) |
+| 2020 | [Blog](https://dhaval-shah.com)| [SivaLabs](https://www.sivalabs.in/2020/09/all-the-resources-you-ever-need-as-a-java-spring-application-developer/)|
+| 2019 | [Chaos Engineering](https://www.dhaval-shah.com/chaos-engineering-demonstration-with-working-example/) | [Chaos Weekly Newsletter](https://medium.com/this-week-in-chaos/issue-9-august-6-2019-a410a8c21c23) |
+| 2018 | [Bootiful TDD](https://www.dhaval-shah.com/bootiful-test-driven-development/)| [Spring Weekly Newsletter](https://spring.io/blog/2018/03/13/this-week-in-spring-march-13th-2018) <br /> [Java Testing Weekly](https://www.petrikainulainen.net/weekly/java-testing-weekly-12-2018)|
 
 ### What powers this blog?
 This blog is powered by [Hugo](https://gohugo.io/), a static site generated built using [Golang](https://golang.org/). It uses a [Hugo Clarity](https://themes.gohugo.io/hugo-clarity/) theme.
