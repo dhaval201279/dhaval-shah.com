@@ -59,7 +59,7 @@ The default value is equal to the number of cores of the machine in which applic
 
 It basically uses parallel STW algorithm for young generation and CMS algorithm for old generation. Below are the phases of this algorithm
 
-| Name of the phase   | Brief descrition     | STW ?   |
+| Name of the phase   | Brief description     | STW ?   |
 | --------  | -------- | ------ |
 | Initial Mark | Collect all the garbage collector roots | Yes |
 | Concurrent Mark | Garbage Collector traverses the Old Generation and marks all live objects, starting from the roots found in the previous phase | No |
@@ -167,4 +167,4 @@ P.S - There are couple of more flags which can be considered based on the need o
 
 It indicates garbage collector to collect young generation before doing Full GC or CMS remark phase and thereby aid in improving its performance due to absence of need to check references between young generation and tenured.
 
-In case you have some experience w.r.t. GC and its tuning to share, feel free to share it through comments - collaboration will definitely help us to enhance knowledge and understanding of our community. You can connect me through comments or [DM](https://twitter.com/dhaval201279/) me, should you have any queries / clarifications in regards to GC and its tuning and optimization.
+In case you have some experience w.r.t. GC and its tuning to share, feel free to share it through comments - collaboration will definitely help us to enhance knowledge and understanding of our community. Alternatively you can [DM](https://twitter.com/dhaval201279/) me, should you have any queries / clarifications in regards to GC and its tuning and optimization.
