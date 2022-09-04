@@ -10,7 +10,6 @@ tags:
   - performance
   - tuning
 thumbnail: "images/wp-content/uploads/2022/09/thumbnail.jpg"
-draft: true
 ---
 
 # Background
