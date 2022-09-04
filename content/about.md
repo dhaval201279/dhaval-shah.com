@@ -1,7 +1,7 @@
 +++
 title = "About"
 description = "Dhaval Shah"
-date = "2020-11-12"
+date = "2022-08-06"
 aliases = ["about-us", "about-hugo", "contact"]
 author = "Dhaval"
 toc = true
@@ -15,13 +15,13 @@ Dear Readers, Welcome to the "Ramblings of Pragmatic Software Craftsman" blog.
 
 ## Introduction
 My name is Dhaval P Shah. I am the founder and editor of this blog.
-I work as a Lead - Software Development Engineer at [Mastercard](https://www.mastercard.co.in/en-in.html).
+I work as a Principal - Software Development Engineer at [Mastercard](https://www.mastercard.co.in/en-in.html).
 
 ## About Me
-I am a pragmatic Software Craftsman, passionate about architecting, designing, implementing, operationalizing and monitoring **Distributed Systems** with 16+ years of experience predominately in crafting low latency, high throughput and scalable enterprise applications.
+I am a pragmatic Software Craftsman, passionate about architecting, designing, implementing, operationalizing and monitoring **Distributed Systems** with 17+ years of experience predominately in crafting low latency, high throughput and scalable enterprise applications.
 
-I am a perpetual learner, who is inquisitive about all the latest trends shaping the software 
-industry. I am predominantly a backend developer with extensive experience in Java / J2EE stack using Spring framework. Of late I am trying to tinker with Big Data stack.
+I am a perpetual learner, who is inquisitive about all the latest trends shaping software 
+industry. I am predominantly a backend developer with an extensive experience in Java / J2EE stack using Spring framework. Of late I am trying to tinker with Big Data stack.
 
 ### Specialities
 1. Spring Boot, Spring Webflux, Spring Reactor, Spring Cloud
@@ -58,7 +58,7 @@ You can connect with me directly on [twitter](https://twitter.com/dhaval201279),
 | 2018 | [Bootiful TDD](https://www.dhaval-shah.com/bootiful-test-driven-development/)| [Spring Weekly Newsletter](https://spring.io/blog/2018/03/13/this-week-in-spring-march-13th-2018) <br /> [Java Testing Weekly](https://www.petrikainulainen.net/weekly/java-testing-weekly-12-2018)|
 
 ### What powers this blog?
-This blog is powered by [Hugo](https://gohugo.io/), a static site generated built using [Golang](https://golang.org/). It uses a [Hugo Clarity](https://themes.gohugo.io/hugo-clarity/) theme.
+This blog is powered by [Hugo](https://gohugo.io/), a static site generator built using [Golang](https://golang.org/). It uses a [Hugo Clarity](https://themes.gohugo.io/hugo-clarity/) theme.
 I’ve hosted this blog on [Netlify](https://www.netlify.com/), a cloud hosting platform for static websites.
 
 
