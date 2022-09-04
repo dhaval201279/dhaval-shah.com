@@ -41,9 +41,6 @@ Above numbers pertaining to CPU utilization means -
 
 #### Niceness
 It mainly indicates how happy a process is to give CPU cycles to other more high priority process i.e. how nice it is with others :) Allowed values range from -20 to 19
-
-<Book e.g. if required Pg 16>
-
 ### *mpstat*
 Its multi processor statistics tool tha can emit metrics per CPU. It is similar to _top_ but with load split separately for each processor.
 
@@ -94,7 +91,7 @@ Whenever OOM occurs below output can be seen
 
 [![RAM - ram-oomkil-bpfcc](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-oomkil-bpfcc.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-oomkil-bpfcc.png)
 
-## Networking
+## Network
 With Distributed Systems, network plays a huge role in System Performance. Typically speaking network would mainly comprise of -
 1. Hardware - which would mainly include routers, NIC, switches etc
 2. Software - which would mainly include [OS](https://en.wikipedia.org/wiki/Operating_system) [kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) that may comprise of device drivers, protocols etc.
@@ -130,9 +127,7 @@ Various options provided by Linux version -
 6. -n IP: IP datagram statistics
 7. -n EIP: IP error statistics
 
-[![Network - sar-tcp](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-sa-tcp.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-sar-tcp.png)
-
-<- TBD---Table for metrics from https://learning.oreilly.com/library/view/systems-performance-2nd/9780136821694/ch10.xhtml#ch10lev6sec6 >
+[![Network - sar-tcp](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-sar-tcp.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-sar-tcp.png)
 
 ### _tcptop_
 It is a tool that emits TCP throughput by host and its processes
@@ -141,7 +136,6 @@ It is a tool that emits TCP throughput by host and its processes
 
 - *RX_KB* : Received traffic in KB
 - *TX_KB* : Traffic sent in KB
-
 
 ## Disk I/O
 Disk I/O can have huge impact on system performance and this in turn may lead to high latency of application. A very common scenario that might lead to performance issues - System is waiting for Disk I/O to get completed and as a result CPU is idle due to blocking I/O operation
