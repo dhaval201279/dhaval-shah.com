@@ -231,5 +231,5 @@ misc-dmesg
 # Conclusion
 Architecting and developing low latency, high throughput enterprise applications needs an overall understanding of not only software but also about the underlying OS behavior along with its key components viz. CPU, RAM, Network and Disk. In this article I tried to show how quickly one can use some of the commands to get insights from OS level whilst troubleshooting performance issues.
 
-Disclaimer :
-Output shown above are based on execution of commands taken from [Chaos Engineering](https://www.amazon.in/Chaos-Engineering-reliability-controlled-disruption/dp/1617297755)
+P.S :
+List of commands and their output shown above are based on [Chaos Engineering](https://www.amazon.in/Chaos-Engineering-reliability-controlled-disruption/dp/1617297755)
