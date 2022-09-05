@@ -1,17 +1,21 @@
 ---
-title: Tools of the trade for analyzing System Performance
+title: Linux tools for analyzing System Performance
 author: Dhaval Shah
 type: post
 date: 2022-09-03T07:00:50+00:00
-url: /tools-4-analyzing-system-performance/
+url: /linux-tools-4-analyzing-system-performance/
 categories:
   - Performance
 tags:
   - performance
   - tuning
-thumbnail: "images/wp-content/uploads/2022/09/thumbnail.jpg"
+  - linux
+thumbnail: "images/wp-content/uploads/2022/09/linux-performance-image.png"
 ---
 
+
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/linux-performance-image.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/linux-performance-image.png)
+-----------------------------------------------------------------------------------------------------------------------------------------
 # Background
 In today's contemporary world of enterprise software where massively used applications are expected to scale and run seamlessly at **extreme high loads** e.g. [Scaling Hotstar for 25.3 million users](https://youtu.be/QjvyiyH4rr0), *system performance* becomes one of the key tenant of architecting high throughput, low latency applications along with capability of ease in scaling as per business / end consumer needs .
 
