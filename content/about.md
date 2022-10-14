@@ -33,7 +33,7 @@ industry. I am predominantly a backend developer with an extensive experience in
 
 ### Certifications
 1. [Gremlin Certified Chaos Engineering Practitioner](https://www.credential.net/b161eed7-1611-471d-b4d1-1b84a0b13d8b)
-2. [Microsoft Certified Azure Developer Associate](https://www.credly.com/badges/3c868c88-f163-41d0-ba70-e757087f978f/public_url)
+2. [Microsoft Certified Azure Developer Associate](https://www.credly.com/badges/01e65ce6-f2bf-40b9-bf40-96436226e8d8/public_url)
 3. [Datastax Certified Apache Cassandra Developer Associate](https://certification.mettl.com/datastax/applicant/verify-certification-with-qr?email=gladiator201279%40gmail.com&assessment=Apache%20Cassandra%203%20Developer%20Associate%20Certification&date=Oct%2018,%202020)
 
 My curriculum vitae - [CV](https://www.cakeresume.com/dhaval201279)
