@@ -2,7 +2,7 @@
 title: Optimizing Kafka Producers and Consumers
 author: Dhaval Shah
 type: post
-date: 2023-03-31T07:00:50+00:00
+date: 2023-04-01T07:00:50+00:00
 url: /optimizing-kafka-producers-consumers/
 categories:
   - Performance
