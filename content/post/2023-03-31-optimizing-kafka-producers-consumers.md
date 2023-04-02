@@ -72,4 +72,4 @@ Pictorially we can collate above understanding and prepare Kafka Producer Consum
 # Conclusion
 In this article we saw what exactly end to end latency within Kafka is along with various phased through which a message typically undergoes. Now we clearly understand what phases impacts performance of Kafka Producers and Consumers. It also covered key configurations that can help in reducing latency and increasing throughput of Kafka Producers and Consumers. By understanding impact of these configurations, we can say that there is a tradeoff between high throughput and low latency from performance optimization standpoint. And one can find right balance through experimentation by understanding nature of application (i.e. Throughput / Latency sensitive) and volume of load.
 
-By default Apache Kafka is configured to favor latency over throughput
+P.S - By default Apache Kafka is configured to favor latency over throughput
