@@ -2,7 +2,7 @@
 title: Performance Improvement Vs Performance Optimization
 author: Dhaval Shah
 type: post
-date: 2023-10-1T06:00:50+00:00
+date: 2023-10-13T06:00:50+00:00
 url: /performance-improvement-vs-performance-optimization/
 categories:
   - Performance
