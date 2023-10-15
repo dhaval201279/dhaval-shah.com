@@ -66,14 +66,14 @@ This would entail deep inspection and understanding of software systems from cod
 - Compressing request / response data using techniques like [ProtoBuf](https://protobuf.dev/) / GZIP to reduce bandwidth usage and improve latency
 
 ## Multi-Threading
-- Maintaining dedicated thread pools along with required configurations for multi threaded and asynchronous workflows
+- Maintaining dedicated thread pools along with required configurations for [multi threaded](https://nathanpeck.com/concurrency-deep-dive-strategies-for-high-traffic-applications/) and asynchronous workflows
 
 ## Heap
 - Tracking memory footprint and understanding projected workload can help us understand probable memory hot spots
 - Garbage Collection events : One of the most overlooked and under rated area from performance optimization and analysis standpoint. It can have major ramifications considering CPU utilization and latency numbers
 
 ## Nature of business workflow
-This would mainly govern software architecture of the application. It in a way will help us determine whether the workflow can be realized with Parallel vs Asynchronous or Non Blocking implementation
+This would mainly govern software architecture of the application. It in a way will help us determine whether the workflow can be realized with [Parallel vs Asynchronous Vs Non Blocking](https://www.linkedin.com/pulse/java-sockets-io-blocking-non-blocking-asynchronous-aliaksandr-liakh/) implementation
 
 ## Data Structures
 Judicious selection of data structures is of paramount importance, as it can have significant impact on memory footprint and latency.
