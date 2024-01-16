@@ -25,16 +25,18 @@ industry. I am predominantly a backend developer with an extensive experience in
 
 ### Specialities
 1. Spring Boot, Spring Webflux, Spring Reactor, Spring Cloud
-2. J2EE technologies (Spring Core, Spring MVC, Spring Data JPA, Spring Integration, Hibernate )
-3. Refactoring legacy applications
-4. Performance Engineering aficionado with sharp focus on optimization of enterprise applications (JVM / GC Tuning, App. Memory utilization, App. profiling and benchmarking, DB tuning etc.)
+2. Performance Engineering aficionado with sharp focus on optimization of enterprise applications (JVM / GC Tuning, App. Memory utilization, App. profiling and benchmarking, DB tuning etc.)
+3. J2EE technologies (Spring Core, Spring MVC, Spring Data JPA, Spring Integration, Hibernate )
+4. Kubernetes
 5. Enterprise Monitoring (Splunk, Dynatrace, Prometheus, Grafana)
 6. Chaos Engineering
+7. Refactoring legacy applications
 
 ### Certifications
-1. [Gremlin Certified Chaos Engineering Practitioner](https://www.credential.net/b161eed7-1611-471d-b4d1-1b84a0b13d8b)
+1. [Certified Kubernetes Application Developer](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/164e9edd-3dfe-493b-82c2-4ff9889fa194-dhaval-shah-94c15851-01c5-40ca-8704-b786404fdb43-certificate.pdf)
 2. [Microsoft Certified Azure Developer Associate](https://www.credly.com/badges/01e65ce6-f2bf-40b9-bf40-96436226e8d8/public_url)
 3. [Datastax Certified Apache Cassandra Developer Associate](https://certification.mettl.com/datastax/applicant/verify-certification-with-qr?email=gladiator201279%40gmail.com&assessment=Apache%20Cassandra%203%20Developer%20Associate%20Certification&date=Oct%2018,%202020)
+4. [Gremlin Certified Chaos Engineering Practitioner](https://www.credential.net/b161eed7-1611-471d-b4d1-1b84a0b13d8b)
 
 My curriculum vitae - [CV](https://www.cakeresume.com/dhaval201279)
 
