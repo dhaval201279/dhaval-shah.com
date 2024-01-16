@@ -257,24 +257,24 @@ syntax on
 As time is limited for CKAD exam, one needs to be as optimal as possible to save time. Hence it is recommended to remember these shortcuts for faster navigation -
 
 ``` vim
-1. w / W -> Beginning of next word
-2. e / E - End of current or next word (next word in case it is already at the end of current word)
-3. 0 - Beginning of current line
-4. $ - End of current line
-5. d$ - Delete from current cursor position to end of line
-6. :/<search-string> - Search entered search string
+w / W -> Beginning of next word
+e / E - End of current or next word (next word in case it is already at the end of current word)
+0 - Beginning of current line
+$ - End of current line
+d$ - Delete from current cursor position to end of line
+:/<search-string> - Search entered search string
   a. n - Next occurrence
   b. N - Previous occurrence
-7. u - Undo last action
-8. U - Undo all changes to current line
-9. Copy / Cut - Paste
+u - Undo last action
+U - Undo all changes to current line
+Copy / Cut - Paste
   a. Press ESC
   b. Take the cursor from the lines you want to copy / delete from
   c. 5yy / 5dd - Copy / Cut 5 lines from current line
   d. Take the cursor to the location where you want to paste copied contents
     i. p - Paste copied / cut lines below the line where cursor is placed
     ii. P - Paste copied / cut lines above the line where cursor is placed
-10. Multiline indent
+Multiline indent
   a. Switch to visual mode
   b. Move to the top of code block that need to be indented. Select single line with 'Shift + V", and than use arrow to select multiple lines
   c. Selected lines will show as highlighted
