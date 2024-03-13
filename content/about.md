@@ -8,9 +8,9 @@ toc = true
 +++
 
 ------------------------------------------------------------------------------
-
+<!--
 [![](https://www.dhaval-shah.com/images/wp-content/uploads/2020/05/about-1.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2020/05/about-1.png)
-
+-->
 Dear Readers, Welcome to the "Ramblings of Pragmatic Software Craftsman" blog.
 
 ## Introduction
@@ -34,7 +34,7 @@ industry. I am predominantly a backend developer with an extensive experience in
 
 ### Certifications
 1. [Certified Kubernetes Application Developer](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/164e9edd-3dfe-493b-82c2-4ff9889fa194-dhaval-shah-94c15851-01c5-40ca-8704-b786404fdb43-certificate.pdf)
-2. [Microsoft Certified Azure Developer Associate](https://www.credly.com/badges/01e65ce6-f2bf-40b9-bf40-96436226e8d8/public_url)
+2. [Microsoft Certified Azure Developer Associate](https://learn.microsoft.com/en-us/users/dhavalshah-1810/credentials/4bacf5da5f4a5fec)
 3. [Datastax Certified Apache Cassandra Developer Associate](https://certification.mettl.com/datastax/applicant/verify-certification-with-qr?email=gladiator201279%40gmail.com&assessment=Apache%20Cassandra%203%20Developer%20Associate%20Certification&date=Oct%2018,%202020)
 4. [Gremlin Certified Chaos Engineering Practitioner](https://www.credential.net/b161eed7-1611-471d-b4d1-1b84a0b13d8b)
 
