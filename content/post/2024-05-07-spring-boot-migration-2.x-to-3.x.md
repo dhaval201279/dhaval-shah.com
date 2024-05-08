@@ -15,7 +15,7 @@ thumbnail: "images/wp-content/uploads/2024/05/spring-boot image-with-text-nd-bir
 ---
 
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2024/05/spring-boot image-with-text-nd-birds.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/05/spring-boot image-with-text-nd-birds.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2024/05/spring-boot-image-with-text-nd-birds.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/05/spring-boot-image-with-text-nd-birds.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 # Background
 Lot of my pet projects have been built using [Spring Boot 2.x version](https://docs.spring.io/spring-boot/docs/2.2.0.RELEASE/reference/htmlsingle/). Same might be applicable for all the enterprises and organizations who have been building [Microservices](https://en.wikipedia.org/wiki/Microservices) based applications for their products / services using [Spring Boot](https://spring.io/projects/spring-boot).
