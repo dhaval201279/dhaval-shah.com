@@ -11,7 +11,7 @@ tags:
   - spring boot
   - microservice
   - cloud native
-thumbnail: "images/wp-content/uploads/2024/05/spring-boot image-with-text-nd-birds.png"
+thumbnail: "images/wp-content/uploads/2024/05/spring-boot-image-with-text-nd-birds.png"
 ---
 
 
