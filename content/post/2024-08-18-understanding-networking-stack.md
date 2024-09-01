@@ -1,9 +1,9 @@
 ---
-title: Linux tools for analyzing System Performance
+title: Understanding OS's network stack
 author: Dhaval Shah
 type: post
-date: 2022-09-03T07:00:50+00:00
-url: /linux-tools-4-analyzing-system-performance/
+date: 2024-08-18T07:00:50+00:00
+url: /understanding-fundamentals-of-networking-stack/
 categories:
   - Performance
 tags:
@@ -17,97 +17,69 @@ thumbnail: "images/wp-content/uploads/2022/09/linux-performance-image.png"
 [![](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/linux-performance-image.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/linux-performance-image.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 # Background
-In today's contemporary world of enterprise software where massively used applications are expected to scale and run seamlessly at **extreme high loads** e.g. [Scaling Hotstar for 25.3 million users](https://youtu.be/QjvyiyH4rr0), *system performance* becomes one of the key tenant of architecting high throughput, low latency applications along with capability of ease in scaling as per business / end consumer needs .
-
-*System performance* is a very broad term as it would encompass entire gambit of computer system i.e. all the software and hardware components that comes within the path of a user request. In this article I will be mainly covering key tools to analyze system resources -
-1. Four main logical components of a physical computer - CPU, RAM, Networking, and Disk I/O
-2. Operating System
-
-[![App - Top Down View](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/app-sw-os-top-down-view.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/app-sw-os-top-down-view.png)
-
-## CPU
-CPU is mainly responsible for executing all software and are most often probable hot spot for system performance issue. Key Linux tools that can help in finding deeper insights -
-
-### *top*
-Shows top CPU consuming processes along with its CPU usage
-
-[![CPU - top](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/cpu-top.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/cpu-top.png)
-
-Above numbers pertaining to CPU utilization means - 
-- us (user time)—The percentage of time the CPU spent in user space.
-- sy (system time)—The percentage of time the CPU spent in kernel space.
-- ni (nice time)—The percentage of time spent on low-priority processes.
-- id (idle time)—The percentage of time the CPU spent doing literally nothing. (It can’t stop!)
-- wa (I/O wait time)—The percentage of time the CPU spent waiting on I/O.
-- hi (hardware interrupts)—The percentage of time the CPU spent servicing hardware interrupts.
-- si (software interrupts)—The percentage of time the CPU spent servicing software interrupts.
-- st (steal time)—The percentage of time a hypervisor stole the CPU to give it to someone else. This kicks in only in virtualized environments.
-
-#### Niceness
-It mainly indicates how happy a process is to give CPU cycles to other more high priority process i.e. how nice it is with others :) Allowed values range from -20 to 19
-### *mpstat*
-Its multi processor statistics tool tha can emit metrics per CPU. It is similar to _top_ but with load split separately for each processor.
-
-[![CPU - mpstat](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/cpu-mpstat.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/cpu-mpstat.png)
-
-### Note
-When your application slows down considerably due to other background processes than one may use _niceness_ property to set higher relative property for application process. This has major limitation, as it does not control how much CPU to allocate to the process
-In order to overcome above limitation one can use *control groups* which mainly allows user to specify exact magnitude of resources i.e. CPU, Memory, I/O that kernel should allocate to group of processes
-
-## RAM
-RAM determines the operating capacity of a system at any given time. Read speed of RAM determines two things -
-1. How fast your CPU can load data into its cache
-2. How much of system performance drops when CPU is forced to read from RAM instead of from its cache
-
-Key Linux tools that can provide deeper insights -
-
-### _free_
-It shows utilization of RAM.
-
-[![RAM - free](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-free.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-free.png)
-
-'Available' column as shown above is a key metric to check RAM utilization
-
-### _top_
-It gives an overview of the memory along with CPU utilization (as discussed in previous section) of system.  By default, the output is sorted by the value of field _%CPU_ utilization of process
-
-[![RAM - top](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-top.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-top.png)
-
-### _vmstat_
-It mainly emits virtual memory statistics
-
-[![RAM - vmstat](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-vmstat.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-vmstat.png)
-
-Key fields to understand from performance standpoint : 
-- r -> Indicates no. of processes running / waiting to run which implicitly helps us to know the saturation level of the system
-- b -> Indicates no. of processes
-- in -> Total no. of interrupts
-- cs -> Total no. of context switches
-
-### _oomkill-bpfcc_
-It basically works by tracing *oom_kill_process* and emitting information whenever out of memory happens. In order to leverage this utility, open a terminal and execute below command and keep the terminal open.
-
-{{< highlight bash >}}
-  sudo oomkill-bpfcc
-{{< /highlight >}}
-
-Whenever OOM occurs below output can be seen
-
-[![RAM - ram-oomkil-bpfcc](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-oomkil-bpfcc.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/ram-oomkil-bpfcc.png)
-
-## Network
 With Distributed Systems, network plays a huge role in System Performance. Typically speaking network would mainly comprise of -
 1. Hardware - which would mainly include routers, NIC, switches etc
 2. Software - which would mainly include [OS](https://en.wikipedia.org/wiki/Operating_system) [kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) that may comprise of device drivers, protocols etc.
 
 Note - At software level, protocols can be further categorized  into 2 :
 1. Protocols at kernel level i.e. TCP, UDP etc
-2. Protocols at application level i.e. HTTP
-One can refer my older posts w.r.t application level protocols and ways to optimize it -
-- [Blocking HTTP client via Spring's RestTemplate](https://www.dhaval-shah.com/rest-client-with-desired-nfrs-using-springs-resttemplate/)
-- [Reactive HTTP client via Spring's WebClient](https://www.dhaval-shah.com/performant-and-optimal-spring-webclient/)
-- [RSocket Vs Webflux](https://www.dhaval-shah.com/performance-comparison-rsocket-webflux/)
+2. Protocols at application level i.e. HTTP - As far as application level protocol and its optimization is concerned, you may refer my older posts :
+   - [Blocking HTTP client via Spring's RestTemplate](https://www.dhaval-shah.com/rest-client-with-desired-nfrs-using-springs-resttemplate/)
+   - [Reactive HTTP client via Spring's WebClient](https://www.dhaval-shah.com/performant-and-optimal-spring-webclient/)
+   - [RSocket Vs Webflux](https://www.dhaval-shah.com/performance-comparison-rsocket-webflux/)
 
+In this article I will mainly be covering ways to optimize network at kernel level. But before that lets try to understand the flow data as a sender at kernel level
+
+# Overview of Linux Networking Stack
+
+------ // Image // --------
+The journey of sender application's data to the [NIC's](https://en.wikipedia.org/wiki/Network_interface_controller) interface begins in user space, where an application generates data to be transmitted over the network. This data is transferred to the kernel space through a system call via [Socket's](https://en.wikipedia.org/wiki/Unix_domain_socket) Send Buffers, as a **_struct sk_buff_** (socket buffer i.e. SKB) - a data type that holds the data and its associated metadata. The SKB then traverses the transport, network, and link layers, where relevant headers for protocols like TCP/UDP, IPv4, and MAC are added.
+
+Link layer mainly comprises of **queueing discipline** (qdiscs). **qdiscs** operate as a parent-child hierarchy, allowing multiple child *qdiscs* to be configured under a parent qdisc. Depending on priority, the _qdiscs_ determines when the packet is to be forwarded to the **driver queue** (a.k.a Ring Buffer). Finally, the NIC reads the packets and eventually deque them on wire :phew:
+
+## Optimizable Areas
+1. **TCP Connection Queues** <br />
+In order to manage inbound connection, Linux uses 2 types of backlog queues -
+   - **_SYN Backlog_** - For incomplete transactions during TCP handshake
+   -  **_Listen Backlog_** - For established sessions that are waiting to be accepted by application
+
+Length of both these queues can be tuned independently 
+
+``` bash
+# Manages length of SYN Backlog Queue
+net.ipv4.tcp_max_syn_backlog = 4096
+
+# Manages length of Listen Backlog Queue
+net.core.somaxconn = 1024
+```
+
+2. **TCP Buffering** <br />
+By managing size of send and receive buffers of socket, data throughput can be tweaked. One needs to be mindful of the fact that large sized buffers guarantees throughput but that gain is at the cost of more memory spent per connection
+
+Read and Write buffers of TCP can be managed via
+``` bash
+# Defines the minimum, default, and maximum size (in bytes) for the TCP receive buffer
+net.ipv4.tcp_rmem = 4096 87380 16777216
+
+
+# Defines the minimum, default, and maximum size (in bytes) for the TCP send buffer
+net.ipv4.tcp_wmem = 4096 65536 16777216
+
+# Enables automatic tuning of TCP receive buffer sizes
+net.ipv4.tcp_moderate_rcvbuf = 1
+```
+
+3. **TCP Congestion Control** <br />
+Congestion control algorithms play a vital role in managing network traffic, ensuring efficient data transmission, and maintaining network stability
+
+4. Other TCP Options
+
+5. Queueing Disciplines
+
+6. Socket Options
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Key tools that can help in gaining kernel level metrics
 ### _sar_
 It is a tool to collect system metrics
