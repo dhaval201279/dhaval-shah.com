@@ -13,18 +13,18 @@ tags:
 thumbnail: "images/wp-content/uploads/2024/09/Overview-of-Networking-Stack-Dark.png"
 ---
 # Background
-With Distributed Systems, network plays a huge role in System Performance. Typically speaking network would mainly comprise of -
-1. Hardware - which would mainly include routers, NIC, switches etc
-2. Software - which would mainly include [OS](https://en.wikipedia.org/wiki/Operating_system) [kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) that may comprise of device drivers, protocols etc.
+With [Distributed Computing](https://en.wikipedia.org/wiki/Distributed_computing) being defactor architectural paradigm, network plays a significant role in System Performance for high throughput / low latency applications. Typically speaking network would mainly comprise of -
+1. Hardware - which mainly includes routers, NIC, switches etc
+2. Software - which mainly includes [OS](https://en.wikipedia.org/wiki/Operating_system) [kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) that may comprise of device drivers, protocols etc.
 
 Note - At software level, protocols can be further categorized  into 2 :
 1. Protocols at kernel level i.e. TCP, UDP etc
 2. Protocols at application level i.e. HTTP - As far as application level protocol and its optimization is concerned, you may refer my older posts :
-   - [Blocking HTTP client via Spring's RestTemplate](https://www.dhaval-shah.com/rest-client-with-desired-nfrs-using-springs-resttemplate/)
-   - [Reactive HTTP client via Spring's WebClient](https://www.dhaval-shah.com/performant-and-optimal-spring-webclient/)
-   - [RSocket Vs Webflux](https://www.dhaval-shah.com/performance-comparison-rsocket-webflux/)
+   - [REST Client with desired NFRs using Spring RestTemplate](https://www.dhaval-shah.com/rest-client-with-desired-nfrs-using-springs-resttemplate/)
+   - [Implementing Performant and Optimal Spring WebClient](https://www.dhaval-shah.com/performant-and-optimal-spring-webclient/)
+   - [RSocket Vs Webflux - Performance Comparison](https://www.dhaval-shah.com/performance-comparison-rsocket-webflux/)
 
-In this article I will mainly be covering ways to optimize network at kernel level. But before that lets try to understand the flow data as a sender at kernel level
+In this article I will mainly be covering ways to optimize network at kernel level. But before that, lets gather understanding around how data flows within Linux Kernel, when a client application invokes an API exposed by downstream system
 
 # Overview of Linux Networking Stack
 
@@ -106,7 +106,7 @@ So we understood how data packet gets transmitted from an application to NIC. An
 
 Since network is one of the most often blamed component for poor performance of application, we also had a cursory overview of various properties that can be tweaked to optimize its performance.
 
-In case you have experienced with above or any other properties, feel free to share within comments!
+In case you have experienced optimizing network at OS level with above or any other properties, feel free to share within comments!
 
 # References
 1. [Brendan Gregg's System Performance Book](https://www.amazon.in/Systems-Performance-Brendan-Gregg-ebook/dp/B08J5QZPNC)
