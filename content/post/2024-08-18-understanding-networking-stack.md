@@ -1,20 +1,20 @@
 ---
-title: Understanding OS's network stack
+title: Optimizing Linux's network stack
 author: Dhaval Shah
 type: post
 date: 2024-08-18T07:00:50+00:00
-url: /understanding-fundamentals-of-networking-stack/
+url: /optimizing-linux-network-stack/
 categories:
   - Performance
 tags:
   - performance
   - tuning
   - linux
-thumbnail: "images/wp-content/uploads/2022/09/linux-performance-image.png"
+thumbnail: "images/wp-content/uploads/2024/09/linux-network-thumb-nail.png"
 ---
 
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/linux-performance-image.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/linux-performance-image.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2024/09/linux-network-thumb-nail.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/09/linux-network-thumb-nail.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 # Background
 With Distributed Systems, network plays a huge role in System Performance. Typically speaking network would mainly comprise of -
@@ -32,10 +32,11 @@ In this article I will mainly be covering ways to optimize network at kernel lev
 
 # Overview of Linux Networking Stack
 
------- // Image // --------
+[![Simplified Overview of Linux Networking Stack ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/09/Overview-of-Networking-Stack-Dark.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/09/Overview-of-Networking-Stack-Dark.png)
+
 The journey of sender application's data to the [NIC's](https://en.wikipedia.org/wiki/Network_interface_controller) interface begins in user space, where an application generates data to be transmitted over the network. This data is transferred to the kernel space through a system call via [Socket's](https://en.wikipedia.org/wiki/Unix_domain_socket) Send Buffers, as a **_struct sk_buff_** (socket buffer i.e. SKB) - a data type that holds the data and its associated metadata. The SKB then traverses the transport, network, and link layers, where relevant headers for protocols like TCP/UDP, IPv4, and MAC are added.
 
-Link layer mainly comprises of **queueing discipline** (qdiscs). **qdiscs** operate as a parent-child hierarchy, allowing multiple child *qdiscs* to be configured under a parent qdisc. Depending on priority, the _qdiscs_ determines when the packet is to be forwarded to the **driver queue** (a.k.a Ring Buffer). Finally, the NIC reads the packets and eventually deque them on wire :phew:
+Link layer mainly comprises of **queueing discipline** (qdiscs). **qdiscs** operate as a parent-child hierarchy, allowing multiple child *qdiscs* to be configured under a parent qdisc. Depending on priority, the _qdiscs_ determines when the packet is to be forwarded to the **driver queue** (a.k.a Ring Buffer). Finally, the NIC reads the packets and eventually deque them on wire :sweat_smile:
 
 ## Optimizable Areas
 1. **TCP Connection Queues** <br />
@@ -70,138 +71,46 @@ net.ipv4.tcp_moderate_rcvbuf = 1
 ```
 
 3. **TCP Congestion Control** <br />
-Congestion control algorithms play a vital role in managing network traffic, ensuring efficient data transmission, and maintaining network stability
+Congestion control algorithms play a vital role in managing TCP based network traffic, ensuring efficient data transmission, and maintaining network stability
 
-4. Other TCP Options
+It can be set using
 
-5. Queueing Disciplines
+``` bash
+# Sets cubic as congestion control algorithm. CUBIC is a modern algorithm designed to perform better in high bandwidth and high latency networks
+net.ipv4.tcp_available_congestion_control = cubic
+```
 
-6. Socket Options
+4. **Other TCP Options** <br />
+Other TCP parameters that can be tweaked
 
+``` bash
+# Enables TCP Selective Acknowledgement. Helps in maintaining high throughput along with reduced latency 
+net.ipv4.tcp_sack = 1
 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Key tools that can help in gaining kernel level metrics
-### _sar_
-It is a tool to collect system metrics
+# Enables TCP Forward Acknowledgement. Helps in faster recovery from multiple packet losses within a single window of data, improving overall TCP performance
+net.ipv4.tcp_fack = 1
 
-[![Network - sar](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-sar.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-sar.png)
+# Allows reuse of sockets in the TIME-WAIT state for new connections. This can help in reducing the latency associated with establishing new connections, leading to faster response times
+net.ipv4.tcp_tw_reuse = 1
 
-#### Activate _sar_
-Edit the file _/etc/default/sysstat_ by changing _ENABLED_ from "false" to "true" and then restart its service by below command
+# Disables fast recycling of TIME-WAIT sockets. Helps maintain stability and reliability of TCP connections, ensuring that connections are properly closed and all packets are accounted for before the socket is reused
+net.ipv4.tcp_tw_recycle = 0
+```
 
-{{< highlight bash >}}
-  sudo service sysstat restart
-{{< /highlight >}}
+5. **Queueing Disciplines (qdiscs)** <br />
+_qdiscs_ are algorithms for scheduling and managing network packets
 
-#### _sar_ options and its metrics understanding
-Various options provided by Linux version -
-1. -n DEV: Network interface statistics
-2. -n EDEV: Network interface errors
-3. -n TCP: TCP statistics
-4. -n ETCP: TCP error statistics
-5. -n SOCK: Socket usage
-6. -n IP: IP datagram statistics
-7. -n EIP: IP error statistics
-
-[![Network - sar-tcp](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-sar-tcp.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-sar-tcp.png)
-
-### _tcptop_
-It is a tool that emits TCP throughput by host and its processes
-
-[![Network - tcptop](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-tcptop.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/network-tcptop.png)
-
-- *RX_KB* : Received traffic in KB
-- *TX_KB* : Traffic sent in KB
-
-## Disk I/O
-Disk I/O can have huge impact on system performance and this in turn may lead to high latency of application. A very common scenario that might lead to performance issues - System is waiting for Disk I/O to get completed and as a result CPU is idle due to blocking I/O operation
-
-Key tools that can help in gaining kernel level metrics
-### _df_
-It mainly shows all the file systems mounted along with its size and used space
-
-[![Disk - df](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/disk-df.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/disk-df.png)
-
-### _iostat_
-Emits summary of I/O statistics per disk
-
-[![Disk - iostat](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/disk-iostat.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/disk-iostat.png)
-
-Note -
-- Use -x to get extended metrics
-- Few key metrics to understand the throughput / avg size of read/write - *r/s*, *w/s*, *rKb/s*, *rKb/s*
-- *aqu-sz* : Measurement of saturation which indicates queue length of requests
-- *%util* : Indicates utilization i.e. percentage of time device spent doing some work. A high value **may** indicate saturation
-
-### _biotop_
-Emits summary of disk I/O by process
-
-[![Disk - biotop](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/disk-biotop.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/disk-biotop.png)
-
-It mainly helps to identify source of load being written to disk is coming from. It in a way helps to identify the root cause of high consumption of resources
-
-## Operating System
-Operating System is a program on which application along with its binaries runs. It also manages system along with hardware, CPU, memory etc.
-
-Few tools that can help to get key metrics -
-
-### _opensnoop_
-Allows you to see all the files being opened by all the processes on your system, in almost near to real time
-
-{{< highlight bash >}}
-  sudo opensnoop-bpfcc
-{{< /highlight >}}
-
-### _execsnoop_
-It list of all the processes being started on the machine by listening for call to *exec* variant in the kernel
-
-{{< highlight bash >}}
-  sudo execsnoop-bpfcc
-{{< /highlight >}}
-
-
-## Other handy Linux tools from Performance Engineering standpoint
-
-### *Uptime*
-It mainly indicates - 
-- how long system has been up
-- average load on the system which mainly helps in understanding the pattern (increasing or decreasing load)
-
-[![Misc - uptime](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-uptime.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-uptime.png)
-
-Note:
-1. The three numbers in Load Average represent a moving window sum average of processes competing over CPU time to run over 1, 5, and 15 minutes. The numbers are exponentially scaled, so a number twice as large doesn’t mean twice as much load
-2. If the numbers are decreasing sharply, it **might** mean that the program which was eating up all the resources has already completed its execution
-3. Increasing number would **mostly** indicate rising load on the system
-
-### Exit code of applications
-One can return exit code returned by previous command
-
-{{< highlight bash >}}
-  echo $?
-{{< /highlight >}}
-
-[![Misc - exitcode](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-exitcode.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-exitcode.png)
-
-Note - codes in range 128-192 are decoded by using 128 + n, where n is the number of the kill signal
-
-[![Misc - exitcode kill](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-exitcode-kill.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-exitcode-kill.png)
-
-### Quick check on memory and CPU utilization
-{{< highlight bash >}}
-  top -n1 -o+%MEM
-{{< /highlight >}} 
-
-[![Misc - Top mem cpu](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-topomem.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-topomem.png)
-
-### _dmesg_
-Linux utility that displays kernel messages
-
-misc-dmesg
-[![Misc - dmesg](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-dmesg.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2022/09/misc-dmesg.png)
+``` bash
+# Sets qdisc to fq_codel
+net.core.default_qdisc = fq_codel
+```
 
 # Conclusion
-Architecting and developing low latency, high throughput enterprise applications needs an overall understanding of not only software but also about the underlying OS behavior along with its key components viz. CPU, RAM, Network and Disk. In this article I tried to show how quickly one can use some of the commands to get insights from OS level whilst troubleshooting performance issues.
+So we understood how data packet gets transmitted from an application to NIC. And while understanding the flow, we got a bird's eye view of key Linux Kernel components that play a major role from data transmission standpoint. 
 
-P.S :
-List of commands and their output shown above are based on [Chaos Engineering](https://www.amazon.in/Chaos-Engineering-reliability-controlled-disruption/dp/1617297755)
+Since network is one of the most often blamed component for poor performance of application, we also had a cursory overview of various properties that can be tweaked to optimize its performance.
+
+In case you have experienced with above or any other properties, feel free to share within comments!
+
+# References
+1. [Brendan Gregg's System Performance Book](https://www.amazon.in/Systems-Performance-Brendan-Gregg-ebook/dp/B08J5QZPNC)
