@@ -2,7 +2,7 @@
 title: Optimizing Linux's network stack
 author: Dhaval Shah
 type: post
-date: 2024-08-18T07:00:50+00:00
+date: 2024-09-01T02:00:50+00:00
 url: /optimizing-linux-network-stack/
 categories:
   - Performance
@@ -10,12 +10,8 @@ tags:
   - performance
   - tuning
   - linux
-thumbnail: "images/wp-content/uploads/2024/09/linux-network-thumb-nail.png"
+thumbnail: "images/wp-content/uploads/2024/09/Overview-of-Networking-Stack-Dark.png"
 ---
-
-
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2024/09/linux-network-thumb-nail.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/09/linux-network-thumb-nail.png)
------------------------------------------------------------------------------------------------------------------------------------------
 # Background
 With Distributed Systems, network plays a huge role in System Performance. Typically speaking network would mainly comprise of -
 1. Hardware - which would mainly include routers, NIC, switches etc
