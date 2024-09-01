@@ -103,7 +103,7 @@ With Distributed Systems, network plays a huge role in System Performance. Typic
 Note - At software level, protocols can be further categorized  into 2 :
 1. Protocols at kernel level i.e. TCP, UDP etc
 2. Protocols at application level i.e. HTTP
-One can refer my older posts w.r.t application / kernel level protocols and ways to optimize it -
+One can refer my older posts w.r.t application level protocols and ways to optimize it -
 - [Blocking HTTP client via Spring's RestTemplate](https://www.dhaval-shah.com/rest-client-with-desired-nfrs-using-springs-resttemplate/)
 - [Reactive HTTP client via Spring's WebClient](https://www.dhaval-shah.com/performant-and-optimal-spring-webclient/)
 - [RSocket Vs Webflux](https://www.dhaval-shah.com/performance-comparison-rsocket-webflux/)
