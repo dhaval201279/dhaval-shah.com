@@ -106,7 +106,7 @@ So we understood how data packet gets transmitted from an application to NIC. An
 
 Since network is one of the most often blamed component for poor performance of application, we also had a cursory overview of various properties that can be tweaked to optimize its performance.
 
-In case you have experienced optimizing network at OS level with above or any other properties, feel free to share within comments!
+In case you have experience in optimizing network at OS level with above or any other properties, feel free to share within comments!
 
 # References
 1. [Brendan Gregg's System Performance Book](https://www.amazon.in/Systems-Performance-Brendan-Gregg-ebook/dp/B08J5QZPNC)
