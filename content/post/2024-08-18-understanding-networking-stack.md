@@ -13,12 +13,12 @@ tags:
 thumbnail: "images/wp-content/uploads/2024/09/Overview-of-Networking-Stack-Dark.png"
 ---
 # Background
-With [Distributed Computing](https://en.wikipedia.org/wiki/Distributed_computing) being defactor architectural paradigm, network plays a significant role in System Performance for high throughput / low latency applications. Typically speaking network would mainly comprise of -
+With [Distributed Computing](https://en.wikipedia.org/wiki/Distributed_computing) being defacto architectural paradigm, network plays a significant role in System's Performance for high throughput / low latency enterprise applications. Typically speaking network would mainly comprise of -
 1. Hardware - which mainly includes routers, NIC, switches etc
 2. Software - which mainly includes [OS](https://en.wikipedia.org/wiki/Operating_system) [kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) that may comprise of device drivers, protocols etc.
 
 Note - At software level, protocols can be further categorized  into 2 :
-1. Protocols at kernel level i.e. TCP, UDP etc
+1. Protocols at kernel level i.e. [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol), [UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol) etc
 2. Protocols at application level i.e. HTTP - As far as application level protocol and its optimization is concerned, you may refer my older posts :
    - [REST Client with desired NFRs using Spring RestTemplate](https://www.dhaval-shah.com/rest-client-with-desired-nfrs-using-springs-resttemplate/)
    - [Implementing Performant and Optimal Spring WebClient](https://www.dhaval-shah.com/performant-and-optimal-spring-webclient/)
