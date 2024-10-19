@@ -36,7 +36,7 @@ Rafael Nadal's legendary status is built on more than just his talent — it's h
 Consistency in routines can enhance focus and productivity. As a Technology Leader, developing disciplined habits like code reviews, Architecture Katas, or setting time for focused deep work on upcoming technologies / tools and conceptual areas can create a stable foundation for success. It’s this kind of daily discipline that ensures steady progress, no matter how miniscule the progress may be. And this trait certainly helps to separate a revered leader from rest of his peers.
 
 ## 3. Adaptability
-[![Rafa - Non Clay Court Achievements](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-Hard-Court-Stats.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-Hard-Court-Stats.png)
+[![Rafa - Non Clay Court Achievements](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-Hard-Court-Stats.jpeg)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-Hard-Court-Stats.jpeg)
 
 Rafa was deemed to be a Clay court player initially. But he improved his skills to such an extent that he was able to win at-least 2 grand slams on rest of the surfaces. His ability to adapt to varying conditions has been key to his long-term success and that too on different surfaces.
 
