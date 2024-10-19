@@ -1,5 +1,5 @@
 ---
-title: Rafael Nadal - An Inspirational Leader Transcending Sports and Humanism 🎾💪🏼🌟
+title: Rafael Nadal - An Inspirational Leader Transcending Sports and Human Values 🎾💪🏼
 author: Dhaval Shah
 type: post
 date: 2024-10-13T02:00:50+00:00
