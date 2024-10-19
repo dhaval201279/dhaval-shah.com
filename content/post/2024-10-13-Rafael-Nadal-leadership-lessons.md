@@ -100,8 +100,16 @@ Nadal’s journey to his 21st Grand Slam title at the 2022 Australian Open came 
  ### Leadership Lesson
  As we grow as Technology Leaders in our career, the nature of our contributions changes too. It’s important to adapt to this shift — perhaps focusing more on mentoring or enabling peers / team members, strategic thinking, and making high-impact decisions rather than only writing code. Understand how our role evolves over time and adjust our contributions to match the needs of our team and organization.
 
-## Conclusion
+# Conclusion
 Rafael Nadal’s journey isn’t just about winning titles; it’s about leading by example. His unwavering resilience, ability to adapt, humility, and passion for excellence are playbook-worthy traits for a Technology Leaders. By adopting these qualities, Technology Leaders can inspire themselves / their teams, conquer tough challenges, and deliver lasting impact — just like Nadal has done on the grandest stages of tennis.
 
 > Thank you Rafa for dazzling us with your unbelievable court coverage to your ripper forehands with high RPM to your trademark banana shots.
 > You are indeed an epitome of unwavering tenacity!
+
+# Postscript - Only for Rafans
+1. [Inspiring Quotes from Rafa](https://timesofindia.indiatimes.com/life-style/relationships/web-stories/10-inspiring-quotes-by-the-tennis-great-rafael-nadal/photostory/114142564.cms)
+2. [Rafa - 5 Best FH at RG](https://x.com/rolandgarros/status/1847548244257112312)
+3. [Rafa - Top 10 points at US Open](https://youtu.be/dYN82rC6EjY?si=U3nQDby5NAS6s-BT)
+4. [Rafa - Top 10 points at Australian Open](https://youtu.be/jW7AhhLQ5tE?si=TUMRWRsl9Arc9yfQ)
+5. [Very Best of Rafa @ Wimbledon](https://youtu.be/4MUJJhg_HgA?si=QlobiSUwi5EsHey6)
+6. [Rafa - The Footballer](https://x.com/gigicat7_/status/1844422390886904150)
