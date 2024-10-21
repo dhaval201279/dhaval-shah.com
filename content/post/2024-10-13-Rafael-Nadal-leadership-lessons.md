@@ -27,7 +27,7 @@ So as a Technology Leader within the world of Software Engineering, below are th
 Nadal is known for his never-say-die attitude. Whether he’s two sets down or struggling with injuries, he fights relentlessly - Most recent e.g. is [Australian Open 2022 final](https://youtu.be/v27M_RgrLzU?si=L9fKpP28i2ddx9Er) against [Medvedev](https://en.wikipedia.org/wiki/Daniil_Medvedev). Down two sets and facing a formidable opponent, Nadal was on the brink of defeat. However, he refused to give up, fighting back to win the next three sets in a match that lasted over five hours. This victory not only earned him his 21st Grand Slam title but also demonstrated his unmatched determination and mental fortitude.
 
 ### Leadership Lesson
-As an Engineering Leader, when faced with setbacks — whether it's a major engineering issue, performance bottleneck, a failed release, or a project that seems too complex — **DONT'T GIVE UP!**  Lead with perseverance, solve problems methodically, and inspire your peers / team members to push through adversity.
+As a Technology Leader, when faced with setbacks — whether it's a major engineering issue, performance bottleneck, a failed release, or a project that seems too complex — **DONT'T GIVE UP!**  Lead with perseverance, solve problems methodically, and inspire your peers / team members to push through adversity.
 
 ## 2. Consistency and Discipline
 Rafael Nadal's legendary status is built on more than just his talent — it's his relentless consistency and unwavering discipline that truly set him apart. From his rigorous training routines to his precise match preparation, Nadal’s commitment to putting in the hard work every single day has been a cornerstone of his success. His consistency and discipline has allowed him to remain at the top for over a decade. 
@@ -49,7 +49,7 @@ Despite his many victories, Nadal remains humble and respectful. He celebrates h
 Another memorable example of Rafael Nadal's empathy and kindness came during the Australian Open 2020 when he [accidentally struck a ball girl](https://youtu.be/IlNihz6LFqA?si=p-qeXwJZ_iB_lw3Q) while returning his opponents serve. Nadal immediately rushed over to check on her, gently touching her head and making sure she was okay. He even gave her a kiss on the cheek as a gesture of apology. Such moments shows Nadal's genuine concern for others, even during a high-pressure match.
 
 ### Leadership Lesson 
-As an Engineering Leader, always be humble about your skills, achievements & successes achieved in your professional career. Celebrate your achievements, but also be empathetic toward peers who might be facing challenges or setbacks. Acknowledge their efforts and contributions, and offer support when needed.
+As a Technology Leader, always be humble about your skills, achievements & successes achieved in your professional career. Celebrate your achievements, but also be empathetic toward peers who might be facing challenges or setbacks. Acknowledge their efforts and contributions, and offer support when needed.
 
 Nadal’s actions, like those moments where he consoles Federer with his hand on Federer's back or with ball girl, serve as a reminder that true leadership is about being human and showing genuine concern for those around you.
 
@@ -64,7 +64,7 @@ In high-pressure situations — Whether it’s dealing with a major production o
 Nadal is known for his rituals on the court, from his meticulous placement of water bottles to his pre-serve routine, reveal his attention to detail. This focus translates into precision and consistency in his play and shot making
 
 ### Leadership Lesson 
-As an engineering leader, attention to detail is critical in the field of software engineering. Whether it’s outlining architecture of a product, writing clean and elegant code, ensuring edge cases are handled or considering key NFRs viz. Reducing cost of product operation, optimizing high throughput / low latency application - Precision and focus in our work can mean the difference between success and failure of products that we build.
+As a Technology leader, attention to detail is critical in the field of software engineering. Whether it’s outlining architecture of a product, writing clean and elegant code, ensuring edge cases are handled or considering key NFRs viz. Reducing cost of product operation, optimizing high throughput / low latency application - Precision and focus in our work can mean the difference between success and failure of products that we build.
 
 ## 7. Gratitude and Appreciation
 Despite his individual success, Nadal has always been quick to express gratitude towards his team, including his family, coaches, and staff who support him throughout his career. After major victories, he has always emphasized how important their contributions have been to his stellar career and his achievements.
