@@ -18,7 +18,7 @@ thumbnail: "images/wp-content/uploads/2024/12/industrial_pipes.jpg"
 
 # Background
 
-I am sure all of us would have implemented some kind of business logic, which is primarily tasked with heavy IO operations. Recently I got an opportunity to implement similar use case. Considering my obsession with [Performance Engineering](https://en.wikipedia.org/wiki/Performance_engineering), I was able to discover an interesting finding about [parallel](https://en.wikipedia.org/wiki/Parallel_computing) execution within [Java](https://www.java.com/en/) ecosystem
+If you've ever had to implement business logic that involves concurrent execution along with heavy IO operations, you'll know it can be challenging! Recently, I had a chance to tackle such a use case and made some interesting discoveries about [parallel](https://en.wikipedia.org/wiki/Parallel_computing) execution in the [Java](https://www.java.com/en/) ecosystem.
 
 I'll keep this concise and focus on three main areas:
 1. Understanding **What** part of requirements
