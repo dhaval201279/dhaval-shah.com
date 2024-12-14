@@ -18,7 +18,7 @@ thumbnail: "images/wp-content/uploads/2024/12/industrial_pipes.jpg"
 
 # Background
 
-I am sure all of us would have implemented some kind of business logic, which is primarily tasked with heavy IO operations. Recently I got an opportunity to implement similar use case. Considering my obsession with [Performance Engineering](https://en.wikipedia.org/wiki/Performance_engineering), I was able to discover an interesting finding about [parallel](https://en.wikipedia.org/wiki/Parallel_computing) execution within [Java](https://www.java.com/en/) ecosystem
+If you've ever had to implement business logic that involves concurrent execution along with heavy IO operations, you'll know it can be challenging! Recently, I had a chance to tackle such a use case and made some interesting discoveries about [parallel](https://en.wikipedia.org/wiki/Parallel_computing) execution in the [Java](https://www.java.com/en/) ecosystem.
 
 I'll keep this concise and focus on three main areas:
 1. Understanding **What** part of requirements
@@ -41,7 +41,7 @@ As a [Java](https://www.java.com/en/) / [Spring](https://spring.io/) engineer, I
 - [Spring Core Reactor](https://spring.io/reactive) based implementation
 
 ### 2.1 JDK Based implementation
-Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/master/src/main/java/com/its/reactivespring/mc/ethoca/Jdk17ApplicationWithIsolatedExceptionForEachParallelThread.java)
+Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/master/src/main/java/com/its/reactivespring/mc/ethbatch/Jdk21ApplicationWithIsolatedExceptionForEachParallelThread.java)
 ```java
   public static void withFlatMapUsingJDK() {
     ...
@@ -91,7 +91,7 @@ Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/m
 4. Wait for Completion: Used _`CompletableFuture.allOf`_ to wait for all tasks to complete.
 
 ### 2.2 Spring Core Reactor based implementation
-Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/master/src/main/java/com/its/reactivespring/mc/ethoca/ReactiveApplicationWithIsolatedExceptionForEachParallelThread.java)
+Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/master/src/main/java/com/its/reactivespring/mc/ethbatch/ReactiveApplicationWithIsolatedExceptionForEachParallelThread.java)
 
 ``` java
   ...
@@ -157,31 +157,34 @@ As we can see in above graph - Spring Reactor processes the list faster. JDK's p
 
 From above graph one can clearly infer -
 - For 5 lac objects, JVM is required to allocate 3 times more memory for JDK based implementation as compared to Spring Reactor based implementation
-- Percentage increase w.r.t Peak Memory is exponentially increasing the list size in JDK
+- Percentage increase w.r.t Peak Memory is exponentially increasing with list size in JDK
 
 ### 3.3 GC Metrics
-As we have seen in my previous blogs, GC has a significant impact on performance of an application. Here's how they compare:
+As we have seen in my [previous blogs](https://deploy-preview-26--dhaval-shah.netlify.app/categories/jvm/), GC has a significant impact on performance of an application. Here's how they compare:
 
 #### 3.3.1 GC Pauses
+This mainly indicates amount of time taken by STW GCs.
 
 [![ GC Pause Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/gc-pause-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/gc-pause-time-comparison.png)
 
-This mainly indicates amount of time taken by STW GCs. Comparatively speaking, in most of the cases GC pauses are higher for JDK based implementation.
+Comparatively speaking, in most of the cases GC pauses are higher for JDK based implementation.
 
 #### 3.3.2 CPU Time
+This shows total CPU time taken by garbage collector.
 
 [![ CPU Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/cpu-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/cpu-time-comparison.png)
 
-This shows total CPU time taken by garbage collector. Its evident from above graph that JDK based implementation is requiring higher CPU time for its GC activities.
+It is evident from above graph that JDK based implementation is requiring higher CPU time for its GC activities.
 
 #### 3.3.3 Object Metrics
+This shows rate at which objects are created within JVM heap and rate at which they are promoted from Young to Old region.
+
 [![ Object Creation and Promotion Rate  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/object-metrics-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/object-metrics-comparison.png)
 
-This shows rate at which objects are created within JVM heap and rate at which they are promoted from Young to Old region. An interesting behavior that can be inferred - Even though object creation rate has been higher for Spring Reactor based implementation, object promotion rate is way less when compared with JDK based implementation
+ An interesting behavior that can be inferred - Even though object creation rate has been higher for Spring Reactor based implementation, object promotion rate is way less when compared with JDK based implementation.
 
 # Conclusion
 
 After objectively comparing both the solutions, it is quite apparent that Spring Reactor based implementation is not only clean and elegant but also performs better.
 
 P.S - All the graphs shown above are prepared by using data from GC report generated by [GCEasy](https://gceasy.io/)
-
