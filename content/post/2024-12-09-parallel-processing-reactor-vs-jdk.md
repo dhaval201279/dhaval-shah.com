@@ -15,101 +15,165 @@ thumbnail: "images/wp-content/uploads/2024/10/RN-FO-Quote-Merged-Photo-1.png"
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
-For someone like me who's been an ardent fan of [Rafael Nadal](https://en.wikipedia.org/wiki/Rafael_Nadal) since 2008, hearing the news of his upcoming retirement absolutely shatters my heart. His departure from the sport feels like losing a constant source of inspiration and joy. The courts will never be the same without his relentless pursuit of chasing down every ball, as if his life depended on that point. This is a truly heartbreaking moment for all the **Rafans** and tennis loving fraternity!
 
-Rafael Nadal's career is nothing short of extraordinary. From his unparalleled dominance on clay courts to his tenacious spirit on every surface, he has been a beacon of athletic excellence. His ferocious willpower, combined with his innate grace, has mesmerized audiences and opponents alike. His ceaseless quest for perfection, even amidst injuries and setbacks, exemplifies his indomitable grit and determination along with his unwavering passion for tennis. Off the court, his humility and sportsmanship shine as brightly as his on-court prowess, making him a true icon both as an athlete and as a human being.
+I am sure all of us would have implemented some kind of business logic, which is primarily tasked with heavy IO operations. Recently I got an opportunity to implement similar use case. Considering my obsession with [Performance Engineering](), I was able to discover an interesting finding about [parallel]() execution within [Java]() ecosystem
 
-So as a Technology Leader within the world of Software Engineering, below are the key **leadership** lessons that I learnt from **The Gladiator - Rafael Nadal** :
+Cutting across the noise, to make this post more concise and succinct, I will just be focussing on following areas :
+1. Understanding **What** part of requirements
+2. High level overview of available solutions
+3. Comparative analysis of available solutions from software & performance engineering standpoint 
 
-## 1. Resiliency in face of Adversity
-[![AO 2022 Final - Win / Loss Percentage](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-AO-win-predictor-percentage.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-AO-win-predictor-percentage.png)
+## 1. Understanding what part of overall requirements
+At a high level requirement definition comprised of -
+1. Implement a business logic that reads object from list
+2. For each object retrieved from list, perform IO intensive operations i.e. invoke bunch of downstream system APIs
+3. Each object present in list and its corresponding business logic to be executed  is independent
+4. Maximum number of downstream APIs to be invoked for each object in list is 10
 
-Nadal is known for his never-say-die attitude. Whether he’s two sets down or struggling with injuries, he fights relentlessly - Most recent e.g. is [Australian Open 2022 final](https://youtu.be/v27M_RgrLzU?si=L9fKpP28i2ddx9Er) against [Medvedev](https://en.wikipedia.org/wiki/Daniil_Medvedev). Down two sets and facing a formidable opponent, Nadal was on the brink of defeat. However, he refused to give up, fighting back to win the next three sets in a match that lasted over five hours. This victory not only earned him his 21st Grand Slam title but also demonstrated his unmatched determination and mental fortitude.
+## 2. High level overview of available solutions
+Based on above requirement, solution seems to be pretty simple and straightforward - Iterate list and execute business logic in parallel for each of the objects in list. I being a typical [Java]() / [Spring]() engineer, obvious choice that I had considered -
+- JDK based implementation
+- Spring Core Reactor based implementation
 
-### Leadership Lesson
-As a Technology Leader, when faced with setbacks — whether it's a major engineering issue, performance bottleneck, a failed release, or a project that seems too complex — **DON'T GIVE UP!**  Lead with perseverance, solve problems methodically, and inspire your peers / team members to push through adversity.
+### 2.1 JDK Based implementation
+Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/master/src/main/java/com/its/reactivespring/mc/ethoca/Jdk17ApplicationWithIsolatedExceptionForEachParallelThread.java)
+```java
+  public static void withFlatMapUsingJDK() {
+    ...
+    // Define thread pool
+    ExecutorService executorService = Executors.newFixedThreadPool(AppConstants.PARALLELISM);
 
-## 2. Consistency and Discipline
-Rafael Nadal's legendary status is built on more than just his talent — it's his relentless consistency and unwavering discipline that truly set him apart. From his rigorous training routines to his precise match preparation, Nadal’s commitment to putting in the hard work every single day has been a cornerstone of his success. His consistency and discipline has allowed him to remain at the top for over a decade. 
+    // Submit tasks for parallel processing
+    List<CompletableFuture<Void>> futures =
+            objectList
+                .stream()
+                .map(anObject -> CompletableFuture.runAsync(() -> {
+                    try {
+                        log.info("Processing object: {}", anObject);
+                        processSomeBizLogic(anObject);
+                        successCount.incrementAndGet();
+                    } catch (Exception e) {
+                        log.error("Error occurred while processing object {} : {}", anObject, e.getMessage());
+                        failureCount.incrementAndGet();
+                    }
+                }, executorService))
+                .toList(); // Collect CompletableFuture<Void> for each object
 
-### Leadership Lesson 
-Consistency in routines can enhance focus and productivity. As a Technology Leader, developing disciplined habits like code reviews, Architecture Katas, or setting time for focused deep work on upcoming technologies / tools and conceptual areas can create a stable foundation for success. It’s this kind of daily discipline that ensures steady progress, no matter how miniscule the progress may be. And this trait certainly helps to separate a revered leader from rest of his peers.
+    // Wait for all tasks to complete
+    CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+    try {
+        allOf.join();
+    } catch (Exception e) {
+        log.error("Error waiting for all tasks to complete: {}", e.getMessage());
+    }
 
-## 3. Adaptability
-[![Rafa - Non Clay Court Achievements](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-Hard-Court-Stats.jpeg)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-Hard-Court-Stats.jpeg)
+    // Shut down the executor
+    executorService.shutdown();
 
-Rafa was deemed to be a Clay court player initially. But he improved his skills to such an extent that he was able to win at-least 2 grand slams on rest of the surfaces. His ability to adapt to varying conditions has been key to his long-term success and that too on different surfaces.
+    // Log results
+    log.info("Success count: {}", successCount.get());
+    log.info("Failure count: {}", failureCount.get());
+    log.info("## Processing completed for object list size : {} ", objectList.size());
+    ...
+  }
+```
 
-### Leadership Lesson 
-In our world which is extremely fast paced and volatile, where Technologies change at a brisk pace, Architectures evolve and business requirements have to be aligned as per changing market needs -  we not only need to be flexible and open enough to learn new tools / technologies / architectural paradigm but also show agility towards rapidly evolving business landscape 
+**Overview of parallel execution using [CompletableFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html)**
 
-## 4. Humility and Empathy
-Despite his many victories, Nadal remains humble and respectful. He celebrates his wins graciously and accepts his defeats with dignity, never undermining his opponents. A striking example of this humility was his reaction after winning the 2009 Australian Open. Defeating [Roger Federer](https://en.wikipedia.org/wiki/Roger_Federer)in a grueling final, Nadal recognized how deeply the loss affected Federer. Instead of focusing solely on his own triumph, [Nadal took the time to console Federer](https://youtu.be/dCjw0Unm8OY?si=oi-yqynfKwu0akZR), speaking empathetically to him in front of the crowd and acknowledging Federer’s greatness. This act highlighted Nadal's respect for his peers and his ability to see beyond competition, valuing the human side of the sport.
+1. Thread Pool (_`ExecutorService`_): Used _`Executors.newFixedThreadPool(4)`_ to process objects (read from list) in parallel with a fixed number of threads
+2. Parallel Processing (_`CompletableFuture`_): Each object is processed in parallel using _`CompletableFuture.runAsync`_
+3. Error Handling: Exceptions thrown during processing are caught within the _`CompletableFuture.runAsync`_ block, and failure counts are incremented. Errors are isolated to individual tasks and hence do not affect other threads.
+4. Wait for Completion: Used _`CompletableFuture.allOf`_ to wait for all tasks to complete.
 
-Another memorable example of Rafael Nadal's empathy and kindness came during the Australian Open 2020 when he [accidentally struck a ball girl](https://youtu.be/IlNihz6LFqA?si=p-qeXwJZ_iB_lw3Q) while returning his opponents serve. Nadal immediately rushed over to check on her, gently touching her head and making sure she was okay. He even gave her a kiss on the cheek as a gesture of apology. Such moments shows Nadal's genuine concern for others, even during a high-pressure match.
+### 2.2 Spring Core Reactor based implementation
+Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/master/src/main/java/com/its/reactivespring/mc/ethoca/ReactiveApplicationWithIsolatedExceptionForEachParallelThread.java)
 
-### Leadership Lesson 
-As a Technology Leader, always be humble about your skills, achievements & successes achieved in your professional career. Celebrate your achievements, but also be empathetic toward peers who might be facing challenges or setbacks. Acknowledge their efforts and contributions, and offer support when needed.
+``` java
+  ...
+  Flux
+    .fromIterable(objectList)
+    .parallel(AppConstants.PARALLELISM)
+    .runOn(Schedulers.boundedElastic())
+    .flatMap(anObject ->
+            Mono.fromCallable(() -> {
+                        log.info("Entering processSomeBizLogic from Callable : {} ", anObject);
+                        processSomeBizLogic(anObject);
+                        log.info("Leaving processSomeBizLogic from Callable  : {}", anObject);
+                        successCount.incrementAndGet();
+                        return anObject;
 
-Nadal’s actions, like those moments where he consoles Federer with his hand on Federer's back or with ball girl, serve as a reminder that true leadership is about being human and showing genuine concern for those around you.
+                    })
+                    .doOnError(error -> {
+                        log.error("Error occurred while processing object {} : {}", anObject, error.getMessage());
+                        failureCount.incrementAndGet();
+                    })
+                    .onErrorResume(error -> {
+                        log.info("Entering onErrorResume");
+                        return Mono.empty();
+                    }) // Skip the errored object
+    )
+    .sequential()
+    .doOnComplete(() -> {
 
-## 5. Mental Toughness
-Rafael Nadal's career is a testament to the power of mental toughness. Known as one of the most mentally resilient athletes in history of sports, he has consistently demonstrated the ability to maintain focus, composure, and intensity under the highest pressure. This mental fortitude has been a defining factor in his 22 Grand Slam victories and countless other achievements, enabling him to overcome seemingly insurmountable challenges on the biggest stages.
+        log.info("Success count: {}", successCount.get());
+        log.info("Failure count: {}", failureCount.get());
+        log.info("$$ Processing completed for object list size : {} ", objectList.size());
+    })
+    .blockLast();
+  ...
+```
 
+**Overview of parallel execution using [Flux](https://javadoc.io/static/io.projectreactor/reactor-core/3.5.3/reactor/core/publisher/Flux.html)**
+1. With _`flatMap`_: This operator allows us to handle errors on per-item basis. Each item is wrapped in _`Mono.fromCallable`_ to enable the error handling flow.
+2. Error Handling with _`doOnError`_ and _`onErrorResume`_:
+    - _`doOnError`_: Logs the error details for the specific item
+    - _`onErrorResume`_: Ensures that errors are skipped by returning an empty Mono. Errors in one thread will not affect the processing of other thread
+3. Parallel Execution: The _`parallel(4).runOn(Schedulers.boundedElastic())`_ ensures that processing happens in parallel
+   - _`Schedulers.boundedElastic()`_: Creates a bounded thread pool that can grow and shrink based on demand, preventing resource exhaustion
 
-### Leadership Lesson 
-In high-pressure situations — Whether it’s dealing with a major production outage, navigating complex stakeholder demands, or staying focused during a high-pressure project delivery, mental resilience is key. This would in turn help us stay composed and focussed, lead with required clarity, and make decisions based on facts and rational thinking.
+## 3. Comparative analysis of available solutions from software & performance engineering standpoint
+By looking at above solutions, one of the obvious difference that one can make out - 
+_`Flux`_ based implementation looks more cleaner and elegant, as it is devoid of lot of boiler plate code which is abstracted out very neatly by fluent APIs exposed by [Spring Core Reactor](). For all clean code aficionados this itself can be one of the compelling reasons to go with 2nd option. However, of late I have been a strong proponent of having more tangible criterion viz. Performance Engineering, Scalability, High Availability, Resiliency etc to compare available options and than conclude with acceptable tradeoffs.
 
-## 6. Attention to Detail
-Nadal is known for his rituals on the court, from his meticulous placement of water bottles to his pre-serve routine, reveal his attention to detail. This focus translates into precision and consistency in his play and shot making
+So in quest of determining more tangible factors - I started delving bit deeper to compare both these options through the lens of performance engineering. As a result I captured metrics for processing entire list with -
+1. 1,00,000 objects
+2. 2,50,000 objects
+3. 5,00,000 objects
 
-### Leadership Lesson 
-As a Technology leader, attention to detail is critical in the field of software engineering. Whether it’s outlining architecture of a product, writing clean and elegant code, ensuring edge cases are handled or considering key NFRs viz. Reducing cost of product operation, optimizing high throughput / low latency application - Precision and focus in our work can mean the difference between success and failure of products that we build.
+### 3.1 Total time spent in processing entire list
+[![ Time taken to process entire list  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/processing-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/processing-time-comparison.png)
 
-## 7. Gratitude and Appreciation
-Despite his individual success, Nadal has always been quick to express gratitude towards his team, including his family, coaches, and staff who support him throughout his career. After major victories, he has always emphasized how important their contributions have been to his stellar career and his achievements.
+As we can see in above graph - Spring Reactor takes relatively less amount of time to process entire list. Looking at the readings, JDK based implementation does not seem to exponentially increase with increase in size of list.
 
-### Leadership Lesson 
- I am of strong belief that behind any successful Technology Leader, there is huge contribution from number of his  peers and team members who have worked tirelessly. Hence as a Technology Leader, one must show appreciation for their support, assistance and ensure that every one feels valued for their contributions. This builds loyalty and morale, fostering a culture of recognition and support.
+### 3.2 Memory footprint
+[![ Memory Footprint  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/memory-footprint-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/memory-footprint-comparison.png)
 
- ## 8. Focus on Improvement, Even When on Top
- Even when Nadal was at the peak of his game, he remained dedicated to improving different aspects of his play — be it tweaking his serve, enhancing his backhand, or adapting his strategy to new surfaces. His focus was always on what can be done better, rather than resting on his past laurels.
+From above graph one can clearly infer -
+- For 5 lac objects, JVM is required to allocate 3 times more memory for JDK based implementation as compared to Spring Reactor based implementation
+- Percentage increase w.r.t Peak Memory is exponentially increasing as the number of objects in the list
 
- ### Leadership Lesson
- As a Technology Leader, even if you’ve achieved a certain status or expertise, continue to look for areas where you can grow and adapt. It could mean learning about new architecture paradigm, to diving into emerging technologies, or refining and polishing your soft skills. This sets an example of a growth mindset for your peers and demonstrates that excellence is a continuous pursuit.
+### 3.3 GC Metrics
+As we have seen in my previous blogs, GC has a significant impact on performance of an application. Hence lets compare its key metrics
 
- Be a perpetual learner and thereby continuously sharpen your (Technical and Soft) skills. Irrespective of number of years of experience and skills you would have gained - Have unwavering focus to have an improved version of yourself! This IMO would not only help in getting self gratifying feeling but it would also establish your credibility.
+#### 3.3.1 GC Pauses
 
- ## 9. Staying Calm Under Pressure
-One of the most iconic displays of Rafael Nadal’s composure under pressure came during the [2008 Wimbledon final against Roger Federer](https://youtu.be/f8YEiCAPAbg?si=fGehXl1-QTCBGj8G), a match widely considered as one of the greatest in tennis history. The match was a back-and-forth battle, lasting nearly five hours and interrupted twice by rain delays. As the match progressed, it seemed that momentum was shifting toward Federer, who had the experience of winning multiple Wimbledon titles and the support of the crowd.
+[![ GC Pause Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/gc-pause-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/gc-pause-time-comparison.png)
 
-Despite the immense pressure during the decider, Nadal kept his focus and managed to hold his serve repeatedly and finally won the Wimbledon 2008 final.
+This mainly indicates amount of time taken by STW GCs. Comparatively speaking, in most of the cases GC pauses are higher for JDK based implementation.
 
- ### Leadership Lesson
- In high-pressure situations where unexpected delays or challenges arise, take time to reset and refocus. Whether it’s a critical project that gets delayed or an unexpected blocker, use that time to rethink your approach and adapt, rather than letting frustration cloud your decision-making. 
+#### 3.3.2 CPU Time
 
- When faced with setbacks in a high-stakes scenario, focus on the present rather than dwelling on what went wrong. As a Technology Leader, if you encounter a setback like a failed deployment or a bug during a critical release, concentrate on the next action needed to resolve the issue. Staying solution-oriented helps maintain momentum and avoids spiraling into negative thinking.
+[![ CPU Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/cpu-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/cpu-time-comparison.png)
 
- In dynamic and high-stakes environments, like managing a large-scale system outage or handling an urgent client escalation, the ability to adapt to changing conditions is crucial. Stay calm, assess the situation as it evolves, and adjust your approach accordingly.
+This shows total CPU time taken by garbage collector. Its evident from above graph that JDK based implementation is requiring higher CPU time for its GC activities 
 
-## 10. Adapting to Aging and Evolving Role
-As Nadal aged, he faced an increasing number of physical challenges, including chronic injuries and the natural slowing down of the body that limited his performance. He had to adjust his playing style, manage his physical condition while maintaining competitiveness. He learnt to focus on his strengths, pace himself, and optimize his schedule to extend his career.
+#### 3.3.3 Object Metrics
+[![ Object Creation and Promotion Rate  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/object-metrics-comparison.png.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/object-metrics-comparison.png.png)
 
-Nadal’s journey to his 21st Grand Slam title at the 2022 Australian Open came after dealing with a debilitating foot condition. This win serves as a prime example of his ability to adapt his game and mindset in the later stages of his career. 
-
- ### Leadership Lesson
- As we grow as Technology Leaders in our career, the nature of our contributions changes too. It’s important to adapt to this shift — perhaps focusing more on mentoring or enabling peers / team members, strategic thinking, and making high-impact decisions rather than only writing code. Understand how our role evolves over time and adjust our contributions to match the needs of our team and organization.
+This shows rate at which objects are created within JVM heap and rate at which they are promoted from Young to Old region. An interesting behavior that can be inferred - Even though object creation rate has been higher for Spring Reactor based implementation, object promotion rate is way less when compared with JDK based implementation
 
 # Conclusion
-Rafael Nadal’s journey isn’t just about winning titles; it’s about leading by example. His unwavering resilience, ability to adapt, humility, and passion for excellence are playbook-worthy traits for a Technology Leaders. By adopting these qualities, Technology Leaders can inspire themselves / their teams, conquer tough challenges, and deliver lasting impact — just like Nadal has done on the grandest stages of tennis.
+After objectively comparing both the solutions using above critera, it is quite apparent that Spring Reactor based implementation is not only clean and elegant but also relatively better from performance considerations.
 
-> Thank you Rafa for dazzling us with your unbelievable court coverage to your ripper forehands with high RPM to your trademark banana shots.
-> You are indeed an epitome of unwavering tenacity!
+P.S - All the graphs shown above are prepared by using data from GC report generated by [GCEasy](https://gceasy.io/)
 
-# Postscript - Only for Rafans
-1. [Inspiring Quotes from Rafa](https://timesofindia.indiatimes.com/life-style/relationships/web-stories/10-inspiring-quotes-by-the-tennis-great-rafael-nadal/photostory/114142564.cms)
-2. [Rafa - 5 Best FH at RG](https://x.com/rolandgarros/status/1847548244257112312)
-3. [Rafa - Top 10 points at US Open](https://youtu.be/dYN82rC6EjY?si=U3nQDby5NAS6s-BT)
-4. [Rafa - Top 10 points at Australian Open](https://youtu.be/jW7AhhLQ5tE?si=TUMRWRsl9Arc9yfQ)
-5. [Very Best of Rafa @ Wimbledon](https://youtu.be/4MUJJhg_HgA?si=QlobiSUwi5EsHey6)
-6. [Rafa - The Footballer](https://x.com/gigicat7_/status/1844422390886904150)
