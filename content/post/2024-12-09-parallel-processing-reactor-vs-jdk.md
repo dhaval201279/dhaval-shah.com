@@ -1,22 +1,24 @@
 ---
-title: Parallel processing
+title: Parallel processing - Comparative Analysis
 author: Dhaval Shah
 type: post
-date: 2024-12-09T02:00:50+00:00
+date: 2024-12-15T02:00:50+00:00
 url: /parallel-processing-reactor-vs-jdk/
 categories:
-  - <>>
+  - performance
+  - jdk
 tags:
-  - <>
-thumbnail: "images/wp-content/uploads/2024/10/RN-FO-Quote-Merged-Photo-1.png"
+  - performance
+  - jdk
+thumbnail: "images/wp-content/uploads/2024/12/industrial_pipes.jpg"
 ---
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-FO-Quote-Merged-Photo-1.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/10/RN-FO-Quote-Merged-Photo-1.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/industrial_pipes.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/industrial_pipes.jpg)
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
 
-I am sure all of us would have implemented some kind of business logic, which is primarily tasked with heavy IO operations. Recently I got an opportunity to implement similar use case. Considering my obsession with [Performance Engineering](), I was able to discover an interesting finding about [parallel]() execution within [Java]() ecosystem
+I am sure all of us would have implemented some kind of business logic, which is primarily tasked with heavy IO operations. Recently I got an opportunity to implement similar use case. Considering my obsession with [Performance Engineering](https://en.wikipedia.org/wiki/Performance_engineering), I was able to discover an interesting finding about [parallel](https://en.wikipedia.org/wiki/Parallel_computing) execution within [Java](https://www.java.com/en/) ecosystem
 
 Cutting across the noise, to make this post more concise and succinct, I will just be focussing on following areas :
 1. Understanding **What** part of requirements
@@ -32,8 +34,8 @@ At a high level requirement definition comprised of -
 
 ## 2. High level overview of available solutions
 Based on above requirement, solution seems to be pretty simple and straightforward - Iterate list and execute business logic in parallel for each of the objects in list. I being a typical [Java]() / [Spring]() engineer, obvious choice that I had considered -
-- JDK based implementation
-- Spring Core Reactor based implementation
+- [JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)based implementation
+- [Spring Core Reactor](https://spring.io/reactive) based implementation
 
 ### 2.1 JDK Based implementation
 Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/master/src/main/java/com/its/reactivespring/mc/ethoca/Jdk17ApplicationWithIsolatedExceptionForEachParallelThread.java)
@@ -133,14 +135,16 @@ Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/m
 
 ## 3. Comparative analysis of available solutions from software & performance engineering standpoint
 By looking at above solutions, one of the obvious difference that one can make out - 
-_`Flux`_ based implementation looks more cleaner and elegant, as it is devoid of lot of boiler plate code which is abstracted out very neatly by fluent APIs exposed by [Spring Core Reactor](). For all clean code aficionados this itself can be one of the compelling reasons to go with 2nd option. However, of late I have been a strong proponent of having more tangible criterion viz. Performance Engineering, Scalability, High Availability, Resiliency etc to compare available options and than conclude with acceptable tradeoffs.
+_`Flux`_ based implementation looks more cleaner and elegant, as it is devoid of lot of boiler plate code which is abstracted out very neatly by fluent APIs exposed by [Spring Core Reactor](https://spring.io/reactive). For all [clean code](https://www.amazon.in/Clean-Code-Handbook-Software-Craftsmanship-ebook/dp/B001GSTOAM) aficionados this itself can be one of the compelling reasons to go with 2nd option. However, of late I have been a strong proponent of having more tangible criterion to compare available alternatives and than conclude with acceptable tradeoffs - viz. Performance Engineering, Scalability, High Availability, Resiliency etc.
 
-So in quest of determining more tangible factors - I started delving bit deeper to compare both these options through the lens of performance engineering. As a result I captured metrics for processing entire list with -
+So in quest of determining more tangible factors to compare both the above solutions - I started delving bit deeper to evaluate available alternatives through the lens of performance engineering. As a result I captured metrics for processing entire list in parallel with -
+
 1. 1,00,000 objects
 2. 2,50,000 objects
 3. 5,00,000 objects
 
 ### 3.1 Total time spent in processing entire list
+
 [![ Time taken to process entire list  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/processing-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/processing-time-comparison.png)
 
 As we can see in above graph - Spring Reactor takes relatively less amount of time to process entire list. Looking at the readings, JDK based implementation does not seem to exponentially increase with increase in size of list.
@@ -165,7 +169,7 @@ This mainly indicates amount of time taken by STW GCs. Comparatively speaking, i
 
 [![ CPU Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/cpu-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/cpu-time-comparison.png)
 
-This shows total CPU time taken by garbage collector. Its evident from above graph that JDK based implementation is requiring higher CPU time for its GC activities 
+This shows total CPU time taken by garbage collector. Its evident from above graph that JDK based implementation is requiring higher CPU time for its GC activities.
 
 #### 3.3.3 Object Metrics
 [![ Object Creation and Promotion Rate  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/object-metrics-comparison.png.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/object-metrics-comparison.png.png)
@@ -173,6 +177,7 @@ This shows total CPU time taken by garbage collector. Its evident from above gra
 This shows rate at which objects are created within JVM heap and rate at which they are promoted from Young to Old region. An interesting behavior that can be inferred - Even though object creation rate has been higher for Spring Reactor based implementation, object promotion rate is way less when compared with JDK based implementation
 
 # Conclusion
+
 After objectively comparing both the solutions using above critera, it is quite apparent that Spring Reactor based implementation is not only clean and elegant but also relatively better from performance considerations.
 
 P.S - All the graphs shown above are prepared by using data from GC report generated by [GCEasy](https://gceasy.io/)
