@@ -20,20 +20,23 @@ thumbnail: "images/wp-content/uploads/2024/12/industrial_pipes.jpg"
 
 I am sure all of us would have implemented some kind of business logic, which is primarily tasked with heavy IO operations. Recently I got an opportunity to implement similar use case. Considering my obsession with [Performance Engineering](https://en.wikipedia.org/wiki/Performance_engineering), I was able to discover an interesting finding about [parallel](https://en.wikipedia.org/wiki/Parallel_computing) execution within [Java](https://www.java.com/en/) ecosystem
 
-Cutting across the noise, to make this post more concise and succinct, I will just be focussing on following areas :
+I'll keep this concise and focus on three main areas:
 1. Understanding **What** part of requirements
 2. High level overview of available solutions
 3. Comparative analysis of available solutions from software & performance engineering standpoint 
 
 ## 1. Understanding what part of overall requirements
-At a high level requirement definition comprised of -
-1. Implement a business logic that reads object from list
-2. For each object retrieved from list, perform IO intensive operations i.e. invoke bunch of downstream system APIs
-3. Each object present in list and its corresponding business logic to be executed  is independent
-4. Maximum number of downstream APIs to be invoked for each object in list is 10
+
+At a high level, the requirement were:
+1. Implement a business logic that reads objects from a list.
+2. For each object, perform IO-intensive operations by invoking multiple downstream system APIs.
+3. Each object's logic is independent of the others.
+4. A maximum of 10 downstream APIs to be invoked per object.
 
 ## 2. High level overview of available solutions
-Based on above requirement, solution seems to be pretty simple and straightforward - Iterate list and execute business logic in parallel for each of the objects in list. I being a typical [Java]() / [Spring]() engineer, obvious choice that I had considered -
+
+The solution seemed straightforward - iterate the list and execute the business logic in parallel for each object. 
+As a [Java](https://www.java.com/en/) / [Spring](https://spring.io/) engineer, I considered two options:
 - [JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)based implementation
 - [Spring Core Reactor](https://spring.io/reactive) based implementation
 
@@ -131,13 +134,13 @@ Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/m
     - _`doOnError`_: Logs the error details for the specific item
     - _`onErrorResume`_: Ensures that errors are skipped by returning an empty Mono. Errors in one thread will not affect the processing of other thread
 3. Parallel Execution: The _`parallel(4).runOn(Schedulers.boundedElastic())`_ ensures that processing happens in parallel
-   - _`Schedulers.boundedElastic()`_: Creates a bounded thread pool that can grow and shrink based on demand, preventing resource exhaustion
+   - _`Schedulers.boundedElastic()`_: Creates a bounded thread pool that can adjust based on demand, preventing resource exhaustion
 
 ## 3. Comparative analysis of available solutions from software & performance engineering standpoint
-By looking at above solutions, one of the obvious difference that one can make out - 
-_`Flux`_ based implementation looks more cleaner and elegant, as it is devoid of lot of boiler plate code which is abstracted out very neatly by fluent APIs exposed by [Spring Core Reactor](https://spring.io/reactive). For all [clean code](https://www.amazon.in/Clean-Code-Handbook-Software-Craftsmanship-ebook/dp/B001GSTOAM) aficionados this itself can be one of the compelling reasons to go with 2nd option. However, of late I have been a strong proponent of having more tangible criterion to compare available alternatives and than conclude with acceptable tradeoffs - viz. Performance Engineering, Scalability, High Availability, Resiliency etc.
 
-So in quest of determining more tangible factors to compare both the above solutions - I started delving bit deeper to evaluate available alternatives through the lens of performance engineering. As a result I captured metrics for processing entire list in parallel with -
+The main difference between these solutions is the [cleanliness](https://www.amazon.in/Clean-Code-Handbook-Software-Craftsmanship-ebook/dp/B001GSTOAM) and elegance of the _`Flux`_ based implementation, which avoids boilerplate code with its fluent APIs. However, it’s important to have tangible criteria to compare alternatives, such as performance, scalability, resilience etc.
+
+So in quest of determining more tangible factors to compare alternatives under considerations - I started delving bit deeper to evaluate available options through the lens of performance engineering. Hence I measured performance of processing entire list in parallel with -
 
 1. 1,00,000 objects
 2. 2,50,000 objects
@@ -147,17 +150,17 @@ So in quest of determining more tangible factors to compare both the above solut
 
 [![ Time taken to process entire list  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/processing-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/processing-time-comparison.png)
 
-As we can see in above graph - Spring Reactor takes relatively less amount of time to process entire list. Looking at the readings, JDK based implementation does not seem to exponentially increase with increase in size of list.
+As we can see in above graph - Spring Reactor processes the list faster. JDK's performance doesn’t exponentially degrade with an increasing list size.
 
 ### 3.2 Memory footprint
 [![ Memory Footprint  ](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/memory-footprint-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2024/12/memory-footprint-comparison.png)
 
 From above graph one can clearly infer -
 - For 5 lac objects, JVM is required to allocate 3 times more memory for JDK based implementation as compared to Spring Reactor based implementation
-- Percentage increase w.r.t Peak Memory is exponentially increasing as the number of objects in the list
+- Percentage increase w.r.t Peak Memory is exponentially increasing the list size in JDK
 
 ### 3.3 GC Metrics
-As we have seen in my previous blogs, GC has a significant impact on performance of an application. Hence lets compare its key metrics
+As we have seen in my previous blogs, GC has a significant impact on performance of an application. Here's how they compare:
 
 #### 3.3.1 GC Pauses
 
@@ -178,7 +181,7 @@ This shows rate at which objects are created within JVM heap and rate at which t
 
 # Conclusion
 
-After objectively comparing both the solutions using above critera, it is quite apparent that Spring Reactor based implementation is not only clean and elegant but also relatively better from performance considerations.
+After objectively comparing both the solutions, it is quite apparent that Spring Reactor based implementation is not only clean and elegant but also performs better.
 
 P.S - All the graphs shown above are prepared by using data from GC report generated by [GCEasy](https://gceasy.io/)
 
