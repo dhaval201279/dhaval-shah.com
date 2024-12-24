@@ -54,7 +54,7 @@ You can connect with me directly on [twitter](https://twitter.com/dhaval201279),
 ### Appreciations / Recommendations of article on this blog
 |  Year  | Article Name   | Quoted / Recommended |
 |:--------:|:--------:|:------:|
-| 2024 | [Paralle Processing - Spring Core Reactor Vs JDK](https://www.dhaval-shah.com/parallel-processing-reactor-vs-jdk/) | [Spring Weekly Newsletter](https://spring.io/blog/2024/12/17/this-week-in-spring-december-17th-2024) |
+| 2024 | [Parallel Processing - Spring Core Reactor Vs JDK](https://www.dhaval-shah.com/parallel-processing-reactor-vs-jdk/) | [Spring Weekly Newsletter](https://spring.io/blog/2024/12/17/this-week-in-spring-december-17th-2024) |
 | 2021 | [RSocket Vs Webflux](https://www.dhaval-shah.com/performance-comparison-rsocket-webflux/) | [Spring Weekly Newsletter](https://spring.io/blog/2021/09/14/this-week-in-spring-september-14th-2021) |
 | 2020 | [Blog](https://dhaval-shah.com)| [SivaLabs](https://www.sivalabs.in/2020/09/all-the-resources-you-ever-need-as-a-java-spring-application-developer/)|
 | 2019 | [Chaos Engineering](https://www.dhaval-shah.com/chaos-engineering-demonstration-with-working-example/) | [Chaos Weekly Newsletter](https://medium.com/this-week-in-chaos/issue-9-august-6-2019-a410a8c21c23) |
