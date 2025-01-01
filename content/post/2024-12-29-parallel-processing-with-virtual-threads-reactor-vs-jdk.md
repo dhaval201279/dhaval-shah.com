@@ -7,19 +7,21 @@ url: /parallel-processing-virtual-threads-reactor-vs-jdk/
 categories:
   - performance
   - jdk
+  - spring
 tags:
   - performance
   - jdk
+  - spring
 thumbnail: "images/wp-content/uploads/2025/01/industrial_pipes.jpg"
 ---
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/industrial_pipes.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/industrial_pipes.jpg)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-java-vs-reactor.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-java-vs-reactor.jpg)
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
-My [previous article](https://www.dhaval-shah.com/parallel-processing-reactor-vs-jdk/) focussed on comparing solutions for performing parallel execution using  [Spring Core Reactor](https://spring.io/reactive) and [JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html) features. This article will be follow up to my previous article where in I will provide comparative analysis of [Virtual Threads](https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html) based execution for [Spring Core Reactor](https://spring.io/reactive) and [JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html) based implementation.
+My [previous article](https://www.dhaval-shah.com/parallel-processing-reactor-vs-jdk/) focussed on comparing solutions for performing parallel execution using  [Spring Core Reactor](https://spring.io/reactive) and [JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html). This article will follow my previous article where I will provide comparative analysis of [Virtual Threads](https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html) based execution for [Spring Core Reactor](https://spring.io/reactive) and [JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html) based implementation.
 
-Keeping the same use case that we referred for comparing Spring Core Reactor & JDK based implementation, this article will be focussing on:
+Keeping the same use case that we referred to for comparing Spring Core Reactor & JDK based implementation, this article will be focussing on:
 1. Limitations of [OS](https://en.wikipedia.org/wiki/Operating_system) / Platform threads
 2. What are Virtual Threads
 3. When to use Virtual Threads
@@ -30,8 +32,8 @@ Keeping the same use case that we referred for comparing Spring Core Reactor & J
 Constraints of [OS](https://en.wikipedia.org/wiki/Operating_system) / Platform threads:
 - Lifecycle of Platform threads is **resource intensive**
 - They can handle only limited number of concurrent threads without degrading performance, as they rely on underlying OS capabilities
-- Blocking operations hold up OS threads, **limiting scalability** of application
-- Platform thread management incurs expensive context-switching which in turn reduces efficiency of application
+- Blocking operations hold up OS threads, **limiting the scalability** of application
+- Platform thread management incurs expensive context-switching which in turn reduces the efficiency of the application
 
 Contemporary applications that are throughput and latency sensitive, demand high concurrency without overwhelming system resources
 
@@ -40,10 +42,10 @@ Virtual Threads, a feature of [Project Loom](https://openjdk.org/projects/loom/)
 
 Salient Features from performance engineering standpoint:
 - Low Cost : Millions of virtual threads can be created without significant memory / CPU overhead
-- Blocking friendly - Blocking a virtual thread doesn't block an OS threads, allowing more efficient resource utilization
+- Blocking friendly - Blocking a virtual thread doesn't block OS threads, allowing more efficient resource utilization
 
 # 3. When to use Virtual Threads
-For any thread within an application, its primary ask is to perform CPU or I/O bound operations. While virtual threads can be used for both the type of operations, one should be mindful of the fact that Virtual Threads are more appropriate for I/O intensive operations. Having said that, it can still be used for CPU intensive operations, but the benefits might not be proportionate to the gain we may see in I/O bound operations.
+For any thread within an application, its primary task is to perform CPU or I/O bound operations. While virtual threads can be used for both type of operations, one should be mindful of the fact that Virtual Threads are more appropriate for I/O intensive operations. Having said that, it can still be used for CPU intensive operations, but the benefits might not be proportionate to the gain we may see in I/O bound operations.
 
 # 4. Solutions with Virtual Threads based implementation
 ## 4.1 JDK Based implementation with Virtual Threads
@@ -136,59 +138,64 @@ Excerpt from [actual code](https://github.com/dhaval201279/reactivespring/blob/m
 ```
 
 # 5. Comparative analysis of Virtual Thread based implementations
-In order to ensure that comparative analysis of Virtual Thread based solutions and Virtual Thread Vs Platform thread based solution is fair and wholistic, we will be keeping the same criteria as we had in my [previous article](https://www.dhaval-shah.com/parallel-processing-reactor-vs-jdk/) :
-
+To ensure that the comparative analysis of Virtual Thread based solutions Platform thread based solutions is fair and wholistic, we will be keeping the same criteria as we had in my [previous article](https://www.dhaval-shah.com/parallel-processing-reactor-vs-jdk/) :
+Concurrent processing of below number  of objects from a list
 1. 1,00,000 objects
 2. 2,50,000 objects
 3. 5,00,000 objects
 
 ## 5.1 Comparing Virtual Thread based solution with Spring Core Reactor & JDK constructs
 
-### 5.1.2 Total time spent in processing entire list
+### 5.1.2 Total time spent in processing the entire list
 
 [![ Time taken to process entire list  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-processing-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-processing-time-comparison.png)
 
-As we can see in above graph - Virtual Threads with JDK based implementation are super fast when compared with Spring Core Reactor. Also, the percentage increase in time for processing list is exponentially increasing with increase in no. of items in list.
+As we can see in the above graph - Virtual Threads with JDK based implementation are super fast when compared with Spring Core Reactor. Also, the percentage increase in time for processing the entire list within Spring Core Reactor based application is exponentially increasing with an increase in no. of items in list.
 
 ### 5.1.3 Memory footprint
 [![ Memory Footprint  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/memory-footprint-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-memory-footprint-comparison.png)
 
-From above graph one can clearly infer -
-Nothing major to highlight except for below observations
+From the above graph one can infer -
 - For 5 lac objects, JVM is required to allocate 33 times more memory in Old Gen for JDK based implementation when compared with Spring Reactor based implementation
 - For 5 lac objects, peak memory utilized within Old Gen is 81 times more for JDK based implementation when compared with Spring Reactor based implementation
 
 ### 5.1.4 GC Metrics
-As we have seen in my [previous blogs](https://deploy-preview-26--dhaval-shah.netlify.app/categories/jvm/), GC has a significant impact on performance of an application. Here's how they compare:
+As we have seen in my [previous blogs](https://deploy-preview-26--dhaval-shah.netlify.app/categories/jvm/), GC has a significant impact on the performance of an application. Here's how they compare:
 
 #### 5.1.5 GC Pauses
-This mainly indicates amount of time taken by STW GCs.
+This mainly indicates the amount of time consumed by STW GCs.
 
 [![ GC Pause Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-gc-pause-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-gc-pause-time-comparison.png)
 
-Comparatively speaking, in most of the cases GC pauses are higher for JDK based implementation. In-spite of longer GC pauses for JDK based implementation, it does not have any significant impact on latency of application
+Comparatively speaking, in most of the cases GC pauses are higher for JDK based implementation. In spite of longer GC pauses for JDK based implementation, it does not have any significant impact on the latency of application.
 
 #### 5.1.6 CPU Time
-This shows total CPU time consumed by garbage collector.
+This shows the total CPU time consumed by the garbage collector.
 
 [![ CPU Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-cpu-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-cpu-time-comparison.png)
 
-It is evident from above graph that even though JDK based implementation is requiring higher CPU time for its GC activities, it does not  have any negative effect on application performance
+It is evident from the above graph that even though JDK based implementation requires higher CPU time for its GC activities, it does not  have any negative effect on application performance.
 
 #### 5.1.7 Object Metrics
 This shows rate at which objects are created within JVM heap and rate at which they are promoted from Young to Old region.
 
 [![ Object Creation and Promotion Rate  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-object-metrics-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-object-metrics-comparison.png)
 
- An interesting behavior that can be inferred - Even though object creation rate and promotion rate has been higher for JDK based implementation, it has no impact on performance of application.
+ An interesting behavior that can be inferred - Even though object creation rate and promotion rate is significantly higher for JDK based implementation, it has minimal impact on performance of application.
 
  ## 5.2 Comparing Spring Core Reactor & JDK based solutions with / without Virtual Threads
- With JDK 21, since developers have 2 options viz. Platform / Virtual threads when it comes to implementing asynchronous / concurrent workflows. Hence it becomes very important to understand - which would fare better when it comes to performance numbers
 
-### 5.2.1 Total time spent in processing entire list
+ With JDK 21, developers have 2 options viz. Platform / Virtual threads when it comes to implementing asynchronous / concurrent workflows. Hence it becomes very important to understand - which would fare better when it comes to performance engineering. Logically it is quite evident, but below graph factually shows that Virtual threads based implementation are much more faster than Platform threads based implementation.
+
+[![ Processing Time - Platform Vs Virtual Threads with JDK / Spring Core Reactor  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-vs-platform-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-vs-platform-comparison.png)
+
+### 5.2.1 Total time spent in processing the entire list
 
 # Conclusion
 
-After objectively comparing both the solutions, it is quite apparent that Spring Reactor based implementation is not only clean and elegant but also performs better.
+After objectively comparing both the solutions from this and the [previous](https://www.dhaval-shah.com/parallel-processing-reactor-vs-jdk/) article, it is quite apparent that :
 
-P.S - All the graphs shown above are prepared by using data from GC report generated by [GCEasy](https://gceasy.io/)
+- For Virtual threads based implementation, JDK should be one's obvious choice as they are **significantly** faster than Spring Core Reactor.
+- For Platform threads based implementation, Spring Core Reactor is **relatively** faster than JDK based implementation
+
+P.S - All the memory and GC related graphs shown above are prepared by using data from GC report generated by [GCEasy](https://gceasy.io/)
