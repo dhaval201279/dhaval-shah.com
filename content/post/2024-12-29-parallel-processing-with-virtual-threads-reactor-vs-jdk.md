@@ -12,7 +12,7 @@ tags:
   - performance
   - jdk
   - spring
-thumbnail: "images/wp-content/uploads/2025/01/industrial_pipes.jpg"
+thumbnail: "images/wp-content/uploads/2025/01/vt-java-vs-reactor.jpg"
 ---
 
 [![](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-java-vs-reactor.jpg)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-java-vs-reactor.jpg)
@@ -153,7 +153,7 @@ Concurrent processing of below number  of objects from a list
 As we can see in the above graph - Virtual Threads with JDK based implementation are super fast when compared with Spring Core Reactor. Also, the percentage increase in time for processing the entire list within Spring Core Reactor based application is exponentially increasing with an increase in no. of items in list.
 
 ### 5.1.3 Memory footprint
-[![ Memory Footprint  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/memory-footprint-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-memory-footprint-comparison.png)
+[![ Memory Footprint  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-memory-footprint-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-memory-footprint-comparison.png)
 
 From the above graph one can infer -
 - For 5 lac objects, JVM is required to allocate 33 times more memory in Old Gen for JDK based implementation when compared with Spring Reactor based implementation
