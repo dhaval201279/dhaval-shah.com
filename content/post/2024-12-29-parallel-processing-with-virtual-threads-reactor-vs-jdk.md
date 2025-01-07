@@ -28,7 +28,7 @@ Keeping the same use case that we referred to for comparing Spring Core Reactor 
 4. Solutions with Virtual Thread based implementation
 5. Comparative analysis of Virtual Thread based implementations
 
-# 1. Limitations of OS/ Platform threads
+# 1. Limitations of OS / Platform threads
 Constraints of [OS](https://en.wikipedia.org/wiki/Operating_system) / Platform threads:
 - Lifecycle of Platform threads is **resource intensive**
 - They can handle only limited number of concurrent threads without degrading performance, as they rely on underlying OS capabilities
@@ -146,37 +146,37 @@ Concurrent processing of below number  of objects from a list
 
 ## 5.1 Comparing Virtual Thread based solution with Spring Core Reactor & JDK constructs
 
-### 5.1.2 Total time spent in processing the entire list
+### 5.1.1 Total time spent in processing the entire list
 
 [![ Time taken to process entire list  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-processing-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-processing-time-comparison.png)
 
 As we can see in the above graph - Virtual Threads with JDK based implementation are super fast when compared with Spring Core Reactor. Also, the percentage increase in time for processing the entire list within Spring Core Reactor based application is exponentially increasing with an increase in no. of items in list.
 
-### 5.1.3 Memory footprint
+### 5.1.2 Memory footprint
 [![ Memory Footprint  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-memory-footprint-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-memory-footprint-comparison.png)
 
 From the above graph one can infer -
 - For 5 lac objects, JVM is required to allocate 33 times more memory in Old Gen for JDK based implementation when compared with Spring Reactor based implementation
 - For 5 lac objects, peak memory utilized within Old Gen is 81 times more for JDK based implementation when compared with Spring Reactor based implementation
 
-### 5.1.4 GC Metrics
+### 5.1.3 GC Metrics
 As we have seen in my [previous blogs](https://deploy-preview-26--dhaval-shah.netlify.app/categories/jvm/), GC has a significant impact on the performance of an application. Here's how they compare:
 
-#### 5.1.5 GC Pauses
+#### 5.1.4 GC Pauses
 This mainly indicates the amount of time consumed by STW GCs.
 
 [![ GC Pause Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-gc-pause-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-gc-pause-time-comparison.png)
 
 Comparatively speaking, in most of the cases GC pauses are higher for JDK based implementation. In spite of longer GC pauses for JDK based implementation, it does not have any significant impact on the latency of application.
 
-#### 5.1.6 CPU Time
+#### 5.1.5 CPU Time
 This shows the total CPU time consumed by the garbage collector.
 
 [![ CPU Time  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-cpu-time-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-cpu-time-comparison.png)
 
 It is evident from the above graph that even though JDK based implementation requires higher CPU time for its GC activities, it does not  have any negative effect on application performance.
 
-#### 5.1.7 Object Metrics
+#### 5.1.6 Object Metrics
 This shows rate at which objects are created within JVM heap and rate at which they are promoted from Young to Old region.
 
 [![ Object Creation and Promotion Rate  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-object-metrics-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-object-metrics-comparison.png)
@@ -188,8 +188,6 @@ This shows rate at which objects are created within JVM heap and rate at which t
  With JDK 21, developers have 2 options viz. Platform / Virtual threads when it comes to implementing asynchronous / concurrent workflows. Hence it becomes very important to understand - which would fare better when it comes to performance engineering. Logically it is quite evident, but below graph factually shows that Virtual threads based implementation are much more faster than Platform threads based implementation.
 
 [![ Processing Time - Platform Vs Virtual Threads with JDK / Spring Core Reactor  ](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-vs-platform-comparison.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2025/01/vt-vs-platform-comparison.png)
-
-### 5.2.1 Total time spent in processing the entire list
 
 # Conclusion
 
