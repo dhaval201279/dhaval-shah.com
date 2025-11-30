@@ -11,6 +11,7 @@ categories:
 tags:
   - azure
   - data-engineering
+  - ADF
 thumbnail: "images/wp-content/uploads/2025/11/thumbnail-pipeline-2.jpg"
 ---
 
@@ -91,20 +92,20 @@ Our pipeline depends entirely on our external services behaving well. If our dep
 
 | Alert Description   | Log search query for Alert Conditions     | Severity   |
 | --------  | -------- | :-----: |
-| Alert for non-existence of source folder | `StorageBlobLogs \| where tostring(ObjectKey) contains_cs "blob-strg-ac/src-folder" \| where StatusText == "PathNotFound"` | Critical |
-| Alert for non-existence of destination folder | `StorageBlobLogs \| where tostring(ObjectKey) contains_cs "blob-strg-ac-dest/output-folder" \| where StatusText == "PathNotFound"` | Critical |
-| Alert for non-existence of generated CSV file | `ADFActivityRun \| where Status == "Failed" \| order by TimeGenerated desc` | Critical |
+| Alert for non-existence of source folder | <code>StorageBlobLogs \| where tostring(ObjectKey) contains_cs "blob-strg-ac/src-folder" \| where StatusText == "PathNotFound"</code> | Critical |
+| Alert for non-existence of destination folder | <code>StorageBlobLogs \| where tostring(ObjectKey) contains_cs "blob-strg-ac-dest/output-folder" \| where StatusText == "PathNotFound"</code> | Critical |
+| Alert for non-existence of generated CSV file | <code>ADFActivityRun \| where Status == "Failed" \| order by TimeGenerated desc</code> | Critical |
 
 ### 4.1.2 Azure ComsosDB Alerts
 
 | Alert Description   | Log search query for Alert Conditions     | Severity   |
 | --------  | -------- | :-----: |
-| Alert for CosmosDB Failures | `ADFActivityRun \| where Status == "Failed" \| where Error has "cosmosDB" \| order by TimeGenerated desc` | Critical |
-| Alert for CosmosDB Throttling (i.e. 429 Errors) | `AzureDiagnostics \| where Category == "DataPlaneRequests" \| where statusCode_s == "429" \| order by TimeGenerated desc` | Critical |
+| Alert for CosmosDB Failures | <code>ADFActivityRun \| where Status == "Failed" \| where Error has "cosmosDB" \| order by TimeGenerated desc</code> | Critical |
+| Alert for CosmosDB Throttling (i.e. 429 Errors) | <code>AzureDiagnostics \| where Category == "DataPlaneRequests" \| where statusCode_s == "429" \| order by TimeGenerated desc</code> | Critical |
 | Alert for CosmosDB Query latency (> 10 sec) | Ref 0 | Critical |
 
 **Ref 0**
-``` kql
+```kusto
 AzureDiagnostics 
     | where OperationName == "Query" 
     | where databaseName_s == "cosmos-db-container-name" 
@@ -126,11 +127,11 @@ we need specific alerts for each failure point:
 
 | Alert Description   | Log search query for Alert Conditions     | Severity   |
 | --------  | -------- | :-----: |
-| Alert for Pipeline Failures | `PipelineFailedRuns > 0` | Critical |
+| Alert for Pipeline Failures | <code>PipelineFailedRuns > 0</code> | Critical |
 | Alert for Pipeline Execution Duration | [Ref 1] | Critical |
 
 **Ref 1**
-``` kql
+```kusto
 let InProgressRuns = 
   ADFPipelineRun
     | where Status == "InProgress"
@@ -152,11 +153,11 @@ InProgressRuns
 
 | Alert Description   | Log search query for Alert Conditions     | Severity   |
 | --------  | -------- | :-----: |
-| Alert for Activity Failures | `ActivityFailedRuns > 0` | Critical |
+| Alert for Activity Failures | <code>ActivityFailedRuns > 0</code> | Critical |
 | Alert for Activity Execution Duration | [Ref 2] | Critical |
 
 **Ref 2**
-``` kql
+```kusto
 let InProgressRuns = 
   ADFActivityRun
     | where Status == "InProgress"
@@ -177,12 +178,12 @@ InProgressRuns
 
 | Alert Description   | Log search query for Alert Conditions     | Severity   |
 | --------  | -------- | :-----: |
-| Alert for Integration Runtime availability | `IntegrationRuntimeAvailableNodeNumber < 1` | Critical |
+| Alert for Integration Runtime availability | <code>IntegrationRuntimeAvailableNodeNumber < 1</code> | Critical |
 | Alert for Blob Storage Read failures | [Ref 3] | Critical |
 | Alert for Blob Storage Write failures | [Ref 4] | Critical |
 
 **Ref 3**
-``` kql
+```kusto
 StorageBlobLogs
   | where ObjectKey has "strg-blob-container-name/src-folder"
   | where Category == 'StorageRead'
@@ -190,7 +191,7 @@ StorageBlobLogs
 ```
 
 **Ref 4**
-``` kql
+```kusto
 ADFActivityRun 
   | where ActivityType == "Copy"
   | where Status == "Failed"
