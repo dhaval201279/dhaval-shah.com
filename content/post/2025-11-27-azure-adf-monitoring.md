@@ -145,8 +145,8 @@ let CompletedRuns =
 InProgressRuns
   | join kind=leftanti (CompletedRuns) on RunId
   | extend RunDuration = now() - Start
-  | where RunDuration > 24h 
-      and TimeGenerated >= ago(30d)
+  | where RunDuration > 1h 
+      and TimeGenerated >= ago(1d)
 ```
 
 ### 4.2.2 Activity Alerts
@@ -171,7 +171,7 @@ let CompletedRuns =
 InProgressRuns
   | join kind=leftanti (CompletedRuns) on ActivityRunId
   | extend RunDuration = now() - Start
-  | where RunDuration > 24h and TimeGenerated >= ago(30d)
+  | where RunDuration > 1h and TimeGenerated >= ago(1d)
 ```
 
 ### 4.2.3 Integration Runtime and Data Movement Alerts
