@@ -198,10 +198,7 @@ ADFActivityRun
 ```
 
 # Wrapping Up: Building a Resilient ADF Pipeline
-
-We've walked through the essentials of setting up **bulletproof error handling and alerts** for your ADF pipeline - the one that brings data together from all sources and lands it safely in Azure Blob Storage. The takeaway? When your production pipelines are backed by this level of maturity, troubleshooting stops being a nightmare and starts being a precise & quick. Your data workflow is now **resilient and reliable.**
-
-We walked through the essentials of setting up a **bulletproof error handling framework and smart / loud alerts** for your Azure Data Factory pipeline — the one that brings data together from all its different homes and lands it safely.
+We walked through the essentials of setting up a **bulletproof error handling framework and smart / loud alerts** for Azure Data Factory pipeline — the one that brings data together from all its different homes and lands it safely.
 
 The most important takeaway?
 
