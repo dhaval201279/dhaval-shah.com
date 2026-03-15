@@ -7,6 +7,7 @@ toc = false
 
 ------------------------------------------------------------------------------
 
+# Introduction
 If you’re here, chances are, something in your product or platform or MVP isn’t moving the business forward the way you expected -
 
 - Maybe new product features take longer and longer to release because the technology underneath is getting harder to manage.
@@ -19,14 +20,23 @@ This is especially common in startups and small companies where founders and CEO
 
 That’s where I help.
 
->**I’m a software architect with over two decades of experience building and running large-scale systems in FinTech world. The kind of systems that don’t get to fail quietly. They process transactions, move money, and have to stay up when traffic spikes or when something breaks at 3 AM.**
+>**I’m a High-Scale Systems & Performance Architect with over two decades of experience building and running large-scale systems in FinTech world. The kind of systems that don’t get to fail quietly. They process transactions, move money, and have to stay up when traffic spikes or when something breaks at 3 AM.**
 
 I work with startups and established companies that need practical engineering leadership and hands-on architecture work that ensures technology supporting the business is **stable**, **scalable**, **resilient**, **cost-efficient** and most importantly should be **easy to operate** — so the company can grow without running into technical roadblocks.
 
 >**No fluff. No slide decks for the sake of it. Just solving real technical problems.**
 
+# Services Overview
+| Area                          | Typical Problem                                              | What I Do                                              |
+| ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------ |
+| [**Consulting Architect**](#consulting-architect)      | System architecture is becoming fragile as the product grows | Architecture reviews and system design guidance        |
+| [**Technology Advisor**](#technology-advisor)        | Founders or leaders need a trusted technical second opinion  | Ongoing advisory for major technology decisions        |
+| [**Performance Scalability & Reliability**](#performance-scalability--system-reliability) | Systems slow down, fail under load, or are hard to debug     | Improve systems' performance, scalability, resiliency, monitoring etc.            |
+| [**Cloud Cost Optimization**](#cloud-cost-optimization)  | Infrastructure costs keep increasing without clear reason    | Identify architectural inefficiencies and reduce waste |
+
+
 # How I help companies solve their problem
-## Fractional Architect
+## Consulting Architect
 ### What this looks like
 A focused review or design engagement that helps ensure your system architecture can support the growth of your product and team. In early stages, systems are often built quickly to get the product to market. That’s the right thing to do. But as usage grows, the same shortcuts can start creating bottlenecks.
 
@@ -76,13 +86,13 @@ Typical areas I support:
 
 The goal is simple: make sure **technology decisions support the business instead of slowing it down later**.
 
-## Performance, Scalability & System Reliability
+## Performance Scalability & System Reliability
 ### What this looks like
 A focused review of the **non-functional foundations of your system** — the parts that determine how well your product behaves in the real world.
 
 When a product starts growing, success depends on more than just features. Systems need to handle higher traffic, stay available during failures, provide visibility into what’s happening internally, and recover quickly when things go wrong.
 
-These aspects — performance, scalability, reliability, monitoring, and observability — are often treated as after-thoughts early on. But as the business grows, they quickly become critical.
+These aspects — performance, scalability, reliability and observability — are often treated as after-thoughts early on. But as the business grows, they quickly become critical.
 
 This work focuses on making sure the system behind the product is **fast, stable, and predictable under real usage**.
 ### When this is useful
@@ -167,10 +177,13 @@ My role isn’t to validate decisions that have already been made.
 It’s to help companies make **better technical decisions before they become expensive problems**.
 
 # Let’s Talk
-I only take on a small number of consulting engagements at a time so I can stay closely involved with the teams I work with.
-
 If you’re dealing with technology challenges — scaling issues, architecture decisions, rising cloud costs, or just want an experienced second opinion — feel free to reach out.
 
-Share a bit about what you’re building and where you’re running into challenges. If it sounds like something I can genuinely help with, we can set up a conversation and take it from there.
+Share a bit about: 
+- What you’re building
+- Where you’re running into challenges
+- What kind of help you're looking for
+
+If it sounds like something I can genuinely help with, we can set up a conversation.
 
 And if I’m not the right fit, I’ll tell you that upfront.
