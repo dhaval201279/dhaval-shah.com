@@ -145,15 +145,15 @@ When I look at a system, I’m comfortable going deep — reading the code, unde
 
 If a solution requires architectural changes, I can help design it. If it requires implementation work, I’m comfortable working with the team to make it happen.
 
-## I understand both the business side and the engineering side
+## I understand both - the business side and the engineering side
 Technology decisions are rarely just technical.
 
-They affect product timelines, operating costs, hiring plans, and how fast a company can move.
+They affect product timelines, operating costs, hiring plans, and how fast a company can grow.
 
 Over the years I’ve worked closely with product leaders, engineering teams, and business stakeholders. That means I’m used to translating technical trade-offs into practical business terms.
 
 The goal isn’t the “perfect” architecture.
-The goal is building technology that supports the business as it grows.
+The goal is building technology that supports the business as it grows with acceptable trade-offs.
 
 ## You’ll get honest & candid answers
 
