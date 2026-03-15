@@ -1,10 +1,10 @@
 +++
 title = "About"
 description = "Dhaval Shah"
-date = "2022-08-06"
+date = "2026-03-06"
 aliases = ["about-us", "about-hugo", "contact"]
 author = "Dhaval"
-toc = true
+toc = false
 +++
 
 ------------------------------------------------------------------------------
@@ -18,19 +18,28 @@ My name is Dhaval P Shah. I am the founder and editor of this blog.
 I work as a Principal - Software Development Engineer at [Mastercard](https://www.mastercard.co.in/en-in.html).
 
 ## About Me
-I am a pragmatic Software Craftsman, passionate about architecting, designing, implementing, operationalizing and monitoring **Distributed Systems** with 18+ years of experience predominately in crafting low latency, high throughput and scalable enterprise applications.
+I am a Principal Software Engineer with more than 2 decades of experience designing and scaling distributed platforms. Specialized in high-throughput, low-latency backend systems built using Java, reactive microservices, and event-driven architectures.
+Proven track record architecting resilient platforms processing 1000+ TPS with sub-50ms latency, designing distributed pipelines handling 150K+ user provisioning workflows.
 
-I am a perpetual learner, who is inquisitive about all the latest trends shaping software 
-industry. I am predominantly a backend developer with an extensive experience in Java / J2EE stack using Spring framework. Of late I am trying to tinker with Big Data stack.
+Recognized for leading complex production problem resolution, institutionalizing observability and performance engineering standards, and shaping scalable cloud-native architectures supporting global payment platforms.
+
 
 ### Specialities
-1. Spring Boot, Spring Webflux, Spring Reactor, Spring Cloud
-2. Performance Engineering aficionado with sharp focus on optimization of enterprise applications (JVM / GC Tuning, App. Memory utilization, App. profiling and benchmarking, DB tuning etc.)
-3. J2EE technologies (Spring Core, Spring MVC, Spring Data JPA, Spring Integration, Hibernate )
-4. Kubernetes
-5. Enterprise Monitoring (Splunk, Dynatrace, Prometheus, Grafana)
-6. Chaos Engineering
-7. Refactoring legacy applications
+| Category   | Skills     |
+| :--------:  | -------- |
+| Architecture and Leadership | Distributed Systems Architecture \| Event Driven Systems (Kafka) \| Cloud Native Platforms \| Reactive Systems \| High Availability \| Resiliency Engineering \| Microservices \| Domain-Driven Design (DDD) \| Observability \| SRE Practices \| Technical Leadership & Mentoring  |
+| Backend Engineering | Java 17 \| Spring Boot \| Spring Framework (Core, Webflux) \| Project Reactor \| Reactive Programming \| Kafka \| REST APIs \| High Throughput & Low Latency Systems \| Performance Engineering (JVM / GC / Database) \| Spring AI |
+| Cloud & Infrastructure | Microsoft Azure \| Pivotal Cloud Foundry (PCF) \| Kubernetes |
+| Data Engineering | Azure Cosmos DB \| Azure Storage Account (Blob, Queue) \| Azure Data Factory \| PostgreSQL \| MongoDB \| Oracle |
+| DevOps, Observability & Tooling | CI / CD (Jenkins) \| Dynatrace \| Splunk \| Gatling \| Mixpanel \| Prometheus \| Grafana \| Cost Optimization |
+| AI Tools | Github Copilot \| Microsoft Copilot \| Jetbrains Junie \| Claude  |
+
+### Scope of Impact
+- Architected distributed backend systems powering global fintech platforms processing 750+ transactions per second
+- Designed high-throughput pipelines orchestrating 15+ downstream services per workflow with strict ordering and failure isolation
+- Led JVM, database, and service-layer performance engineering initiatives improving platform efficiency by 30–40%
+- Influenced engineering practices across organization through performance / resiliency engineering standards
+
 
 ### Certifications
 1. [Certified Kubernetes Application Developer](https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/164e9edd-3dfe-493b-82c2-4ff9889fa194-dhaval-shah-94c15851-01c5-40ca-8704-b786404fdb43-certificate.pdf)
@@ -64,8 +73,3 @@ You can connect with me directly on [twitter](https://twitter.com/dhaval201279),
 ### What powers this blog?
 This blog is powered by [Hugo](https://gohugo.io/), a static site generator built using [Golang](https://golang.org/). It uses a [Hugo Clarity](https://themes.gohugo.io/hugo-clarity/) theme.
 I’ve hosted this blog on [Netlify](https://www.netlify.com/), a cloud hosting platform for static websites.
-
-
-
-
-
