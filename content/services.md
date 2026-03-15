@@ -1,6 +1,5 @@
 +++
 title = "Services"
-date = "2026-03-06"
 author = "Dhaval"
 toc = false
 +++
