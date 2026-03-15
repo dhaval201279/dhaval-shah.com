@@ -2,17 +2,17 @@
 title = "Services"
 date = "2026-03-06"
 author = "Dhaval"
-toc = true
+toc = false
 +++
 
 ------------------------------------------------------------------------------
 
-If you’re here, chances are something in the product or platform isn’t moving the business forward the way you expected -
+If you’re here, chances are, something in your product or platform or MVP isn’t moving the business forward the way you expected -
 
 - Maybe new product features take longer and longer to release because the technology underneath is getting harder to manage.
 - Maybe your product is gaining users but the system starts slowing down whenever traffic spikes.
 - Maybe your cloud bill keeps increasing, but it’s not clear what’s actually driving the cost.
-- Maybe outages or slow performance are starting to affect customer trust.
+- Maybe outages or slow performance are starting to affect customer trust and hence your revenue.
 - Maybe you’re building something ambitious and want to make sure the technology behind it can support the business as it grows.
 
 This is especially common in startups and small companies where founders and CEOs are focused on product, market fit, and growth. The technology often evolves quickly in the early stages — and that’s normal. But as the business grows, the same decisions that helped you move fast early on can start slowing things down.
@@ -165,3 +165,12 @@ If something can be solved with a simpler approach, that’s the direction I’l
 
 My role isn’t to validate decisions that have already been made.
 It’s to help companies make **better technical decisions before they become expensive problems**.
+
+# Let’s Talk
+I only take on a small number of consulting engagements at a time so I can stay closely involved with the teams I work with.
+
+If you’re dealing with technology challenges — scaling issues, architecture decisions, rising cloud costs, or just want an experienced second opinion — feel free to reach out.
+
+Share a bit about what you’re building and where you’re running into challenges. If it sounds like something I can genuinely help with, we can set up a conversation and take it from there.
+
+And if I’m not the right fit, I’ll tell you that upfront.
