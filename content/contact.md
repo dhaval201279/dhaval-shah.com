@@ -30,6 +30,7 @@ Engagements are a good fit if you are:
 
 | Channel | Address |
 |---------|---------|
+| Book an Appointment | [Calendly](https://calendly.com/dhaval201279) |
 | Email | [Gmail](mailto:gladiator201279@gmail.com) |
 | LinkedIn | [linkedin.com/in/dhavalshah201279](https://www.linkedin.com/in/dhavalshah201279/) |
 | Twitter / X | [@dhaval201279](https://twitter.com/dhaval201279) |
