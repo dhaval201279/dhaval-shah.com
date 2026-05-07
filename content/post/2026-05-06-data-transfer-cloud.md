@@ -20,7 +20,7 @@ thumbnail: "images/wp-content/uploads/2026/05/cross-cloud-data-highway.png"
 
 # Background
 
-Imagine you need to move terabytes or petabytes of large files from [AWS S3]() to [Azure Blob Storage](), and that too with 
+Imagine you need to move terabytes or petabytes of large files from [AWS S3](https://aws.amazon.com/s3/) to [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/), and that too with 
 1. Reliability &
 2. High Throughput 
 
@@ -28,14 +28,14 @@ The naïve approach (download the whole file, upload whole file) collapses under
 - Network glitches
 - Process crashes
 - Cloud throttling 
-- Feasibility of buffering a 500 GB file in memory
+- Feasibility of buffering a 1 TB of file in memory
 
 What looks like a simple file-copy operation - is a classic distributed systems problem with: 
 1. Partial failures 
 2. Idempotency
 3. Data consistency across cloud
 
-Recently I implemented it for one of my client and hence thought to unpack the foundational design principles that turned their existing fragile script into a production‑grade, resumable, and exactly‑once transfer pipeline. 
+Recently I implemented it for one of my client and hence thought to unpack the foundational design principles that turned their existing fragile script into a production‑grade, resumable, and exactly‑once transfer pipeline.
 
 Considering the magnitude and complexity of problem, this will be shared over a series of articles that will cover **core architecture**, **chunk‑level strategies**, **cross‑cloud consistency**, and **why deterministic identifiers** are key to this problem
 
@@ -67,12 +67,12 @@ Files are split into fixed-size chunks (64–256 MB, tunable). Each chunk maps t
 The chunk-to-block mapping is deterministic, which is what makes the whole system **idempotent**.
 
 ## 2. Stateless Workers
-Workers carry zero in-memory state between operations. All progress is externalized to the metadata store ([Azure Cosmos DB](), or any other persistent store) managed by Control Plane. Since state lives within meta-data store, RICS application is - 
-- Reilable : w.r.t data consistency and correctness
+Workers carry zero in-memory state between operations. All progress is externalized to the metadata store ([Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/cosmos-db/), or any other persistent store) managed by Control Plane. Since state lives within meta-data store, RICS application is - 
+- Reliable : w.r.t data consistency and correctness
 - Scalable : Throughput can be increased by adding more instances
 
 ## 3. Eventual Consistency with Correctness Guarantess
-RISC doesn't chase strong cross-cloud consistency. Instead it guarantees:
+RICS doesn't chase strong cross-cloud consistency. Instead it guarantees:
 - A file is visible to consumers only after atomic blob commit
 - Partial uploads are never exposed
 - Retries converge to the same correct final state
@@ -92,7 +92,7 @@ RISC doesn't chase strong cross-cloud consistency. Instead it guarantees:
 - Eventual consistency across clouds — acceptable when commit is atomic
 
 # Conclusion
-In this article we took a stab at what problem RISC intends to solve along with its high level architecture, design principles and architectural trade-offs.
+In this article we took a stab at what problem RICS intends to solve along with its high level architecture, design principles and architectural trade-offs.
 
 Architecture tells you what the system looks like. Performance tells you how fast it actually moves.
-In [Part 2](), we will go under the hood of the two mechanisms that determine throughput: _S3 ranged_ reads and _Azure block blob_ uploads - Stay Tuned! 
+In [Part 2](), we will go under the hood of the two mechanisms that determine throughput: _S3 ranged_ reads and _Azure block blob_ uploads - So stay Tuned! 
