@@ -71,7 +71,7 @@ Workers carry zero in-memory state between operations. All progress is externali
 - Reliable : w.r.t data consistency and correctness
 - Scalable : Throughput can be increased by adding more instances
 
-## 3. Eventual Consistency with Correctness Guarantess
+## 3. Eventual Consistency with Correctness Guarantees
 RICS doesn't chase strong cross-cloud consistency. Instead it guarantees:
 - A file is visible to consumers only after atomic blob commit
 - Partial uploads are never exposed
