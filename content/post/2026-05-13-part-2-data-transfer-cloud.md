@@ -15,7 +15,7 @@ tags:
 thumbnail: "images/wp-content/uploads/2026/05/cross-cloud-data-highway-throughput.png"
 ---
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/05/cross-cloud-data-highway.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/05/cross-cloud-data-highway-throughput.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/05/cross-cloud-data-highway-throughput.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/05/cross-cloud-data-highway-throughput.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
