@@ -95,4 +95,4 @@ RICS doesn't chase strong cross-cloud consistency. Instead it guarantees:
 In this article we took a stab at what problem RICS intends to solve along with its high level architecture, design principles and architectural trade-offs.
 
 Architecture tells you what the system looks like. Performance tells you how fast it actually moves.
-In [Part 2](), we will go under the hood of the two mechanisms that determine throughput: _S3 ranged_ reads and _Azure block blob_ uploads - So stay Tuned! 
+In [Part 2](https://www.dhaval-shah.com/cross-cloud-data-highway-high-throughput/), we will go under the hood of the two mechanisms that determine throughput: _S3 ranged_ reads and _Azure block blob_ uploads - So stay Tuned! 
