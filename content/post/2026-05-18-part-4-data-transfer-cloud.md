@@ -33,7 +33,7 @@ RICS builds observability into architecture with two pillars:
 - **_transfer_throughput_mbps** - derived metric
 - **_transfer_backlog_depth_** - files in PENDING state
 
-## Laltency Metrics
+## Latency Metrics
 - **_chunk_transfer_duration_seconds_**
 - **_file_transfer_duration_seconds_**
 - **_s3_read_latency_seconds_**
