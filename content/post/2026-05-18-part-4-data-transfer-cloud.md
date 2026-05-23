@@ -19,10 +19,10 @@ thumbnail: "images/wp-content/uploads/2026/05/cross-cloud-data-highway-observabi
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
-In the [previous article](https://www.dhaval-shah.com/cross-cloud-data-highway-high-resiliency/), we explored resiliency and fault tolerance as critical enablers of high‑volume inter‑cloud data transfer. Yet, even the most resilient system cannot succeed without deep visibility into its live operations. This final part of the series focuses on observability
+In the [previous article](https://www.dhaval-shah.com/cross-cloud-data-highway-high-resiliency/), we explored resiliency and fault tolerance as critical enablers of high‑volume inter‑cloud data transfer. Yet even the most resilient system cannot succeed without deep visibility into its live operations. This final part of the series focuses on observability
 
-# Observability - A First Class Requirement
-RICS builds observability into the architecture with two pillars: 
+# Observability - A First-Class Requirement
+RICS builds observability into architecture with two pillars: 
 1. Metrics
 2. Structured logs
 
