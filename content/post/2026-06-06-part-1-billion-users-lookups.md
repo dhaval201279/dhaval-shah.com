@@ -33,8 +33,8 @@ That's what makes them worth writing about.
 The request sounded almost trivial.
 
 A product manager walked into a planning meeting and wrote two bullet points on the whiteboard:
-1. API 1: List users with KYC status
-2. API 2: Fetch full user details including all accounts
+1. **API 1 :** List users with KYC status
+2. **API 2 :** Fetch full user details including all accounts
 
 Clean. Simple. Two endpoints.
 
@@ -52,8 +52,8 @@ The system was a KYC (Know Your Customer) profile service for a FinTech platform
 
 The UI needed two things:
 
- - API 1 : User Listing Return a paginated list of users. Each record: User ID, First Name, Last Name, KYC status. No account details.
- - API 2 : User Detail Return the full profile for a selected user: complete KYC data, all linked accounts, everything.
+ - **API 1 :** User Listing Return a paginated list of users. Each record: User ID, First Name, Last Name, KYC status. No account details.
+ - **API 2 :** User Detail Return the full profile for a selected user: complete KYC data, all linked accounts, everything.
 
 A straightforward CRUD problem. Until the next sentence in the requirements doc.
 
@@ -97,7 +97,7 @@ Scale doesn't kill systems by itself.
 
 The most dangerous assumptions w.r.t given use case:
 1. *"Our users are evenly distributed."* They're not. 20% of users drive 80% of API calls.
-2. *"Joins are fine — the database is fast."* Joins are fine until they run across 500 million rows.
+2. *"Joins are fine - the database is fast."* Joins are fine until they run across 500 million rows.
 3. *"Pagination is a UI concern."* Pagination is a database concern as well.
 
 # The Architectural Decision Log Starts Here
