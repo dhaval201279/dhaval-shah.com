@@ -2,7 +2,7 @@
 title: Billion User Trap - The Database Design That Looked Perfect on Day One
 author: Dhaval Shah
 type: post
-date: 2026-06-13T02:00:50+00:00
+date: 2026-06-09T02:00:50+00:00
 url: /billion-user-trap-db-design/
 categories:
   - architecture
