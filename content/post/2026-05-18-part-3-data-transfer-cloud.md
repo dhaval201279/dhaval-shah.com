@@ -116,4 +116,4 @@ Resiliency in RICS is not an after thought - its a characteristic that is built 
 2. External state management
 3. Chunk size as the unit of failure
 As a result cost of failure is bounded to chunk and not entire file. 
-[Part-4]() will cover **Observability** and **Monitoring** aspect of RICS.
+[Part-4](https://www.dhaval-shah.com/cross-cloud-data-highway-observability/) will cover **Observability** and **Monitoring** aspect of RICS.

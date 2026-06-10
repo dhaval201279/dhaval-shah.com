@@ -124,4 +124,4 @@ Throughput in RICS is not a function of raw network bandwidth alone — it is an
 2. _flatMap_ with a concurrency cap to achieve parallel I/O without increasing memory footprint 
 3. Adaptive Concurrency Controller that continuously adapts to what AWS and Azure are actually tolerating at that moment
 
-[Part 3]() takes this further: we move from how fast it runs to how well RICS survives failure by examining the resiliency mechanisms - So stay tuned!
+[Part 3](https://www.dhaval-shah.com/cross-cloud-data-highway-high-resiliency/) takes this further: we move from how fast it runs to how well RICS survives failure by examining the resiliency mechanisms - So stay tuned!
