@@ -6,10 +6,12 @@ date: 2026-06-13T02:00:50+00:00
 url: /billion-user-trap-db-design/
 categories:
   - architecture
-  - system-design
+  - distributed-systems
+  - database-optimization
 tags:
   - architecture
-  - system-design
+  - distributed-systems
+  - database-optimization
 thumbnail: "images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-2.png"
 ---
 
