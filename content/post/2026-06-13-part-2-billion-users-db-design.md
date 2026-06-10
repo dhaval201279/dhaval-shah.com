@@ -10,21 +10,21 @@ categories:
 tags:
   - architecture
   - system-design
-thumbnail: "images/wp-content/uploads/2026/06/1-billion-user-kyc-blog-series-part-1.png"
+thumbnail: "images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-2.png"
 ---
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/06/1-billion-user-kyc-blog-series-part-1.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/06/1-billion-user-kyc-blog-series-part-1.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-2.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-2.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
-This multi part series walks through the real architectural decisions and real mistakes behind designing a globally distributed KYC User Profile system - a system that should be capable of serving billions of users at 10M+ RPD with sub-500 ms P99 latency.  It's mainly about weighing trade-offs and making architectural decisions.
+In the first part we established the foundational principle that separates systems which survive scale from systems that collapse under it - **_design for access patterns, not for entities_**. 
 
-In this second part we will double click Database design of User Profile system and thereby try understanding its impace from performance engineering and scalability standpoint
+In this second part we double click on the database design of the User Profile system and try to understand its impact from performance engineering and scalability standpoint. Specifically - why the schema that adheres to proper normalization, proper foreign keys, and proper indexes, becomes a latency problem.
 
 # Every Architecture Diagram Is Pristine Before the First 100 Million Rows
-Show me an ER diagram from a planning session and I'll show you something that may cause a production incident when your platform scales. Not because engineers are bad at design. Because the diagram was designed for the data they had. Not the data they'd get and would be getting accessed.
+Show me an ER diagram from a planning session and I'll show you something that may cause a production incident when your platform scales. Not because engineers are bad at design. Because the diagram was designed for the data they had or had to be persisted. Not the data they'd get and would be getting accessed.
 
-The KYC User Profile system had a natural, normalized design. Clean and elegant.
+The KYC User Profile system had a natural, normalized design. Clean and elegant!
 
 ``` sql
 -- Users: core identity
@@ -63,7 +63,7 @@ CREATE TABLE accounts (
 );
 ```
 
-And here is your query for User Detail API which is equally elegant:
+And here is the query for User Detail API which is equally elegant:
 ``` sql
 SELECT u.*, k.status, k.verified_at, k.doc_type,
        a.account_id, a.account_type, a.account_no, a.balance
@@ -73,16 +73,18 @@ JOIN   accounts a    ON a.user_id = u.user_id
 WHERE  u.user_id = :userId;
 ```
 
-This works for 100 users, 100,000 users. But beyond certain million no. of users, API starts showing signs of latency degradation - and thats because **database joins are worst enemies of Scale**
+This works for 100 users, 100,000 users. But beyond certain million no. of users, API starts showing signs of latency degradation - and thats because **database joins are worst enemies of scale**
 
 # Why Joins Become Your Worst Enemy at Scale
 A database JOIN is not a free operations. For a point lookup on a single _user\_id_ across three tables, with proper indexes, you're looking at **3 B-tree** traversals plus result merging. 
-At low concurrency: fine.
+
+At low concurrency this seems fine.
+
 But at 10 million requests per day (roughly 115 RPS average, with peaks easily hitting 500-1000 RPS), every millisecond of database CPU matters.
 
 ## The hidden cost of JOINs at scale
-1. **Lock contention across tables :** When a KYC update happens the kyc_records table takes a row-level write lock. Concurrent reads doing a JOIN that touches that row wait
-2. **Buffer contention :** When the working set of data your queries need is larger than the buffer can hold - pages are being loaded, evicted, and reloaded in a continuous cycle
+1. **Lock contention across tables :** When a KYC update happens, the _kyc\_records_ table takes a row-level write lock. Concurrent reads doing a JOIN that touches that row wait
+2. **Buffer contention :** When the working set of data, your queries need is larger than the DB buffer size - pages are being loaded, evicted, and reloaded in a continuous cycle
 3. **Query plan instability :** This may be due to frequent changes in your DB object _statistics_
 4. **The N+1 ORM problem :** The "elegant" JOIN becomes N+1 fetches when the ORM decides to lazily load accounts
 
@@ -91,9 +93,9 @@ The normalized schema is correct for writes. Normalization avoids update anomali
 
 It is wrong as the primary read model at scale!
 
-Hence the proposal to shift to [CQRS — Command Query Responsibility Segregation]().
+Hence the proposal to shift to [CQRS — Command Query Responsibility Segregation](https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation).
 
-Writes still go to the normalized source-of-truth schema. But reads get their own optimized data stores 
+Writes still go to the normalized source-of-truth schema. But reads get their own optimized data stores. 
 
 For this system, two read models are required:
 1. **Read Model 1: User Summary Store**
@@ -129,5 +131,5 @@ A covering index stores the additional columns you need directly inside the inde
 The data model is sorted. But the listing API still has a major performance / scalability issue that most teams won't find until they're in production. Stay tuned for [Part - 3]()
 
 # Architect's Note
-Three-table JOIN, proper indexes, clean normalization. Correct on day one. But by year two we start seeing latency degradations.
-Fundamentally speaking - the gap between a schema that works and a schema that scales is always access pattern analysis. That's not taught in SQL courses. It's learned by making hands dirty during production incidents.
+Three-table JOIN, proper indexes, clean normalization - Correct on day one. But by year two we start seeing latency degradations.
+Fundamentally speaking - the gap between a schema that works and a schema that scales is always access pattern analysis. That's not taught in SQL courses. It's learnt by making hands dirty while triaging and fixing production incidents.
