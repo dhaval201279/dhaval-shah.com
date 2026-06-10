@@ -2,7 +2,7 @@
 title: Billion User Trap - The Database Design That Looked Perfect on Day One
 author: Dhaval Shah
 type: post
-date: 2026-06-09T02:00:50+00:00
+date: 2026-06-13T02:00:50+00:00
 url: /billion-user-trap-db-design/
 categories:
   - architecture
@@ -19,12 +19,12 @@ thumbnail: "images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
-In the first part we established the foundational principle that separates systems which survive scale from systems that collapse under it - **_design for access patterns, not for entities_**. 
+In the [first part](https://www.dhaval-shah.com/billion-user-trap-2-simple-apis/) we established the foundational principle that separates systems which survive scale from systems that collapse under it - **_design for access patterns, not for entities_**. 
 
 In this second part we double click on the database design of the User Profile system and try to understand its impact from performance engineering and scalability standpoint. Specifically - why the schema that adheres to proper normalization, proper foreign keys, and proper indexes, becomes a latency problem.
 
 # Every Architecture Diagram Is Pristine Before the First 100 Million Rows
-Show me an ER diagram from a planning session and I'll show you something that may cause a production incident when your platform scales. Not because engineers are bad at design. Because the diagram was designed for the data they had or had to be persisted. Not the data they'd get and would be getting accessed.
+Show me an ER diagram from a planning session and I'll show you something that may cause a production incident when your platform scales. Not because engineers are bad at design. Because the diagram was designed for the data they had or had to persist. Not the data they'd get and would be getting accessed.
 
 The KYC User Profile system had a natural, normalized design. Clean and elegant!
 
@@ -75,10 +75,10 @@ JOIN   accounts a    ON a.user_id = u.user_id
 WHERE  u.user_id = :userId;
 ```
 
-This works for 100 users, 100,000 users. But beyond certain million no. of users, API starts showing signs of latency degradation - and thats because **database joins are worst enemies of scale**
+This works for 100 users, 100,000 users. But beyond certain million no. of users, API starts showing signs of latency degradation - and that's because **database joins are worst enemies of scale**
 
 # Why Joins Become Your Worst Enemy at Scale
-A database JOIN is not a free operations. For a point lookup on a single _user\_id_ across three tables, with proper indexes, you're looking at **3 B-tree** traversals plus result merging. 
+A database JOIN is not a free operation. For a point lookup on a single _user\_id_ across three tables, with proper indexes, you're looking at **3 B-tree** traversals plus result merging. 
 
 At low concurrency this seems fine.
 
@@ -108,7 +108,7 @@ Optimized for the detail API. Contains the full denormalized user record: KYC fi
 With CQRS, the operational complexity here is real: you now have two representations of the same data. They must stay consistent. That consistency mechanism is part of this series.
 
 # The Indexes That Actually Matter
-Indexes are one  of the most common hotspot as far as DB performance is concerned.
+Indexes are one  of the most common hotspots as far as DB performance is concerned.
 
 The indexes most teams create 
 ``` sql
@@ -119,7 +119,7 @@ CREATE INDEX idx_accounts_user_id ON accounts(user_id);
 
 Standard Indexes are sub optimal for listing API query at scale because query using standard index requires 2 steps -
   1. **Index Scan -** B-tree traversal to find the row identifier that matches WHERE clause
-  2. **Heap Fetch -** For each row identifier found, DB goes to the heap and fetch the full row 
+  2. **Heap Fetch -** For each row identifier found, DB goes to the heap and fetches the full row 
 
 What you actually need
 ``` sql
