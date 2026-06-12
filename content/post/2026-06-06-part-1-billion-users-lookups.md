@@ -124,4 +124,4 @@ These two patterns drive every decision in this series. Database design, Cache t
 
 # What Comes Next
 
-In [Part 2](), we look at the database design - the normalized schema with elegant joins - and exactly where it breaks down before you hit 100 million users.
+In [Part 2](https://www.dhaval-shah.com/billion-user-trap-db-design), we look at the database design - the normalized schema with elegant joins - and exactly where it breaks down before you hit 100 million users.
