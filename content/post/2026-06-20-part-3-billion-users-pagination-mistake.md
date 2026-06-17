@@ -1,8 +1,8 @@
 ---
-title: Billion User Trap - The Database Design That Looked Perfect on Day One
+title: Billion User Trap - The Pagination Mistake That Can Take Down Your Database
 author: Dhaval Shah
 type: post
-date: 2026-06-16T02:00:50+00:00
+date: 2026-06-22T02:00:50+00:00
 url: /billion-user-trap-db-design/
 categories:
   - architecture
@@ -19,6 +19,90 @@ thumbnail: "images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
+
+# The Query That Kills Production
+
+It's one line of SQL. It is the default behavior in most ORMs.
+
+And at scale, it silently destroys database performance.
+
+```sql
+SELECT user_id, full_name, kyc_status
+FROM   users
+ORDER  BY created_at DESC
+LIMIT  50 OFFSET 5000000;
+```
+
+This is **offset-based pagination**. It works correctly. And it will become your worst problem once your user table crosses tens of millions of rows.
+
+---
+
+# What OFFSET Actually Does
+
+Here's what most engineers believe **_OFFSET_** does:
+
+> "Skip to the 5 millionth record and return the next 50."
+
+Here's what the database actually does:
+
+> "Scan and load the first **5,000,050** rows. Discard the first 5,000,000. Return the last 50."
+
+And that too - **EVERY TIME**
+
+The database must traverse every row before the offset to reach the rows you want. The deeper the page, the more work. **The more concurrent users paginating, the more overlapping full-scans running simultaneously.**
+
+---
+
+# The Performance Profile of OFFSET at Scale
+
+On a 200M row users table (PostgreSQL, SSD-backed, well-tuned):
+
+| Page Number (50 records/page) | OFFSET Value | Approx. Query Time (P99) |
+|---|---|---|
+| Page 1 | 0 | 4ms |
+| Page 100 | 4,950 | 6ms |
+| Page 1,000 | 49,950 | 18ms |
+| Page 10,000 | 499,950 | 140ms |
+| Page 100,000 | 4,999,950 | 1,800ms |
+
+What happens while OFFSET query runs - It holds buffer pool pages and I/O bandwidth that your real-time user queries also need.
+
+---
+
+# Cursor-Based Pagination: The Fix That Actually Works
+
+The correct approach is **keyset pagination** (also called **_cursor-based pagination_**).
+
+> Instead of "give me page N," you ask: "give me 50 records that come after this specific record."
+
+```sql
+-- First page (no cursor)
+SELECT user_id, full_name, kyc_status, created_at
+FROM   users
+WHERE  region = 'NA'
+ORDER  BY created_at DESC, user_id DESC
+LIMIT  50;
+
+-- Subsequent pages (cursor = last record from previous page)
+SELECT user_id, full_name, kyc_status, created_at
+FROM   users
+WHERE  region = 'NA'
+  AND  (created_at, user_id) < (:lastCreatedAt, :lastUserId)
+ORDER  BY created_at DESC, user_id DESC
+LIMIT  50;
+```
+
+What changed:
+
+1. No OFFSET - the WHERE clause positions the query directly in the index
+2. The database uses the index to jump to the exact start position
+3. Reads exactly 50 rows. Not 5,000,050.
+4. Query time is **O(1)** with respect to page depth - **page 100,000 is exactly as fast as page 1**
+
+The same query at page 100,000 now runs in **4ms** instead of **1,800ms**. Not 10% faster. 450X faster.
+
+---
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 In the [first part](https://www.dhaval-shah.com/billion-user-trap-2-simple-apis/) we established the foundational principle that separates systems which survive scale from systems that collapse under it - **_design for access patterns, not for entities_**. 
 
 In this second part we double click on the database design of the User Profile system and try to understand its impact from performance engineering and scalability standpoint. Specifically - why the schema that adheres to proper normalization, proper foreign keys, and proper indexes, becomes a latency problem.
