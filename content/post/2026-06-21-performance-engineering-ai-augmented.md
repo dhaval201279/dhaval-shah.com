@@ -1,5 +1,5 @@
 ---
-title: "The GC Summary Chart Wasn't Wrong. It Just Wasn't the Whole Answer."
+title: "The GC Summary Report Wasn't Wrong - It Just Wasn't Complete"
 author: Dhaval Shah
 type: post
 date: 2026-06-21T02:00:50+00:00
