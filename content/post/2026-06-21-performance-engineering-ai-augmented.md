@@ -108,7 +108,7 @@ There's no settling point anywhere in this run. Old Gen climbs from 4M to 4,212M
 That's the part the summary chart doesn't show you. JDK isn't finishing faster because it's collecting garbage more efficiently. It's finishing faster because it keeps retaining objects in Old Gen and deferring the cost of cleaning them up. The pause time numbers in the summary table are real, but they're not the full cost of what's happening on the heap - they're the cost paid so far, up to the point where the benchmark happened to stop.
 
 
-# 4. Why this matters beyond a one-shot benchmark
+# 4. Why this matters beyond a single shot benchmark
 
 500,000 objects, processed once, start to finish, in 32.5 seconds - that's a finite batch job. It has a clean exit. The moment the last object is processed, the JVM shuts down and whatever was sitting in Old Gen never has to be dealt with.
 
@@ -150,4 +150,4 @@ What it can't tell you is whether the heap behind those numbers ever reached a s
 
 For this specific comparison: JDK finishes faster, and that finding stands. But it gets there by allowing Old Gen grow without a plateau for the entire run, while Spring Reactor reaches a steady state within the first 3 collections and stays there for the remaining 47. Whether that trade-off is acceptable depends entirely on your use case and workload - whether you're running this once or running it forever.
 
-P.S. - The full prompt used for this analysis are available in my [se-ai-templates](https://github.com/dhaval201279/se-ai-template/blob/main/performance-engineering/templates/01-gc-detailed-comparison.md) repository on GitHub.
+P.S. - The full prompt used for this analysis is available in my [se-ai-templates](https://github.com/dhaval201279/se-ai-template/blob/main/performance-engineering/templates/01-gc-detailed-comparison.md) repository on GitHub.
