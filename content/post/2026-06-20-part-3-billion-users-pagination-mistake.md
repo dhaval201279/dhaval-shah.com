@@ -2,7 +2,7 @@
 title: Billion User Trap - The Pagination Mistake That Can Take Down Your Database
 author: Dhaval Shah
 type: post
-date: 2026-06-29T02:00:50+00:00
+date: 2026-06-27T02:00:50+00:00
 url: /billion-user-pagination-db-design/
 categories:
   - architecture
