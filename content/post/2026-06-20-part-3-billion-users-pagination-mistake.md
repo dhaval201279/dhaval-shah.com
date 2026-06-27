@@ -2,8 +2,8 @@
 title: Billion User Trap - The Pagination Mistake That Can Take Down Your Database
 author: Dhaval Shah
 type: post
-date: 2026-06-23T02:00:50+00:00
-url: /billion-user-trap-db-design/
+date: 2026-06-29T02:00:50+00:00
+url: /billion-user-pagination-db-design/
 categories:
   - architecture
   - distributed-systems
@@ -12,19 +12,20 @@ tags:
   - architecture
   - distributed-systems
   - database-optimization
-thumbnail: "images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-2.png"
+thumbnail: "images/wp-content/uploads/2026/06/1-billion-user-kyc-pagination-db-design-part-3.png"
 ---
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-2.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/06/1-billion-user-kyc-db-design-part-2.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/06/1-billion-user-kyc-pagination-db-design-part-3.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/06/1-billion-user-kyc-pagination-db-design-part-3.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
+In [Part 1](https://www.dhaval-shah.com/billion-user-trap-2-simple-apis/), we established that **access patterns** & not entities should drive your design. In [Part 2](https://www.dhaval-shah.com/billion-user-trap-db-design/), we fixed the database by replacing brittle three-table JOINs with a covering index, reducing P99 on the listing query. The schema was right. The index was right. The listing API itself was fast.
+And then it quietly started taking the database down - not because of a bad query, but because of how that fast query was being **paginated**.
 
 # The Query That Kills Production
-
 It's one line of SQL. It is the default behavior in most ORMs.
 
-And at scale, it silently destroys database performance.
+And at scale, it silently impacts database performance.
 
 ```sql
 SELECT user_id, full_name, kyc_status
@@ -73,7 +74,7 @@ What happens while OFFSET query runs - It holds **buffer pool pages** and **I/O 
 
 The correct approach is **keyset pagination** (also called **_cursor-based pagination_**).
 
-> Instead of "give me page N," you ask: "give me 50 records that come after this specific record."
+> Instead of "give me page N," you ask: "give me 50 records that come after a specific record."
 
 ```sql
 -- First page (no cursor)
@@ -97,19 +98,19 @@ What changed:
 1. No OFFSET - the WHERE clause positions the query directly in the index
 2. The database uses the index to jump to the exact start position
 3. Reads exactly 50 rows. Not 5,000,050.
-4. Query time is **O(1)** with respect to page depth - **page 100,000 is exactly as fast as page 1**
+4. Query time is **_O(1)_** with respect to page depth - **page 100,000 is exactly as fast as page 1**
 
 The same query at page 100,000 now runs in **4ms** instead of **1,800ms**. Not 10% faster. 450X faster.
 
 ---
 
 ## Implementing the Cursor Token
-Exposing raw timestamps and IDs as cursor values, leaks your schema. But the more common mistake is treating obfuscation (i.e. Base 64 encoding) as if it were security.
+Exposing raw timestamps and IDs as cursor values, leaks your schema. Most common mistake I have seen is considering Base 64 encoding as a security mechanism that will safeguard your application from leaking schema.
 
 The correct cursor design addresses this security problem, and ties the payload structure directly to the index that serves it.
 
 ### Step-1 : The payload mirrors the index
-The cursor payload is not an arbitrary bag of fields - it must contain exactly the columns in the same order as the index that powers the query. Recall the covering index from [Part 2]() :
+The cursor payload is not an arbitrary bag of fields - it must contain exactly the columns in the same order as the index that powers the query. Recall the covering index from [Part 2](https://www.dhaval-shah.com/billion-user-trap-db-design/) :
 
 ``` sql
   CREATE INDEX idx_user_summary ON users(region, created_at DESC, user_id)
@@ -216,14 +217,6 @@ Cursor pagination shown here as part of my solution to the problem statement com
 2. Total count - accurate total requires a COUNT(*) which is itself expensive at scale
 3. Bidirectional browsing - **reverse cursors are possible but with some additional complexity**
 
-# What Comes Next
-Pagination is stable. The database is no longer under unnecessary load from deep scans :)
-
-Now we add caching - to make our lookups faster!
-
-And discover that the Redis deployment that was supposed to solve the latency problem... made one particular problem significantly worse :(
-
 # Architect's Note
-OFFSET-based pagination is one of the most common database performance mistake I have seen in platforms that have grown beyond their original design assumptions. It ships silently, runs fine for years, and then quietly starts eating database capacity as the volume of data grows.
-If your platform's user listing or any "search and scroll" feature uses OFFSET under the hood - it's worth auditing before scale forces the conversation.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OFFSET-based pagination is one of the most common database performance mistake I have seen in platforms that creep in due to original design assumptions. It runs fine for initial years, and then quietly starts eating database capacity as the volume of data grows.
+If your platform's user listing or any **"search and scroll"** feature uses OFFSET under the hood - it's worth auditing before scale forces the issue.
