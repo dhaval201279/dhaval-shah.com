@@ -243,11 +243,4 @@ The Oracle post-mortem from previous week and this Postgres example are not the 
 
 What's consistent across both databases is the underlying lesson. A storage format that looks flexible and harmless at low row counts can hide real query cost that only shows up at scale - and the only way to know which fix would actually work is to read the real plan, and not assume from the table schema what the database is doing underneath it.
 
-P.S. - the full prompt template and both worked examples are available in the
-[se-ai-templates](https://github.com/dhaval201279/se-ai-templates/tree/main/database)
-repository on GitHub.
-
----
----
-
-P.S. - The full prompt used for this analysis is available in my [se-ai-templates](https://github.com/dhaval201279/se-ai-template/blob/main/performance-engineering/templates/01-gc-detailed-comparison.md) repository on GitHub.
+The full prompt used for this analysis is available in my [se-ai-templates](https://github.com/dhaval201279/se-ai-template/blob/main/database/templates/01-postgres-query-plan-forensics.md) repository on GitHub.
