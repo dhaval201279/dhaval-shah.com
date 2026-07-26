@@ -1,5 +1,5 @@
 ---
-title: "A Black Friday Incident Took 9 Days to Resolve. Here's the Process That Would Have Changed That."
+title: "A Black Friday Incident Took 9 Days to Resolve - Here's the Process That Would Have Changed That"
 author: Dhaval Shah
 type: post
 date: 2026-07-25T01:00:50+00:00
