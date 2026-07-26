@@ -2,8 +2,8 @@
 title: "A Black Friday Incident Took 9 Days to Resolve. Here's the Process That Would Have Changed That."
 author: Dhaval Shah
 type: post
-date: 2026-07-19T01:00:50+00:00
-url: /sre-ai-review/
+date: 2026-07-25T01:00:50+00:00
+url: /sre-gc-ai-review/
 categories:
   - performance-engineering
   - sre
@@ -12,14 +12,14 @@ tags:
   - performance-engineering
   - sre
   - ai-augmented-se
-thumbnail: "images/wp-content/uploads/2026/07/sre-ai-review.png"
+thumbnail: "images/wp-content/uploads/2026/07/sre-gc-ai-review.png"
 ---
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/07/sre-ai-review.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/07/sre-ai-review.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/07/sre-gc-ai-review.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/07/sre-gc-ai-review.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 # Background
-[An older post on this blog](https://www.dhaval-shah.com/understanding-and-optimizing-garbage-collection/) covered the technical detail of this incident - the GC types, the flags, the before-and-after metrics. This post covers something different: the *process* of how the investigation actually ran, where it lost time, and which decisions (with more structured approach) would have changed.
+[An older post on this blog](https://www.dhaval-shah.com/understanding-and-optimizing-garbage-collection/) covered the technical details of this incident - the GC types, the flags, the before-and-after metrics. This post covers something different: the *process* of how the investigation ran, where it lost time, and which decisions (with more structured approach) would have changed.
 
 ## The incident
 On Black Friday, an online checkout platform running at over 1000 TPS. **CPU spiking to 100%, application crashing**. Restarted every 12 hours to keep the business running while the team investigated. GC logs requested reactively from the ops team after the incident had already started.
@@ -27,16 +27,16 @@ On Black Friday, an online checkout platform running at over 1000 TPS. **CPU spi
 ## Total investigation time
 Roughly 9 days across two phases :
 1. Phase 1 - Identifying the GC algorithm as the problem and applying what looked like a fix - took 5 to 6
-days. 
-Phase 2 — Realising the fix was incomplete and tuning the right parameters - took another 3 to 4 days.
+days.
+2. Phase 2 — Realising the fix was incomplete and tuning the right parameters - took another 3 to 4 days.
 
-Neither of those timelines reflects lack of engineering skill. They reflect a process that didn't ask the right questions at the right moments. That's a different kind of problem, and it's worth examining in this world of AI.
+Neither of those timelines reflect lack of engineering skill. They reflect a process that didn't ask the right questions at the right moments. That's a different kind of problem, and it's worth examining in this world of AI.
 
 # What the investigation actually looked like
 
 **Day 1:** CPU at 100% correlated with GC activity on Dynatrace. App crashes. Decision made to restart every 12 hours rather than leave it degraded. GC logs requested from the ops team.
 
-**Days 2-5:** GC logs analysed. Application running on Parallel GC - the default for JDK 8. High allocation failure rate (~90%). Investigation concluded: the GC algorithm is the problem; CMS is better suited for a latency-sensitive. This conclusion was correct.
+**Days 2-5:** GC logs analyzed. Application running on Parallel GC - the default for JDK 8. High allocation failure rate (~90%). Investigation concluded: the GC algorithm is the problem; CMS is better suited for latency-sensitive applications. This conclusion was correct.
 
 **Days 5-6:** CMS deployed to lower environment. Results looked good:
 - 50% reduction in allocation failures
@@ -46,7 +46,7 @@ Decision made to push to production.
 
 **Day 6, production:** CMS in production showed a 17-second max GC pause. Old Generation fully occupied. The application was behaving worse than it had under Parallel GC in some respects, despite the lower environment showing clear improvement.
 
-**Days 7-9:** Back to analysis. Research into CMS-specific JVM flags across documentation and technical blogs. Three parameters identified and applied:
+**Days 7-9:** Back to analysis. Research into CMS-specific JVM flags across documentation and technical blogs. Three parameters identified and applied after multiple runs:
 - `UseCMSInitiatingOccupancyOnly=true`
 - `CMSInitiatingOccupancyFraction=70`
 - `ParallelGCThreads=8`
@@ -71,7 +71,7 @@ CMS showed a 17-second max pause in production because of how CMS triggers its O
 
 The lower environment result - **50% improvement in allocation failures**, **84% improvement in max pause** - was real. It just wasn't measuring the right thing under the right conditions. Nobody asked: "Under what heap occupancy level does this fix break? Does our lower environment reach that occupancy level?"
 
-That question wasn't obvious to ask in the moment. It's the kind of question that belongs on a checklist before any fix goes from staging to production.
+That question wasn't obvious to ask in that moment. It's the kind of question that belongs on a checklist before any fix goes from staging to production.
 
 **Point 3 — the parameter value was borrowed, not derived.**
 
@@ -87,7 +87,7 @@ Each of these maps to a point in the investigation where the right question woul
 
 **At hour 1 — before choosing a fix:**
 
-*"What does CPU-correlated-with-GC tell us about which specific GC phase is consuming CPU — and does that tell us whether the problem is the algorithm choice, the heap configuration, or the application's allocation behaviour?"*
+*"What does CPU-correlated-with-GC tell us about which specific GC phase is consuming CPU — and does that tell us whether the problem is the algorithm choice, the heap configuration, or the application's allocation behavior?"*
 
 This question separates **"GC is using CPU"** (which CMS could help) from **"GC is using CPU because the heap is too small for this workload"** (which CMS alone wouldn't fix — and didn't, initially).
 
@@ -119,7 +119,7 @@ The third question shortens the remaining parameter search to a principled start
 
 GC log analysis still requires human judgment. The right value of `CMSInitiatingOccupancyFraction` for this specific application isn't something any external process can calculate without the production GC log data. The structured questions point you toward the calculation; they don't replace it.
 
-More importantly: a structured process doesn't replace reactive instrumentation with proactive instrumentation. The GC logs in this incident were requested on day 1 after the incident started. A structured incident response *runbook* that specifies "GC logs must be pre-enabled in production before any major traffic event" would have saved at least one day of log collection time. That's an operational process change, not a question-asking change.
+More importantly: a structured process doesn't replace reactive instrumentation with proactive instrumentation. The GC logs in this incident were requested on day 1 after the incident started. A structured incident response *runbook* that specifies "GC logs must be pre-enabled in production before any major traffic event" would have saved at least half a day of log collection time. That's an operational process change, not a question-asking change.
 
 The full prompt templates for all three decision points - the hour-1 symptom analysis, the pre-production fix validation, and the parameter derivation prompt - are in the GitHub repo below.
 
@@ -131,9 +131,5 @@ The first fix was architecturally correct and operationally incomplete. That's a
 
 The structured questions above don't guarantee a faster resolution. They do guarantee that the investigation doesn't advance past "the fix passed staging" before asking whether staging was actually testing the right thing.
 
-P.S. — The three prompt templates used across this analysis - the hour-1 symptom correlator, the fix validation checklist, and the GC parameter derivation prompt - are available in the [se-ai-templates](https://github.com/dhaval201279/se-ai-templates/tree/main/sre)
+P.S. — The three prompt templates used across this analysis - the hour-1 symptom correlator, the fix validation checklist, and the GC parameter derivation prompt - are available in the [se-ai-templates](https://github.com/dhaval201279/se-ai-template/tree/main/sre/templates/gc)
 repository on GitHub.
-
-
-
-The full prompt used for this analysis is available in my [se-ai-templates](https://github.com/dhaval201279/se-ai-template/blob/main/database/templates/01-postgres-query-plan-forensics.md) repository on GitHub.
