@@ -11,6 +11,6 @@
   url: "https://www.facebook.com/dhaval201279"
 # - item: "instagram"
 # url: "https://instagram.com/#"
-#- item: "rss"
-#  url: "index.xml"
+- item: "rss"
+  url: "index.xml"
 #  internal:  true
