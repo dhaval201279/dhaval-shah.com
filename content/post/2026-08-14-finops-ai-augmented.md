@@ -2,7 +2,7 @@
 title: "Three Azure Cost Leaks - And the Analysis Process That Found Them"
 author: Dhaval Shah
 type: post
-date: 2026-08-14T01:00:50+00:00
+date: 2026-08-13T01:00:50+00:00
 url: /finops-azure-ai-review/
 categories:
   - finops
