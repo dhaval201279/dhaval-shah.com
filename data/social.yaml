@@ -12,5 +12,5 @@
 # - item: "instagram"
 # url: "https://instagram.com/#"
 - item: "rss"
-  url: "index.xml"
+  url: "https://www.dhaval-shah.com/index.xml"
 #  internal:  true
