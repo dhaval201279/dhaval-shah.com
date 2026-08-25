@@ -1,7 +1,7 @@
 +++
 title = "About"
 description = "Dhaval Shah"
-date = "2026-04-06"
+date = "2026-06-06"
 aliases = ["about-us", "about-hugo", "contact"]
 author = "Dhaval"
 toc = false
