@@ -2,7 +2,7 @@
 title: "The Architect's Dilemma: Validating a Vibe-Coded MVP for Regulated Industries"
 author: Dhaval Shah
 type: post
-date: 2026-08-20T01:00:50+00:00
+date: 2026-08-26T01:00:50+00:00
 url: /architecture-review-supabase/
 categories:
   - architecture
