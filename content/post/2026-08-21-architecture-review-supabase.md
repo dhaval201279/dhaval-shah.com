@@ -124,7 +124,7 @@ When I validate an architecture for products pertaining to regulated industries,
 
 **The Risk:** NIST 800-171 requires continuous monitoring. NIS2 mandates 24-hour incident reporting. IAEA standards require audit trails for safety system performance. GDPR requires breach detection. Supabase doesn't provide these capabilities natively.
 
-**The client's proposed mitigation:** *"We'll use Log Drains to ship logs to our own SIEM."*
+**The client's proposed mitigation:** *"We'll use Log Drains to push logs to S3"*
 
 **Brutal Truth:** Supabase Cloud is developer‑friendly but observability‑weak. For regulated workloads, it is non‑compliant out of the box. Log Drains are a partial fix, but they only address retention. You must build tracing, metrics, alerting, and compliance monitoring yourself - at significant cost and complexity.
 
@@ -184,7 +184,7 @@ If you have more than two red flags, the architecture is not production-ready fo
 
 I told the client:
 
-> *"This architecture is suitable for a prototype or an internal demo. It is not suitable for production in defence, nuclear, or sovereign data environments. The eight dimensions I've outlined are not negotiable — they are the minimum bar for regulated production. Self-hosting Supabase doesn't lower the bar; it just moves the work to your team. If you don't have a platform engineering organization, you're not ready to self-host. And if you don't have an architect reviewing this, you're not ready to launch."*
+> *"This architecture is suitable for a prototype or an internal demo. It is not suitable for production in defence, nuclear, or sovereign data environments. The seven dimensions I've outlined are not negotiable — they are the minimum bar for regulated production. Self-hosting Supabase doesn't lower the bar; it just moves the work to your team. If you don't have a platform engineering organization, you're not ready to self-host. And if you don't have an architect reviewing this, you're not ready to launch."*
 
 The client didn't want to hear this. They had invested eight weeks and significant budget. The demos were beautiful. The team was proud. Leadership had promised a launch date to the board.
 
