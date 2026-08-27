@@ -194,7 +194,7 @@ But here's the thing about architecture:
 The legacy system is bit ugly, slow, and outdated. But it has survived because an architect, twenty years ago, made boring choices that prioritized compliance over convenience, maintainability over bleeding edge technology, and safety over speed.
 
 
-# Further Reading
+# References
 
 - [NIST SP 800-171 Rev. 2 — Protecting Controlled Unclassified Information](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final)
 - [IAEA Safety Standards Series — Software for Computer Based Systems Important to Safety in NPPs](https://www.iaea.org/publications/6019/software-for-computer-based-systems-important-to-safety-in-nuclear-power-plants)
