@@ -1,5 +1,5 @@
 ---
-title: "The 280-Millisecond Lie: How Ready Pods Were Quietly Costing a Fintech Client"
+title: "The 280-Millisecond Lie: How Ready Pods Were Quietly Costing a FinTech Client"
 author: Dhaval Shah
 type: post
 date: 2026-09-05T01:00:50+00:00
