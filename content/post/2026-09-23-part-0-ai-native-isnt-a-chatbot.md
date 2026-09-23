@@ -1,5 +1,5 @@
 ---
-title: "The Latency Lie: How Ready Pods Were Quietly Costing a FinTech"
+title: "Part 0 - The Dispute That No Rule Could Catch: What AI-Native Really Means in Enterprise Java"
 author: Dhaval Shah
 type: post
 date: 2026-09-23T01:00:50+00:00
@@ -95,7 +95,7 @@ For some work, that assumption is right. If you're training models, running expe
 
 # Why does first part start with no AI in it
 
-The code for this part is on GitHub at the `part-01` tag. It contains no LLM, no prompt and no agent. That's deliberate.
+The code for this part is on GitHub at the `part-00` tag. It contains no LLM, no prompt and no agent. That's deliberate.
 
 Part 1 builds Meridian Bank's **existing** dispute system: the deterministic "before" picture. It's a Spring Boot 4 service with a REST API, PostgreSQL, and every business rule a dispute has to pass:
 
