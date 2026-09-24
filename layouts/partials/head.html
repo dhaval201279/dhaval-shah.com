@@ -26,11 +26,16 @@
 <script>
   mermaid.initialize({ startOnLoad: false });
   window.addEventListener('load', function () {
-    document.querySelectorAll('code.language-mermaid').forEach(function (code) {
-      code.querySelectorAll('.ln, .lnt').forEach(function (ln) { ln.remove(); });
+    // Hugo 0.78 relabels unknown fence languages (e.g. mermaid) as "fallback" when guessSyntax is on
+    var MERMAID_START = /^\s*(flowchart|graph|sequenceDiagram|classDiagram|stateDiagram(-v2)?|erDiagram|gantt|pie|journey|gitGraph|mindmap|timeline|quadrantChart)\b/;
+    document.querySelectorAll('code.language-mermaid, code.language-fallback').forEach(function (code) {
+      var clone = code.cloneNode(true);
+      clone.querySelectorAll('.ln, .lnt').forEach(function (ln) { ln.remove(); });
+      var source = clone.textContent;
+      if (!MERMAID_START.test(source)) return;
       var pre = document.createElement('pre');
       pre.className = 'mermaid';
-      pre.textContent = code.textContent;
+      pre.textContent = source;
       var block = code.closest('.highlight_wrap') || code.closest('.highlight') || code.closest('pre');
       block.replaceWith(pre);
     });
