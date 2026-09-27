@@ -2,7 +2,7 @@
 title: "Part 1 - Multiple Runs - Why Deterministic Thinking Breaks!"
 author: Dhaval Shah
 type: post
-date: 2026-09-26T01:00:50+00:00
+date: 2026-09-26T02:00:50+00:00
 url: /part-1-ai-native-multiple-runs/
 categories:
   - java
@@ -14,10 +14,10 @@ tags:
   - spring-ai
   - ai-agents
   - architecture
-thumbnail: "images/wp-content/uploads/2026/09/part-0-ai-native-sys-java.png"
+thumbnail: "images/wp-content/uploads/2026/09/part-1-ai-native-deterministic-thinking.png"
 ---
 
-[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/09/part-0-ai-native-sys-java.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/09/part-0-ai-native-sys-java.png)
+[![](https://www.dhaval-shah.com/images/wp-content/uploads/2026/09/part-1-ai-native-deterministic-thinking.png)](https://www.dhaval-shah.com/images/wp-content/uploads/2026/09/part-1-ai-native-deterministic-thinking.png)
 -----------------------------------------------------------------------------------------------------------------------------------------
 # Background
 In [Part 0](https://www.dhaval-shah.com/part-0-ai-native-sys-java/) we built the system that Meridian Bank already has as an existing banking system: a **_REST API_** over **_PostgreSQL_** that applies every dispute rule exactly, every time. **Run the same request twice, get the same answer twice.** That property of building **deterministic systems and testing** them out comes very naturally to us!
