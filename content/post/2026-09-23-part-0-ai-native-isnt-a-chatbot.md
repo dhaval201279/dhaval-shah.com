@@ -40,6 +40,7 @@ So far the banking and finance industry has tried solving this by making those h
 
 Getting that right, in a regulated system where a wrong action moves real money, is an architecture problem. That's what this series 
 > **Architecting and Implementing AI-Native Enterprise Systems in Java**
+
 is going to cover.
 
 # What exactly "AI-native" means (and what it doesn't)
@@ -95,7 +96,8 @@ For some work, that assumption is right. If you're training models, running expe
 
 # Why does first part start with no AI in it
 
-The code for this part is on GitHub at the `part-00` tag. It contains no LLM, no prompt and no agent. That's deliberate.
+The code for this part is on [GitHub](https://github.com/dhaval201279/dispute-service/releases/tag/part-00) at the `part-00` tag. 
+**Disclaimer - It contains no LLM, no prompt and no agent.**
 
 Part 1 builds Meridian Bank's **existing** dispute system: the deterministic "before" picture. It's a Spring Boot 4 service with a REST API, PostgreSQL, and every business rule a dispute has to pass:
 
