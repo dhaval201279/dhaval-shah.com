@@ -1,8 +1,8 @@
 ---
-title: "Part 1 - Multiple Runs - Why Deterministic Thinking Breaks!"
+title: "Part 1 - Multiple Runs : Why Deterministic Thinking Breaks!"
 author: Dhaval Shah
 type: post
-date: 2026-09-26T02:00:50+00:00
+date: 2026-09-30T02:00:50+00:00
 url: /part-1-ai-native-multiple-runs/
 categories:
   - java
