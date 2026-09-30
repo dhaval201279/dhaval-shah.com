@@ -59,10 +59,10 @@ The ten fixtures are written the way people actually write:
 | C9 | "i cancelled my subscription and they charged me again, its basically fraud" | DR-107 |
 | C10 | "my flight was cancelled by the airline months ago and i still havent got my money back" | DR-104 |
 
-Three complaind ids deserve attention -
+Three complain ids deserve attention -
 1. **C5 is Meera's complaint from Part 0 :** The correct answer is UNKNOWN. She isn't denying the purchase; she can't place the merchant name. You cannot tell those apart from the text alone - you need to look up the transaction first. Classifying this as fraud is the exact failure Part 0 opened with.
 
-2. **C7 is deliberately hopeless :** "There's a wrong charge, please help" could be any of the four. The only correct behaviour is to ask a follow-up question.
+2. **C7 is deliberately hopeless :** "There's a wrong charge, please help" could be any of the four. The only correct behavior is to ask a follow-up question.
 
 3. **C9 contains a trap :** The cardholder says "basically fraud", but describes a cancelled subscription. The model has to classify what happened, not the label the customer reached for. Most humans get this wrong too, which is why intake teams are trained on it.
 
@@ -152,7 +152,7 @@ The aggregation is plain arithmetic in `VarianceReport`, which means it's unit-t
         -Dspring-boot.run.arguments=--experiment.runs=20
 ```
 
-Ten complaints × 20 runs × 2 temperatures × 2 modes is 800 calls, so start with `--experiment.runs=5` while you're adjusting prompts. Results land in `target/variance.csv`.
+Ten complaints × 20 runs × 2 temperatures × 2 modes is 800 calls, so start with `--experiment.runs=5` while you're evaluating and adjusting your prompts. Results are captured at `target/variance.csv`.
 
 Your numbers will not match mine exactly! Different model version, different day, possibly different answers - which is, after all, the thesis.
 
@@ -206,7 +206,7 @@ Model: **Groq - openai/gpt-oss-20b**. 10 complaints × 2 temperatures × 2 modes
 **Overall accuracy 86%.** Bounded 90%, unbounded 83%.
 Every case where the same input produced two different answers occurred at temperature 0.7.
 
-3 things to look for when you read your own table. I'd expect all four, but check rather than assume.
+3 things to look for when you read your own table. I'd expect all 3, but check rather than assume.
 
 **1. The unambiguous cases are boring, and that's the finding :** C1, C2, C3 and C4 describe exactly one thing. They are highly stable and accurate in both the modes. If a model can't handle them, nothing that follows matters.
 
@@ -220,13 +220,13 @@ This in a way tell us - there is a major shift in how non-deterministic systems 
 
 You cannot write `assertEquals(DR_101, classify(complaint))` and call it a test. Not because the model is bad, but because a single run tells you nothing. Pass or fail, you learned one sample from a distribution.
 
-So the nature of testing changest in three ways -
+So the nature of testing changes in three ways -
 
 **1. Assert on distributions, not on single answers :** "This complaint classifies as DR-101 at least 90% of the time over multiple runs" is a meaningful assertion. "This complaint classifies as DR-101" is a coin toss you wrote down.
 
-**2. Separate stability from correctness, always.** They fail differently and they're fixed differently. Instability usually means the prompt is underspecified. Stable wrongness means the model doesn't have the information it needs - which is exactly C5's problem, and no amount of prompt tuning fixes it. The model needs to *look at the transaction*. That's coming in [Part-2]().
+**2. Separate stability from correctness, always.** They fail differently and they're fixed differently. Instability usually means the prompt is under-specified. Stable wrongness means the model doesn't have the information it needs - which is exactly C5's problem, and no amount of prompt tuning fixes it. The model needs to *look at the transaction*. That's coming in [Part-2]().
 
-**3. Treat the prompt as code under test.** Those three English rules in the bounded prompt are business logic. They deserve version control, review, and a test suite that runs when they change. In subsequent parts, this will be converted into a CI gate: **a prompt change without an eval run is an untested deployment.**
+**3. Treat the prompt as code under test.** Those three English rules in the bounded prompt are business logic. They deserve version control, review, and a test suite that runs when they change. In subsequent parts, this will eventually be converted into a CI gate: **a prompt change without an eval run is an untested deployment.**
 
 **None of this replaces your existing testing approach and methodologies**. Part 0's rules still get ordinary deterministic tests, because they're ordinary deterministic code.
 
