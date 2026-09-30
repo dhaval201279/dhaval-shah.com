@@ -145,18 +145,30 @@ The aggregation is plain arithmetic in `VarianceReport`, which means it's unit-t
 
 # Run it yourself
 
+## Source Code
+[dispute-desk](https://github.com/dhaval201279/dispute-service/releases/tag/part-01)
+
+## Bash Command
+
 ```bash
     export GROQ_API_KEY=sk-...
     mvn -pl dispute-agent spring-boot:run \
-        -Dspring-boot.run.profiles=experiment \
+        -Dspring-boot.run.profiles=experiment,groq \
         -Dspring-boot.run.arguments=--experiment.runs=20
+```
+## Powershell Command
+
+``` ps
+    $env:GROQ_API_KEY = "gs_"
+    echo $env:GROQ_API_KEY
+    mvn -pl dispute-agent spring-boot:run "-Dspring-boot.run.profiles=experiment,groq" "-Dspring-boot.run.arguments=--experiment.runs=2"        
 ```
 
 Ten complaints × 20 runs × 2 temperatures × 2 modes is 800 calls, so start with `--experiment.runs=5` while you're evaluating and adjusting your prompts. Results are captured at `target/variance.csv`.
 
-Your numbers will not match mine exactly! Different model version, different day, possibly different answers - which is, after all, the thesis.
+Your numbers will not match mine exactly! Different model version, different day, possibly different answers - which is, what this thesis is all about.
 
-## The results
+## My results - for 2 runs
 
 Model: **Groq - openai/gpt-oss-20b**. 10 complaints × 2 temperatures × 2 modes.
 
@@ -230,4 +242,4 @@ So the nature of testing changes in three ways -
 
 **None of this replaces your existing testing approach and methodologies**. Part 0's rules still get ordinary deterministic tests, because they're ordinary deterministic code.
 
-> You’ve got two styles pulling in different directions, and it's the **Architect** that keeps the boundary in the right spot so the whole design stays coherent.
+> **You’ve got two styles pulling in different directions, and it's the Architect that keeps the boundary in the right spot so the whole design stays coherent.**
