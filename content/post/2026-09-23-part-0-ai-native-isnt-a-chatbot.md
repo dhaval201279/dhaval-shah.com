@@ -182,6 +182,6 @@ flowchart LR
 # Conclusion
 So Part 0 ends with a system that works correctly and still fails Meera. That's not an oversight to fix with better validation; it's the boundary of what rules can do. Everything from here on is about adding understanding at the edge without compromising a single rule at the core.
 
-In subsequent part we make the first model call, and immediately break something you've relied on for your whole career: we send the same complaint to an LLM twenty times and count how many different answers come back. If you've ever asked **"how do you unit-test something that isn't deterministic?"**, that experiment is where the answer starts.
+In [subsequent part](https://www.dhaval-shah.com/part-1-ai-native-multiple-runs/) we make the first model call, and immediately break something you've relied on for your whole career: we send the same complaint to an LLM twenty times and count how many different answers come back. If you've ever asked **"how do you unit-test something that isn't deterministic?"**, that experiment is where the answer starts.
 
-See you there!
+[See you there!](https://www.dhaval-shah.com/part-1-ai-native-multiple-runs/)
