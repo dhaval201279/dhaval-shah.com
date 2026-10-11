@@ -194,3 +194,5 @@ What I’d take from this:
 - Write down your precedence rules before the model has to guess them. Experienced intake staff know that “denial beats pattern” because it’s drilled into them. But nobody had written it down, so the model invented its own ordering and got it wrong. Much of making agents work in real domains is about surfacing rules that humans follow instinctively but never document.
 
 > The bottom line: agents succeed when you stop treating them as clever guessers and start treating them as structured systems. The more clearly you define the tools and rules, the more reliably they deliver.
+
+Source Code - [Part-2 Release](https://github.com/dhaval201279/dispute-service/releases/tag/part-02)
