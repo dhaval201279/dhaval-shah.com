@@ -2,7 +2,7 @@
 title: "Part 2 - Teaching It to Look Things Up: Tools, Spring AI and Conversations at Once"
 author: Dhaval Shah
 type: post
-date: 2026-09-30T02:00:50+00:00
+date: 2026-10-10T02:00:50+00:00
 url: /part-2-ai-native-agent-runs/
 categories:
   - java
