@@ -31,7 +31,8 @@ My Architecture and Design philosophy for crafting enterprise applications has a
 # Start with the Attacker
 On the other side of a B2B fintech platform is an institution - a bank, an NBFC, a payment aggregator. The relationship is contractual and long-lived. Credentials sit on servers, not on phones. Each one can move money! When something breaks, the argument is settled with logs and contracts.
 
-These are the six threats that actually matter - 
+These are the six threats that actually matter :
+ 
 **1. The leaked credential :** Secrets in Git history, CI logs, .env files on a jump host, a vendor support ticket etc. This is the most common real failure by a wide margin. With only what leaked, what can an attacker do, and for how long?
 
 **2. TLS that ends early :** Your TLS session doesn't run client-app to your-app. It ends at a CDN, WAF, load balancer, or API gateway - and on the client side, at an outbound proxy. What still protects the request after the first termination point?
