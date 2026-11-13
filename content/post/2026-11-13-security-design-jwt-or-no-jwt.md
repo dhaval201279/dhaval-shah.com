@@ -32,52 +32,52 @@ My Architecture and Design philosophy for crafting enterprise applications has a
 On the other side of a B2B fintech platform is an institution - a bank, an NBFC, a payment aggregator. The relationship is contractual and long-lived. Credentials sit on servers, not on phones. Each one can move money! When something breaks, the argument is settled with logs and contracts.
 
 These are the six threats that actually matter - 
-**1. The leaked credential : /** Secrets in Git history, CI logs, .env files on a jump host, a vendor support ticket etc. This is the most common real failure by a wide margin. With only what leaked, what can an attacker do, and for how long?
+**1. The leaked credential :** Secrets in Git history, CI logs, .env files on a jump host, a vendor support ticket etc. This is the most common real failure by a wide margin. With only what leaked, what can an attacker do, and for how long?
 
-**2. TLS that ends early : /** Your TLS session doesn't run client-app to your-app. It ends at a CDN, WAF, load balancer, or API gateway - and on the client side, at an outbound proxy. What still protects the request after the first termination point?
+**2. TLS that ends early :** Your TLS session doesn't run client-app to your-app. It ends at a CDN, WAF, load balancer, or API gateway - and on the client side, at an outbound proxy. What still protects the request after the first termination point?
 
-**3. The chatty intermediary : /** Gateways, APM agents, request loggers, and "temporary" debug filters write headers and bodies to log stores with broader access than your production database - including the Authorization header.
+**3. The chatty intermediary :** Gateways, APM agents, request loggers, and "temporary" debug filters write headers and bodies to log stores with broader access than your production database - including the Authorization header.
 
-**4. Replay and duplication : "** A valid request sent again. Sometimes malicious, sometimes a genuine retry after a timeout. Same symptom, different controls - confusing the two produces designs that handle neither.
+**4. Replay and duplication :** A valid request sent again. Sometimes malicious, sometimes a genuine retry after a timeout. Same symptom, different controls - confusing the two produces designs that handle neither.
 
-**5. The insider : /** At your end or theirs. Anyone who can read a shared secret can forge requests.
+**5. The insider :** At your end or theirs. Anyone who can read a shared secret can forge requests.
 
-**6. The counterparty who disputes : /** "We never sent that ₹5 lac payout instruction." Not a network attack - the situation your controls have to stand up in, months later, with a lawyer reading along.
+**6. The counterparty who disputes :** "We never sent that ₹5 lac payout instruction." Not a network attack - the situation your controls have to stand up in, months later, with a lawyer reading along.
 
 # The five properties every API security decision is really trading off
 
 ## 1. Authentication: who is calling?
 
-- **TLS alone : /** authenticates the *server* to the client. The client stays anonymous unless you use mutual TLS.
-- **Mechanisms : /** API key, client ID + secret, HMAC request signing, `private_key_jwt`, mTLS client certificate.
-- **Common mistake : /** treating possession of a static string as identity. An API key proves that the caller has the key. Nothing more.
+- **TLS alone :** authenticates the *server* to the client. The client stays anonymous unless you use mutual TLS.
+- **Mechanisms :** API key, client ID + secret, HMAC request signing, `private_key_jwt`, mTLS client certificate.
+- **Common mistake :** treating possession of a static string as identity. An API key proves that the caller has the key. Nothing more.
 
 ## 2. Authorization: what is this caller allowed to do, on which resources?
 
-- **TLS alone : /** nothing.
-- **Mechanisms : /** scopes and claims in access tokens, restricted or scoped keys, server-side policy.
-- **Common mistake : /** one credential that unlocks every endpoint.
+- **TLS alone :** nothing.
+- **Mechanisms :** scopes and claims in access tokens, restricted or scoped keys, server-side policy.
+- **Common mistake :** one credential that unlocks every endpoint.
 
 ## 3. Integrity and non-repudiation: was the request altered, and can the sender later deny it?
 
 These two are related, but they're not the same property.
 
-- **Integrity : /** means the bytes you received are the bytes the sender produced. A shared key (HMAC) gives you that.
-- **Non-repudiation : /** means you can show a third party that *only* the sender could have produced those bytes. That needs an asymmetric key that only the sender holds, plus the operational discipline to make that claim credible.
-- **TLS alone : /** integrity in transit, one hop at a time. Nothing provable afterwards. 
-- **Mechanisms : /** HMAC (integrity only); JWS or HTTP Message Signatures with asymmetric keys (integrity, plus non-repudiation if key custody holds up).
-- **Common mistake : /** believing that a signed JWT access token protects the request body. **It doesn't.**
+- **Integrity :** means the bytes you received are the bytes the sender produced. A shared key (HMAC) gives you that.
+- **Non-repudiation :** means you can show a third party that *only* the sender could have produced those bytes. That needs an asymmetric key that only the sender holds, plus the operational discipline to make that claim credible.
+- **TLS alone :** integrity in transit, one hop at a time. Nothing provable afterwards. 
+- **Mechanisms :** HMAC (integrity only); JWS or HTTP Message Signatures with asymmetric keys (integrity, plus non-repudiation if key custody holds up).
+- **Common mistake :** believing that a signed JWT access token protects the request body. **It doesn't.**
 
 ## 4. Confidentiality: who can read it?
 
-- **TLS alone : /** only the endpoints of each hop, only while the data is moving.
-- **Mechanisms : /** JWE over the full payload, field-level JWE.
-- **Common mistake : /** encrypting entire payloads by default, then finding out the WAF, the gateway policies, the logs and your on-call engineers are all blind. The second-most-common: carefully encrypting fields you never needed to receive.
+- **TLS alone :** only the endpoints of each hop, only while the data is moving.
+- **Mechanisms :** JWE over the full payload, field-level JWE.
+- **Common mistake :** encrypting entire payloads by default, then finding out the WAF, the gateway policies, the logs and your on-call engineers are all blind. The second-most-common: carefully encrypting fields you never needed to receive.
 
 ## 5. Sender-constraint and replay protection: can a stolen credential, or a captured request, be used by someone else or used again?
 
-- **TLS alone : /** no.
-- **Mechanisms : /** tokens bound to an mTLS certificate ([RFC 8705]()) or a DPoP key ([RFC 9449]()); timestamps and nonces inside request signatures; short credential lifetimes. Idempotency keys belong next to these, but they solve the *reliability* half of the problem, not the security half.
+- **TLS alone :** no.
+- **Mechanisms :** tokens bound to an mTLS certificate ([RFC 8705](https://www.rfc-editor.org/rfc/rfc8705.html)) or a DPoP key ([RFC 9449](https://www.rfc-editor.org/rfc/rfc9449.html)); timestamps and nonces inside request signatures; short credential lifetimes. Idempotency keys belong next to these, but they solve the *reliability* half of the problem, not the security half.
 - **Common mistake:** "our tokens expire in five minutes" offered as replay protection.
 
 # The two axes that decide most outcomes
@@ -132,13 +132,13 @@ So "JWT or no JWT" is really two independent decisions:
 # How to evaluate security models
 To compare available security models, it can be vetted through below criteria - 
 
-- **Security - /** Which of the five properties it delivers, against which of the six threats, and what happens when a key leaks.
-- **Operations - /** The recurring work per tenant per year: rotations, certificate renewals, onboarding steps, incident handling.
-- **Overhead - /** Extra infrastructure and moving parts: authorization server, HSM or KMS, PKI, JWKS endpoints, nonce and idempotency stores.
-- **Performance - /** CPU cycles spent on cryptography per request, extra round trips (token fetches, handshakes) and payload growth.
-- **Scalability - /** The state each request depends on and how that state behaves across regions and under failover.
-- **Implementation - /** What you must build and operate correctly.
-- **Developer experience - /** How long an integrator takes to get from receiving credentials to the first successful call, and how debuggable a failure is. In B2B this matters more than people admit. Your integrator may be an FI's outsourced vendor on a stack you don't control, and "401 signature invalid" with no further detail is a tax you pay on every onboarding.
+- **Security -** Which of the five properties it delivers, against which of the six threats, and what happens when a key leaks.
+- **Operations -** The recurring work per tenant per year: rotations, certificate renewals, onboarding steps, incident handling.
+- **Overhead -** Extra infrastructure and moving parts: authorization server, HSM or KMS, PKI, JWKS endpoints, nonce and idempotency stores.
+- **Performance -** CPU cycles spent on cryptography per request, extra round trips (token fetches, handshakes) and payload growth.
+- **Scalability -** The state each request depends on and how that state behaves across regions and under failover.
+- **Implementation -** What you must build and operate correctly.
+- **Developer experience -** How long an integrator takes to get from receiving credentials to the first successful call, and how debuggable a failure is. In B2B this matters more than people admit. Your integrator may be an FI's outsourced vendor on a stack you don't control, and "401 signature invalid" with no further detail is a tax you pay on every onboarding.
 - 
 # The map of various security mechanisms and what it achieves
 
