@@ -156,7 +156,7 @@ Here's how the common mechanisms line up against the five properties.
 | Asymmetric request signing (JWS / RFC 9421) | Yes | No | Yes | Yes, with sender-only key custody | No | Yes, if timestamp/nonce covered |
 | JWE (full or field-level) | No | No | Of ciphertext, not of sender | No | Yes | No |
 | Tokenization / vaulting | No | No | No | No | Yes, by not holding the data | No |
-| IP allowlisting / private connectivity | Network-level only | No | No | No | No | Reduces exposure |
+| IP whitelisting / private connectivity | Network-level only | No | No | No | No | Reduces exposure |
 
 Two rows deserve a second look.
 
